@@ -3,7 +3,7 @@
 <html lang="ar" dir="rtl" data-theme="light">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=1440, user-scalable=yes" />
   <title>لوحة أداء عمادة شؤون الطلاب - مقارنة الأرباع 2026</title>
   <style>
     :root{
@@ -325,6 +325,13 @@
     .insight-body{display:none;border-top:1px solid var(--border);padding:13px 15px;background:var(--card-2);font-size:13px;line-height:1.75;color:var(--text)}
     .insight.open .insight-body{display:block}
     .rec-list{margin:8px 0 0;padding:0;list-style:none;display:grid;gap:6px}.rec-list li{display:flex;gap:7px}.rec-list b{color:var(--green);min-width:18px}
+    .rec-list li{align-items:flex-start}
+    .recommendation-quarter-label{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;min-width:78px;padding:4px 9px;border-radius:999px;font-size:11px;font-weight:1000;line-height:1.2}
+    .recommendation-quarter-label.q1{background:rgba(31,157,115,.14);color:#0d7c58;border:1px solid rgba(31,157,115,.22)}
+    .recommendation-quarter-label.q2{background:rgba(58,123,213,.14);color:#2866b3;border:1px solid rgba(58,123,213,.22)}
+    .recommendation-text{flex:1;min-width:0}
+    .recs-quarter-note{margin:0 0 12px;color:var(--muted);font-size:12px;font-weight:850;line-height:1.7}
+
     .footer{padding:26px 0 8px;text-align:center;color:var(--muted);font-size:12px;font-weight:800;line-height:1.7}
 
     [dir="ltr"] .brand,[dir="ltr"] .actions,[dir="ltr"] .filter-group,[dir="ltr"] .chart-legend{direction:ltr}
@@ -596,6 +603,7 @@
     .detail-table-wrap{padding:14px 14px 6px}
     .detail-month-table{
       width:100%;
+      table-layout:fixed;
       border-collapse:separate;
       border-spacing:0;
       overflow:hidden;
@@ -606,7 +614,8 @@
       padding:12px 10px;border-bottom:1px solid var(--border);text-align:center;vertical-align:middle;font-weight:800
     }
     .detail-month-table thead th{background:var(--card-2);color:var(--text)}
-    .detail-month-table td.metric-cell{text-align:right;min-width:240px;color:var(--text);font-weight:950}
+    .detail-month-table thead th:first-child,.detail-month-table td.metric-cell{width:32%}
+    .detail-month-table td.metric-cell{text-align:right;min-width:240px;color:var(--text);font-weight:950;line-height:1.45}
     .detail-month-table tbody tr:last-child td{border-bottom:none}
     .sports-detail-table{
       width:100%;
@@ -693,8 +702,28 @@
     }
 
     .month-input,.rec-input{
-      width:100%;border:1px solid var(--border);background:var(--card);color:var(--text);
-      border-radius:12px;padding:9px 10px;font:inherit;font-weight:850;
+      width:100%;
+      min-height:46px;
+      height:46px;
+      border:1px solid var(--border);
+      background:var(--card);
+      color:var(--text);
+      border-radius:12px;
+      padding:9px 10px;
+      font:inherit;
+      font-weight:900;
+      line-height:1;
+      text-align:center;
+      font-variant-numeric:tabular-nums;
+      font-feature-settings:"tnum" 1, "lnum" 1;
+      box-sizing:border-box;
+      appearance:textfield;
+      -moz-appearance:textfield;
+    }
+    .month-input::-webkit-outer-spin-button,
+    .month-input::-webkit-inner-spin-button{
+      -webkit-appearance:none;
+      margin:0;
     }
     .month-input:disabled,.rec-input:disabled{opacity:.6;cursor:not-allowed;background:var(--card-2);color:var(--muted)}
     .detail-quarter-box{display:none}
@@ -1764,6 +1793,31 @@
       .matrix-quadrant-legend{grid-template-columns:1fr 1fr}
     }
 
+  
+    /* عرض الجوال بنفس تخطيط اللابتوب */
+    html, body{min-width:1180px;}
+    body{-webkit-text-size-adjust:100%;}
+
+    /* حماية العرض للمعلومات المالية الخاصة بمركز محترف */
+    .sensitive-protected{position:relative;overflow:hidden}
+    .sensitive-protected.sensitive-locked > :not(.sensitive-lock-overlay){filter:blur(12px);pointer-events:none;user-select:none}
+    .sensitive-lock-overlay{
+      display:none;position:absolute;inset:0;z-index:20;align-items:center;justify-content:center;
+      background:linear-gradient(135deg,rgba(245,248,252,.96),rgba(233,241,246,.96));padding:22px;text-align:center
+    }
+    body.dark .sensitive-lock-overlay{background:linear-gradient(135deg,rgba(13,28,48,.97),rgba(20,42,63,.97))}
+    .sensitive-locked .sensitive-lock-overlay{display:flex}
+    .sensitive-lock-box{display:grid;gap:10px;justify-items:center;max-width:330px}
+    .sensitive-lock-icon{font-size:42px;line-height:1}
+    .sensitive-lock-title{font-size:18px;font-weight:1000;color:var(--text)}
+    .sensitive-lock-text{font-size:13px;font-weight:800;color:var(--muted);line-height:1.7}
+    .sensitive-unlock-btn{border:0;border-radius:999px;background:var(--green-2);color:#fff;padding:10px 18px;font-family:inherit;font-weight:950;cursor:pointer}
+    .sensitive-mini-lock{cursor:pointer;border-style:dashed!important;display:grid;place-items:center;text-align:center;min-height:120px}
+    .sensitive-mini-lock b{font-size:17px!important}
+    .sensitive-tile{position:relative;overflow:hidden}
+    .sensitive-tile .dept-tile-icon{font-size:38px}
+    .sensitive-tile p{color:var(--muted);font-weight:900}
+
   </style>
 </head>
 <body>
@@ -1834,7 +1888,7 @@
         <div class="score-list" id="scoreList"></div>
       </article>
 
-      <article class="chart-card">
+      <article class="chart-card sensitive-protected" id="muhtarafFinancialCard">
         <div class="card-head">
           <div>
             <h3 class="card-title" data-t="muhtarafTitle">الإيرادات مقابل المصروفات – المحترف</h3>
@@ -1842,6 +1896,14 @@
           </div>
         </div>
         <div class="chart-box" id="muhtarafChart"></div>
+        <div class="sensitive-lock-overlay">
+          <div class="sensitive-lock-box">
+            <div class="sensitive-lock-icon">🔒</div>
+            <div class="sensitive-lock-title">معلومات مالية محمية</div>
+            <div class="sensitive-lock-text">أدخل كلمة المرور لعرض بيانات مركز محترف المالية.</div>
+            <button class="sensitive-unlock-btn" type="button" onclick="requestSensitiveAccess()">فتح المحتوى</button>
+          </div>
+        </div>
       </article>
 
       <article class="chart-card">
@@ -1875,7 +1937,7 @@
             <p class="card-sub" data-t="sarSub">القيم بالريال السعودي</p>
           </div>
         </div>
-        <div class="warning" data-t="sportsWarning">⚠️ انخفاض الميزانية 63% منذ 2023 — قد يؤثر على فجوة الأداء.</div>
+        <div class="warning" data-t="sportsWarning">⚠️ ارتفع الإنفاق الرياضي 133% منذ 2023، وارتفع 170% مقارنة بعام 2024.</div>
         <div class="chart-box compact" id="sportsTrendChart"></div>
       </article>
 
@@ -1898,10 +1960,18 @@
         </div>
         <div class="chart-box radar-chart-box" id="radarChart"></div>
       </article>
-      <article class="chart-card">
+      <article class="chart-card sensitive-protected" id="muhtarafProgramCard">
         <div class="card-head"><div><h3 class="card-title" data-t="programTitle">أداء برامج المحترف: الربع الأول</h3></div></div>
         <div class="warning" data-t="programWarning">⚠️ انخفض LS-CBP بمقدار 35 نقطة عن العام الماضي.</div>
         <div class="chart-box compact" id="programChart"></div>
+        <div class="sensitive-lock-overlay">
+          <div class="sensitive-lock-box">
+            <div class="sensitive-lock-icon">🔒</div>
+            <div class="sensitive-lock-title">نتائج مالية محمية</div>
+            <div class="sensitive-lock-text">يتطلب عرض أداء برامج مركز محترف كلمة المرور.</div>
+            <button class="sensitive-unlock-btn" type="button" onclick="requestSensitiveAccess()">فتح المحتوى</button>
+          </div>
+        </div>
       </article>
 
       <article class="chart-card">
@@ -1920,7 +1990,7 @@
       <div class="quarter-head">
         <div>
           <h3 id="quarterPanelTitle">أداء الربع الأول والثاني</h3>
-          <p id="quarterPanelSub">الربع الأول يستخدم بيانات الداشبورد الحالية، والربع الثاني فارغ إلى أن تضيف بياناتك أنت.</p>
+          <p id="quarterPanelSub">الربع الأول يعرض البيانات الثابتة الحالية، والربع الثاني لا توجد له بيانات معتمدة حتى الآن.</p>
         </div>
 
       </div>
@@ -1936,7 +2006,7 @@
     <section class="insights">
       <div class="insights-head">
         <h2 data-t="insightsTitle">رؤى الأقسام والتوصيات</h2>
-        <span class="tag green" data-t="clickHint">اضغط على أي قسم لعرض التوصيات</span>
+        <span class="tag green" data-t="clickHint">اضغط على أي قسم لعرض توصيات الربع الأول والثاني</span>
       </div>
       <div class="insights-list" id="insightsList"></div>
     </section>
@@ -1962,11 +2032,10 @@
         <div class="dept-summary-strip" id="departmentsSummaryStrip"></div>
         <div class="dept-search-row">
           <input class="dept-search" id="deptSearchInput" type="search" placeholder="ابحث باسم الإدارة أو المؤشر..." />
-          <span class="tag green">التفاصيل داخل صفحة الإدارات فقط</span>
+          <span class="tag green">التفاصيل داخل صفحة الإدارات — وضع العرض فقط</span>
         </div>
         <div class="departments-grid" id="departmentsGrid"></div>
         <div class="data-entry-bottom">
-          <button class="dept-page-btn data-entry-toggle" type="button">🔒 إدخال البيانات</button>
         </div>
       </div>
       <div class="dept-detail dept-detail-view" id="departmentDetail"></div>
@@ -1991,7 +2060,7 @@
       muhtarafTitle:{ar:"الإيرادات مقابل المصروفات – المحترف",en:"Muhtaraf Revenue vs. Expenditure"}, sarSub:{ar:"القيم بالريال السعودي",en:"Values in SAR"},
       activitiesTitle:{ar:"اتجاه الأنشطة الطلابية الشهري",en:"Student Activities Monthly Trend"}, activitiesSub:{ar:"مقارنة الطلاب والأنشطة وجلسات الاحتجاز.",en:"Students, activities, and retention sessions."},
       sportsTitle:{ar:"نقاط المؤشر الرياضي حسب المسار",en:"Sports Index Points by Track"}, sportsSub:{ar:"تُسحب النقاط تلقائياً من جدول أداء النشاط الرياضي للربع المحدد.",en:"Points are pulled automatically from the sports activity table for the selected quarter."}, maleSports:{ar:"ذكور: 10,180 نقطة (درجة E)",en:"Male: 10,180 pts (Grade E)"}, femaleSports:{ar:"إناث: 14,435 نقطة (درجة D)",en:"Female: 14,435 pts (Grade D)"},
-      sportsTrendTitle:{ar:"اتجاه الإنفاق الرياضي – 3 سنوات",en:"Sports Expenditure 3-Year Trend"}, sportsWarning:{ar:"⚠️ انخفاض الميزانية 63% منذ 2023 — قد يؤثر على فجوة الأداء.",en:"⚠️ 63% budget decline since 2023 — may affect the performance gap."},
+      sportsTrendTitle:{ar:"اتجاه الإنفاق الرياضي – 3 سنوات",en:"Sports Expenditure 3-Year Trend"}, sportsWarning:{ar:"⚠️ ارتفع الإنفاق الرياضي 133% منذ 2023، وارتفع 170% مقارنة بعام 2024.",en:"⚠️ Sports expenditure increased 133% since 2023 and 170% compared with 2024."},
       disabilityTitle:{ar:"مستفيدو وحدة ذوي الإعاقة",en:"Disability Unit Beneficiaries"}, disabilitySub:{ar:"تُسحب البيانات من وحدة ذوي الإعاقة",en:"Data is pulled from the Disability Unit"},
       radarTitle:{ar:"درجات الجودة التشغيلية حسب الإدارة",en:"Operational Quality Scores by Department"}, radarSub:{ar:"مقارنة وضوح الإجراءات والترابط والاستقرار والتوحيد — الدرجة من 100.",en:"Process clarity, interdependency, stability, and standardization — scored out of 100."},
       programTitle:{ar:"أداء برامج المحترف: الربع الأول",en:"Muhtaraf Program Performance: Q1"}, programWarning:{ar:"⚠️ انخفض LS-CBP بمقدار 35 نقطة عن العام الماضي.",en:"⚠️ LS-CBP dropped by 35 points year-on-year."},
@@ -2003,6 +2072,40 @@
     const statusLabels = {
       all:{ar:"الكل",en:"All"}, ontime:{ar:"ملتزم",en:"Compliant"}, slight:{ar:"متأخر قليلاً",en:"Slightly Late"}, excuse:{ar:"متأخر بعذر",en:"Late w/ Excuse"}, noexcuse:{ar:"متأخر بدون عذر",en:"Late Without Excuse"}, missing:{ar:"لم يُرسَل",en:"Not Submitted"}
     };
+
+    const SENSITIVE_ACCESS_HASH = "884222efb729780eb7860a80398c145ae4fa0f65f8192258344f1cc553981adc";
+    let sensitiveAccessUnlocked = sessionStorage.getItem("muhtaraf_sensitive_access") === "1";
+    async function hashSensitivePassword(value){
+      const bytes = new TextEncoder().encode(String(value || ""));
+      const digest = await crypto.subtle.digest("SHA-256", bytes);
+      return Array.from(new Uint8Array(digest)).map(b => b.toString(16).padStart(2,"0")).join("");
+    }
+    async function requestSensitiveAccess(onSuccess){
+      if(sensitiveAccessUnlocked){
+        if(typeof onSuccess === "function") onSuccess();
+        return true;
+      }
+      const password = window.prompt("أدخل كلمة المرور لعرض معلومات مركز محترف المالية:");
+      if(password === null) return false;
+      const hash = await hashSensitivePassword(password);
+      if(hash === SENSITIVE_ACCESS_HASH){
+        sensitiveAccessUnlocked = true;
+        sessionStorage.setItem("muhtaraf_sensitive_access","1");
+        updateSensitiveSections();
+        renderQuarterPanel();
+        if(document.getElementById("departmentsPage")?.classList.contains("open")) renderDepartmentsPage();
+        if(typeof onSuccess === "function") onSuccess();
+        return true;
+      }
+      window.alert("كلمة المرور غير صحيحة.");
+      return false;
+    }
+    function updateSensitiveSections(){
+      ["muhtarafFinancialCard","muhtarafProgramCard"].forEach(id => {
+        const el = document.getElementById(id);
+        if(el) el.classList.toggle("sensitive-locked", !sensitiveAccessUnlocked);
+      });
+    }
 
     const DEPT_DATA = [
       { name_ar:"إدارة النقل الطلابي", name_en:"Student Transport", score:120, status:"ontime" },
@@ -2617,7 +2720,8 @@
         "عدد طلاب المنح المسكنين",
         "عدد طلبات الدعم الفني المتعثرة",
         "عدد البرامج الطلابية المنفذة في السكن الطلابي",
-        "نسبة رضا الطلاب"
+        "نسبة رضا الطلاب",
+        "عدد طلبات الدعم الفني المرفوعة"
       ],
       "إدارة التغذية والإعاشة": [
         "إجمالي عدد الجولات اليومية",
@@ -2626,7 +2730,8 @@
         "عدد طلبات الدعم الفني المتعثرة",
         "عدد المخالفات",
         "عدد الإنذارات",
-        "عدد الغرامات"
+        "عدد الغرامات",
+        "إجمالي مبلغ الغرامات"
       ],
       "وحدة التوجيه وحقوق الطالب": [
         "عدد البرامج التوعوية المنفذة",
@@ -2657,7 +2762,8 @@
         "عدد المستفيدين من خدمات الوحدة ومراكز الوحدة - طلاب",
         "عدد المستفيدين من خدمات الوحدة ومراكز الوحدة - طالبات",
         "زمن الاستجابة لطلبات التيسير الأكاديمي والمالي",
-        "نسبة رضا الطلبة من ذوي الإعاقة"
+        "نسبة رضا الطلبة من ذوي الإعاقة",
+        "أنواع الإعاقات"
       ],
       "إدارة العمل التطوعي": [
         "عدد الساعات التطوعية",
@@ -2703,9 +2809,9 @@
 
 
     const MUHTARAF_DATA = [
-      { month:"Jan", month_ar:"يناير", expenditure:4716, net:23484 },
-      { month:"Feb", month_ar:"فبراير", expenditure:28226, net:-13926 },
-      { month:"Mar", month_ar:"مارس", expenditure:2588, net:10774 }
+      { month:"Jan", month_ar:"يناير", expenditure:4716, net:23484.13 },
+      { month:"Feb", month_ar:"فبراير", expenditure:28226, net:-13926.88 },
+      { month:"Mar", month_ar:"مارس", expenditure:2588, net:10774.52 }
     ];
     const ACTIVITIES_DATA = [
       { month:"Jan", month_ar:"يناير", students:145, activities:43, retention:16 },
@@ -2719,7 +2825,7 @@
       { category:"International Participation", category_ar:"المشاركات الدولية", male:550, female:550 }
     ];
     const SPORTS_TREND = [
-      { year:"2025", amount:965793 }, { year:"2024", amount:414572 }, { year:"2023", amount:357786 }
+      { year:"2025", amount:965793 }, { year:"2024", amount:357786 }, { year:"2023", amount:414572 }
     ];
     const RADAR_DATA = [
       { subject:"Process Clarity", subject_ar:"وضوح الإجراءات", Transport:80, Housing:65, Nutrition:70, Sports:55, Activities:75 },
@@ -2779,7 +2885,35 @@
         sports: ORIGINAL_DATA.sports,
         disability: ORIGINAL_DATA.disability
       },
-      Q2: { label_ar:"الربع الثاني", label_en:"Q2", hasData:false, depts:[], muhtaraf:[], activities:[], sports:[], disability:[] }
+      Q2: {
+        label_ar:"الربع الثاني", label_en:"Q2", hasData:true,
+        depts:[
+          { name_ar:"إدارة التغذية والإعاشة", name_en:"Nutrition & Catering", score:100, status:"ontime" },
+          { name_ar:"إدارة السكن الطلابي", name_en:"Student Housing", score:100, status:"ontime" },
+          { name_ar:"مكتب التوظيف والإرشاد المهني", name_en:"Employment Office", score:100, status:"ontime" },
+          { name_ar:"إدارة المنح الدراسية", name_en:"Student Grants", score:100, status:"ontime" },
+          { name_ar:"إدارة النشاط الرياضي", name_en:"Sports Activities", score:100, status:"ontime" },
+          { name_ar:"وحدة عشائر الجوالة", name_en:"Scout Unit", score:100, status:"ontime" },
+          { name_ar:"مركز محترف", name_en:"Professional Center", score:100, status:"ontime" }
+        ],
+        muhtaraf:[
+          { month:"Apr", month_ar:"أبريل", expenditure:0, net:0 },
+          { month:"May", month_ar:"مايو", expenditure:0, net:0 },
+          { month:"Jun", month_ar:"يونيو", expenditure:18000, net:8085 }
+        ],
+        activities:[
+          { month:"Apr", month_ar:"أبريل", students:0, activities:0, receptionHours:0 },
+          { month:"May", month_ar:"مايو", students:0, activities:0, receptionHours:0 },
+          { month:"Jun", month_ar:"يونيو", students:0, activities:0, receptionHours:0 }
+        ],
+        sports:[
+          { category:"Championships", category_ar:"البطولات", male:0, female:0 },
+          { category:"Central Activities", category_ar:"الأنشطة المركزية", male:0, female:0 },
+          { category:"Internal Activities", category_ar:"الأنشطة الداخلية", male:0, female:0 },
+          { category:"International Participation", category_ar:"المشاركات الدولية", male:0, female:0 }
+        ],
+        disability:[]
+      }
     };
 
     let currentQuarter = "Q1";
@@ -2802,21 +2936,14 @@
       return lang === "ar" ? q.label_ar : q.label_en;
     }
     function getMuhtarafNetFromDepartment(quarter = "Q1"){
-      const deptIndex = DEPARTMENT_TARGETS.findIndex(d => normalizeArabicText(d.name_ar).includes("محترف"));
-      if(deptIndex < 0) return 0;
-
-      let hasEnteredData = false;
-      let totalNet = 0;
-      const fields = ["month","program","price","beneficiaries","trainer","hall","codes"];
-
-      for(let i = 0; i < 6; i++){
-        if(fields.some(field => String(getSavedMuhtarafValue(deptIndex, i, field, quarter) || "").trim() !== "")){
-          hasEnteredData = true;
-        }
-        totalNet += Number(calcMuhtarafRow(deptIndex, i, quarter).netProfit) || 0;
+      const deptIndex = findDepartmentIndexByName("محترف");
+      if(deptIndex >= 0){
+        let total = 0;
+        for(let i=0; i<12; i++) total += Number(calcMuhtarafRow(deptIndex, i, quarter).netProfit) || 0;
+        return Math.round(total * 100) / 100;
       }
-
-      return hasEnteredData ? Math.round(totalNet * 100) / 100 : 0;
+      const source = (QUARTER_DATA[quarter] && QUARTER_DATA[quarter].muhtaraf) || MUHTARAF_DATA;
+      return Math.round(source.reduce((sum, row) => sum + (Number(row.net) || 0), 0) * 100) / 100;
     }
 
     function quarterStats(key){
@@ -2840,13 +2967,25 @@
       const brand = document.querySelector('[data-t="brandSub"]'); if(brand) brand.textContent = lang === "ar" ? arBrand : enBrand;
       const footer = document.querySelector('[data-t="footer"]'); if(footer) footer.textContent = lang === "ar" ? `عمادة شؤون الطلاب — جامعة تبوك • ${q} 2026 • مراجعة الإدارة` : `Deanship of Student Affairs — University of Tabuk • ${q} 2026 • Management Review`;
       const program = document.querySelector('[data-t="programTitle"]'); if(program) program.textContent = lang === "ar" ? `أداء برامج المحترف: ${q}` : `Muhtaraf Program Performance: ${q}`;
+      const programWarning = document.querySelector('[data-t="programWarning"]');
+      if(programWarning){
+        if(currentQuarter === "Q2"){
+          programWarning.textContent = lang === "ar"
+            ? "✅ برنامج NEBOSH حقق هامش ربح 31% وتجاوز الهدف المحدد 30%."
+            : "✅ NEBOSH achieved a 31% profit margin, exceeding the 30% target.";
+        } else {
+          programWarning.textContent = lang === "ar"
+            ? "⚠️ انخفض LS-CBP بمقدار 35 نقطة عن العام الماضي."
+            : "⚠️ LS-CBP dropped by 35 points year-on-year.";
+        }
+      }
       document.title = lang === "ar" ? `لوحة أداء عمادة شؤون الطلاب - ${q} 2026` : `Student Affairs Performance Dashboard - ${q} 2026`;
     }
     function emptyText(){ return lang === "ar" ? "لا توجد بيانات مدخلة لهذا الربع حتى الآن" : "No data entered for this quarter yet"; }
     function renderQuarterPanel(){
       updateQuarterStaticText();
       const panelTitle = $("quarterPanelTitle"); if(panelTitle) panelTitle.textContent = lang === "ar" ? "أداء الربع الأول والثاني" : "Q1 & Q2 Performance";
-      const panelSub = $("quarterPanelSub"); if(panelSub) panelSub.textContent = lang === "ar" ? "الربع الأول يستخدم بيانات الداشبورد الحالية، والربع الثاني فارغ إلى أن تضيف بياناتك أنت." : "Q1 uses current dashboard data; Q2 stays empty until you enter your own data.";
+      const panelSub = $("quarterPanelSub"); if(panelSub) panelSub.textContent = lang === "ar" ? "الربع الأول يعرض البيانات الثابتة الحالية، وبدأت تعبئة الربع الثاني ببيانات التزام الإدارات المعتمدة." : "Q1 shows the current fixed data; Q2 entry has started with approved department compliance data.";
       document.querySelectorAll(".quarter-btn").forEach(btn => {
         btn.classList.toggle("active", btn.dataset.quarter === currentQuarter);
         btn.textContent = quarterLabel(btn.dataset.quarter);
@@ -2861,8 +3000,13 @@
             {label:{ar:"متوسط الامتثال",en:"Avg Compliance"}, value:stats.avg + "%", note:{ar:"للربع المحدد",en:"Selected quarter"}, color:COLORS.purple},
             {label:{ar:"في الوقت",en:"On Time"}, value:stats.ontime, note:{ar:"عدد الإدارات",en:"Departments"}, color:COLORS.green},
             {label:{ar:"عالية المخاطر",en:"High Risk"}, value:stats.risk, note:{ar:"متأخر بلا عذر أو لم يُرسل",en:"Late/no submission"}, color:COLORS.red},
-            {label:{ar:"صافي مركز محترف",en:"Muhtaraf Center Net"}, value:fmt(stats.net), note:{ar:"ريال سعودي",en:"SAR"}, color:stats.net >= 0 ? COLORS.green : COLORS.red}
-          ].map(i => `<div class="quarter-mini-card" style="color:${i.color}"><span>${i.label[lang]}</span><b>${fmt(i.value)}</b><small>${i.note[lang]}</small></div>`).join("");
+            {label:{ar:"صافي مركز محترف",en:"Muhtaraf Center Net"}, value:fmt(stats.net), note:{ar:"ريال سعودي",en:"SAR"}, color:stats.net >= 0 ? COLORS.green : COLORS.red, sensitive:true}
+          ].map(i => {
+            if(i.sensitive && !sensitiveAccessUnlocked){
+              return `<button type="button" class="quarter-mini-card sensitive-mini-lock" style="color:${COLORS.green}" onclick="requestSensitiveAccess()"><span>🔒 معلومات مالية</span><b>صافي مركز محترف</b><small>اضغط وأدخل كلمة المرور</small></button>`;
+            }
+            return `<div class="quarter-mini-card" style="color:${i.color}"><span>${i.label[lang]}</span><b>${fmt(i.value)}</b><small>${i.note[lang]}</small></div>`;
+          }).join("");
         }
       }
       const bars = $("quarterComparisonBars");
@@ -2904,7 +3048,7 @@
     }
 
 
-    let dataEntryUnlocked = sessionStorage.getItem("data_entry_unlocked") === "1";
+    let dataEntryUnlocked = false; // وضع العرض الثابت
 
     let lang = "ar";
     let theme = localStorage.getItem("quarters_dashboard_theme") || "light";
@@ -3458,9 +3602,22 @@
       }) || null;
     }
 
-    function getDepartmentEnteredRecommendations(deptIndex){
-      return [1,2,3]
-        .map(recNo => String(getSavedKpiValue(recSaveKey(deptIndex, recNo)) || "").trim())
+    function recommendationQuarterLabel(quarter){
+      if(lang === "ar") return quarter === "Q2" ? "الربع الثاني" : "الربع الأول";
+      return quarter === "Q2" ? "Q2" : "Q1";
+    }
+
+    function getRecommendationValue(deptIndex, quarter, recNo){
+      const direct = String(getSavedKpiValue(recSaveKey(deptIndex, quarter, recNo)) || "").trim();
+      if(direct) return direct;
+      // توافق احتياطي مع النسخ السابقة التي كانت تحفظ توصيات الربع الأول بدون رمز الربع.
+      if(quarter === "Q1") return String(getSavedKpiValue(`rec:${deptIndex}:${recNo}`) || "").trim();
+      return "";
+    }
+
+    function getDepartmentEnteredRecommendations(deptIndex, quarter){
+      return [1,2,3,4]
+        .map(recNo => getRecommendationValue(deptIndex, quarter, recNo))
         .filter(Boolean);
     }
 
@@ -3469,20 +3626,26 @@
       const usedInsights = new Set();
 
       (DEPARTMENT_TARGETS || []).forEach((dept, deptIndex) => {
-        const entered = getDepartmentEnteredRecommendations(deptIndex);
+        const q1Entered = getDepartmentEnteredRecommendations(deptIndex, "Q1");
+        const q2Entered = getDepartmentEnteredRecommendations(deptIndex, "Q2");
         const base = findInsightForDepartmentName(dept.name_ar);
         if(base) usedInsights.add(base);
 
-        // الإدارات الموجودة سابقاً تستمر بالظهور، وأي إدارة جديدة تظهر فور إدخال توصية لها.
-        if(!base && !entered.length) return;
+        // توصيات النسخة السابقة تُعامل كتوصيات الربع الأول للحفاظ على البيانات الحالية.
+        const q1Fallback = lang === "ar" ? (base?.recs_ar || []) : (base?.recs || []);
+        const q1Recommendations = q1Entered.length ? q1Entered : q1Fallback;
+        const recommendations = [
+          ...q1Recommendations.map(text => ({quarter:"Q1", text})),
+          ...q2Entered.map(text => ({quarter:"Q2", text}))
+        ];
+
+        // الإدارات القديمة تستمر بالظهور، وأي إدارة جديدة تظهر فور وجود توصية في أي ربع.
+        if(!base && !recommendations.length) return;
 
         const linked = getDeptScoreByName(dept.name_ar);
         const status = linked?.status || base?.status || "missing";
         const badgeAr = statusLabels[status]?.ar || base?.badge_ar || "غير محدد";
         const badgeEn = statusLabels[status]?.en || base?.badge || "Not specified";
-        const recommendations = entered.length
-          ? entered
-          : (lang === "ar" ? (base?.recs_ar || []) : (base?.recs || []));
 
         rows.push({
           dept_ar: dept.name_ar,
@@ -3490,18 +3653,19 @@
           badge_ar: badgeAr,
           badge: badgeEn,
           status,
-          note_ar: entered.length ? "توصيات مدخلة من صفحة الإدارة." : (base?.note_ar || "لم تُدخل توصيات لهذه الإدارة بعد."),
-          note: entered.length ? "Recommendations entered from the department page." : (base?.note || "No recommendations have been entered for this department yet."),
+          note_ar: "تظهر أدناه جميع التوصيات مع تحديد الربع المخصص لكل توصية.",
+          note: "All recommendations are shown below with their assigned quarter.",
           recommendations
         });
       });
 
-      // احتياطياً: الاحتفاظ بأي عنصر قديم غير مرتبط بصفحات الإدارات.
+      // احتياطياً: الاحتفاظ بأي عنصر قديم غير مرتبط بصفحات الإدارات واعتباره للربع الأول.
       INSIGHTS.forEach(base => {
         if(usedInsights.has(base)) return;
+        const fallback = lang === "ar" ? (base.recs_ar || []) : (base.recs || []);
         rows.push({
           ...base,
-          recommendations: lang === "ar" ? (base.recs_ar || []) : (base.recs || [])
+          recommendations: fallback.map(text => ({quarter:"Q1", text}))
         });
       });
       return rows;
@@ -3516,8 +3680,12 @@
         const risk = ins.status === "noexcuse" || ins.status === "missing";
         const recs = ins.recommendations || [];
         const recHtml = recs.length
-          ? recs.map((r,j)=>`<li><b>${j+1}.</b><span>${r}</span></li>`).join("")
-          : `<li><span>${lang === "ar" ? "لم تُدخل توصيات بعد." : "No recommendations entered yet."}</span></li>`;
+          ? recs.map((rec,j)=>{
+              const obj = typeof rec === "object" ? rec : {quarter:"Q1", text:String(rec)};
+              const qClass = obj.quarter === "Q2" ? "q2" : "q1";
+              return `<li><b>${j+1}.</b><span class="recommendation-quarter-label ${qClass}">${recommendationQuarterLabel(obj.quarter)}</span><span class="recommendation-text">${obj.text}</span></li>`;
+            }).join("")
+          : `<li><span>${lang === "ar" ? "لم تُدخل توصيات للربع الأول أو الثاني بعد." : "No Q1 or Q2 recommendations have been entered yet."}</span></li>`;
         return `<div class="insight"><button class="insight-toggle" type="button" onclick="this.parentElement.classList.toggle('open')"><div class="insight-title"><span class="tag" style="background:${c}22;color:${c}">${lang==="ar"?ins.badge_ar:ins.badge}</span><strong>${lang==="ar"?ins.dept_ar:ins.dept}</strong>${risk?`<span class="tag red">⚠ ${lang==="ar"?"مخاطر":"Risk"}</span>`:""}</div><b>⌄</b></button><div class="insight-body"><b>${lang==="ar"?ins.note_ar:ins.note}</b><ul class="rec-list">${recHtml}</ul></div></div>`;
       }).join("");
     }
@@ -3615,9 +3783,17 @@
       updateSportsCardTags();
       lineChart("sportsTrendChart", SPORTS_TREND, [{key:"amount", name:{ar:"المصروفات",en:"Expenditure"}, color:COLORS.red}], {h:260, label:d=>d.year});
       renderDisability(); radarChart();
-      groupedBars("programChart", [{prog:"PM-CBP", y2026:37.6, y2025:28}, {prog:"LS-CBP", y2026:2.02, y2025:37}], [
-        {key:"y2026", name:{ar:"Q1 2026",en:"Q1 2026"}, color:COLORS.green}, {key:"y2025", name:{ar:"Q1 2025",en:"Q1 2025"}, color:COLORS.gray}
-      ], {h:260, max:42, label:d=>d.prog});
+      if(currentQuarter === "Q2"){
+        const deptIndex = findDepartmentIndexByName("محترف");
+        const neboshMargin = deptIndex >= 0 ? calcMuhtarafRow(deptIndex, 0, "Q2").margin : 0;
+        groupedBars("programChart", [{prog:"NEBOSH", q2:neboshMargin}], [
+          {key:"q2", name:{ar:"الربع الثاني 2026",en:"Q2 2026"}, color:COLORS.green}
+        ], {h:260, max:42, label:d=>d.prog});
+      } else {
+        groupedBars("programChart", [{prog:"PM-CBP", y2026:37.6, y2025:28}, {prog:"LS-CBP", y2026:2.02, y2025:37}], [
+          {key:"y2026", name:{ar:"Q1 2026",en:"Q1 2026"}, color:COLORS.green}, {key:"y2025", name:{ar:"Q1 2025",en:"Q1 2025"}, color:COLORS.gray}
+        ], {h:260, max:42, label:d=>d.prog});
+      }
       scatterChart();
     }
 
@@ -3684,7 +3860,7 @@
           <div class="dept-summary-box"><b>${fmt(DEPARTMENT_TARGETS.length)}</b><span>إدارة/وحدة</span></div>
           <div class="dept-summary-box"><b>${fmt(totalIndicators)}</b><span>مؤشر ومستهدف</span></div>
           <div class="dept-summary-box"><b>${fmt(DEPARTMENT_TARGETS.filter(d => getDeptScoreByName(d.name_ar)).length)}</b><span>مرتبطة ببطاقة الأداء</span></div>
-          <div class="dept-summary-box"><b>Q1 / Q2</b><span>جاهزة لإدخال الإنجاز</span></div>`;
+          <div class="dept-summary-box"><b>Q1 / Q2</b><span>بيانات ثابتة للعرض</span></div>`;
       }
       const query = normalizeArabicText($("deptSearchInput")?.value || "");
       const data = DEPARTMENT_TARGETS.filter(d => !query || normalizeArabicText(d.name_ar + " " + d.summary + " " + d.indicators.map(x=>x.join(" ")).join(" ") + " " + getOperationalKpis(d.name_ar).join(" ")).includes(query));
@@ -3693,6 +3869,15 @@
         const meta = getDeptStatusMeta(d);
         const scoreText = meta.score === null ? "—" : fmt(Math.min(meta.score,100)) + "%";
         const extra = meta.score > 100 ? "تجاوز المستهدف" : (meta.linked ? statusLabels[meta.status][lang] : "جاهز للتعبئة");
+        const isSensitiveMuhtaraf = d.name_ar === "مركز محترف";
+        if(isSensitiveMuhtaraf && !sensitiveAccessUnlocked){
+          return `<button class="dept-tile sensitive-tile" type="button" style="--dept-color:${COLORS.green}" onclick="requestSensitiveAccess(() => openDepartmentDetail(${realIndex}))">
+            <div class="dept-tile-icon">🔒</div>
+            <h3>مركز محترف</h3>
+            <p class="dept-page-subtitle">محتوى محمي بسبب احتوائه على معلومات مالية.</p>
+            <div class="dept-tile-meta"><span class="dept-tile-score">كلمة مرور</span><span class="dept-tile-status">اضغط للفتح</span></div>
+          </button>`;
+        }
         return `<button class="dept-tile" type="button" style="--dept-color:${meta.color}" onclick="openDepartmentDetail(${realIndex})">
           <div class="dept-tile-icon">${d.icon || "🏢"}</div>
           <h3>${d.name_ar}</h3>
@@ -4072,73 +4257,755 @@
       updateOfficialAutoTargets(deptIndex);
       renderDepartmentCharts(deptIndex);
     }
-
-
-
-    function refreshDataEntryButton(){
-      document.querySelectorAll(".data-entry-toggle").forEach(btn => {
-        btn.textContent = dataEntryUnlocked ? "🔓 إغلاق إدخال البيانات" : "🔒 إدخال البيانات";
-        btn.title = dataEntryUnlocked ? "إغلاق وضع إدخال البيانات" : "فتح وضع إدخال البيانات بكلمة مرور";
-      });
-    }
-    function toggleDataEntryMode(){
-      if(dataEntryUnlocked){
-        dataEntryUnlocked = false;
-        sessionStorage.removeItem("data_entry_unlocked");
-        refreshDataEntryButton();
-        const openDetail = document.querySelector(".department-detail.open");
-        if(openDetail){
-          document.querySelectorAll(".kpi-input,.month-input,.rec-input,.homepage-score-input,.homepage-status-select").forEach(input => input.disabled = true);
-          document.querySelectorAll(".data-entry-note").forEach(note => {
-            note.classList.remove("unlocked");
-            note.textContent = "🔒 الإدخال مغلق";
-          });
-        }
-        alert("تم إغلاق إدخال البيانات.");
-        return;
-      }
-      const pass = prompt("أدخل كلمة مرور إدخال البيانات:");
-      if(pass === "الجودة"){
-        dataEntryUnlocked = true;
-        sessionStorage.setItem("data_entry_unlocked", "1");
-        refreshDataEntryButton();
-        document.querySelectorAll(".kpi-input,.month-input,.rec-input,.homepage-score-input,.homepage-status-select").forEach(input => input.disabled = false);
-        document.querySelectorAll(".data-entry-note").forEach(note => {
-          note.classList.add("unlocked");
-          note.textContent = "🔓 الإدخال متاح";
-        });
-        alert("تم فتح إدخال البيانات.");
-      }else if(pass !== null){
-        alert("كلمة المرور غير صحيحة.");
-      }
-    }
-
-
+    function refreshDataEntryButton(){}
+    function toggleDataEntryMode(){ return; }
 
     const KPI_STORAGE_KEY = "student_affairs_department_kpi_inputs_v1";
+    const STATIC_KPI_DATA = {
+      "month:0:0:Q1:1":"5",
+      "month:0:0:Q1:2":"5",
+      "month:0:0:Q1:3":"5",
+      "op:0:0:Q1":"15",
+      "month:0:1:Q1:1":"80",
+      "month:0:1:Q1:2":"85",
+      "month:0:1:Q1:3":"80",
+      "op:0:1:Q1":"81.7",
+      "month:0:2:Q1:1":"3",
+      "month:0:2:Q1:2":"0",
+      "month:0:2:Q1:3":"1",
+      "op:0:2:Q1":"4",
+      "month:0:3:Q1:1":"0",
+      "month:0:3:Q1:2":"0",
+      "month:0:3:Q1:3":"0",
+      "op:0:3:Q1":"0",
+      "month:0:4:Q1:1":"13",
+      "month:0:4:Q1:2":"0",
+      "month:0:4:Q1:3":"0",
+      "op:0:4:Q1":"13",
+      "month:0:5:Q1:1":"1",
+      "month:0:5:Q1:2":"1",
+      "month:0:5:Q1:3":"2",
+      "op:0:5:Q1":"4",
+      "month:0:6:Q1:1":"1",
+      "month:0:6:Q1:2":"0",
+      "month:0:6:Q1:3":"0",
+      "op:0:6:Q1":"1",
+      "month:0:7:Q1:1":"0",
+      "month:0:7:Q1:2":"0",
+      "month:0:7:Q1:3":"0",
+      "op:0:7:Q1":"0",
+      "op:0:8:Q1":"19",
+      "op:0:9:Q1":"9",
+      "mainScore:0:Q1":"90",
+      "mainStatus:0:Q1":"excuse",
+      "rec:0:Q1:1":"تلتزم الإدارة بمعالجة كافة الملاحظات الواردة للإدارة في الربع الأول، ويتم متابعة المعالجة في الربع الثاني.",
+      "month:0:0:Q2:1":"3",
+      "month:0:0:Q2:2":"2",
+      "month:0:0:Q2:3":"2",
+      "op:0:0:Q2":"7",
+      "month:0:1:Q2:1":"85",
+      "month:0:1:Q2:2":"90",
+      "month:0:1:Q2:3":"90",
+      "op:0:1:Q2":"88.3",
+      "month:0:2:Q2:1":"0",
+      "month:0:2:Q2:2":"10",
+      "month:0:2:Q2:3":"0",
+      "op:0:2:Q2":"10",
+      "month:0:3:Q2:1":"0",
+      "month:0:3:Q2:2":"0",
+      "month:0:3:Q2:3":"0",
+      "op:0:3:Q2":"0",
+      "month:0:4:Q2:1":"10",
+      "month:0:4:Q2:2":"1",
+      "month:0:4:Q2:3":"0",
+      "op:0:4:Q2":"11",
+      "month:0:5:Q2:1":"10",
+      "month:0:5:Q2:2":"4",
+      "month:0:5:Q2:3":"0",
+      "op:0:5:Q2":"14",
+      "month:0:6:Q2:1":"0",
+      "month:0:6:Q2:2":"0",
+      "month:0:6:Q2:3":"0",
+      "op:0:6:Q2":"0",
+      "month:0:7:Q2:1":"0",
+      "month:0:7:Q2:2":"0",
+      "month:0:7:Q2:3":"0",
+      "op:0:7:Q2":"0",
+      "mainScore:0:Q2":"100",
+      "mainStatus:0:Q2":"ontime",
+      "month:1:0:Q1:1":"80",
+      "month:1:0:Q1:2":"80",
+      "month:1:0:Q1:3":"80",
+      "op:1:0:Q1":"80",
+      "month:1:1:Q1:1":"180",
+      "month:1:1:Q1:2":"180",
+      "month:1:1:Q1:3":"180",
+      "op:1:1:Q1":"180",
+      "month:1:2:Q1:1":"0",
+      "month:1:2:Q1:2":"0",
+      "month:1:2:Q1:3":"0",
+      "op:1:2:Q1":"0",
+      "month:1:3:Q1:1":"12",
+      "month:1:3:Q1:2":"5",
+      "month:1:3:Q1:3":"10",
+      "op:1:3:Q1":"27",
+      "month:1:4:Q1:1":"5",
+      "month:1:4:Q1:2":"5",
+      "month:1:4:Q1:3":"5",
+      "op:1:4:Q1":"5",
+      "op:1:5:Q1":"964",
+      "mainScore:1:Q1":"100",
+      "mainStatus:1:Q1":"ontime",
+      "rec:1:Q1:1":"تقوم الإدارة بتزويد وحدة التطوير والجودة من خلال نظام مسار بشواهد تقييم رضا المستفيدين.",
+      "rec:1:Q1:2":"تقوم الوحدة بتفصيل طلبات الدعم الفني المرفوعة مع تصنيف المغلق منها والمتعثر والجاري.",
+      "rec:1:Q1:3":"بناءً على معيار الالتزام بموعد التسليم، تم الاتفاق على أن إدارة النقل الطلابي وإدارة السكن الطلابي من أكثر الإدارات تميزًا في الربع الأول من عام 2026.",
+      "month:2:0:Q1:1":"195",
+      "month:2:0:Q1:2":"195",
+      "month:2:0:Q1:3":"195",
+      "op:2:0:Q1":"195",
+      "month:2:2:Q1:1":"0",
+      "month:2:2:Q1:2":"0",
+      "month:2:2:Q1:3":"0",
+      "op:2:2:Q1":"0",
+      "month:2:3:Q1:1":"1",
+      "month:2:3:Q1:2":"1",
+      "month:2:3:Q1:3":"1",
+      "op:2:3:Q1":"3",
+      "month:2:4:Q1:1":"0",
+      "month:2:4:Q1:2":"0",
+      "month:2:4:Q1:3":"0",
+      "op:2:4:Q1":"0",
+      "month:2:6:Q1:1":"100",
+      "month:2:6:Q1:2":"100",
+      "month:2:6:Q1:3":"100",
+      "op:2:6:Q1":"100",
+      "mainScore:2:Q1":"100",
+      "mainStatus:2:Q1":"ontime",
+      "rec:2:Q1:1":"تقوم الإدارة بتزويد وحدة التطوير والجودة من خلال نظام مسار بتقرير تتبع الرحلات للربع الأول.",
+      "rec:2:Q1:2":"اعتماد آلية واضحة لتقييم رضا المستفيدين، وتبليغ وحدة التطوير والجودة بالآلية لمتابعة النتائج ربعياً.",
+      "rec:2:Q1:3":"بناءً على معيار الالتزام بموعد التسليم، تم الاتفاق على أن إدارة النقل الطلابي وإدارة السكن الطلابي من أكثر الإدارات تميزًا في الربع الأول من عام 2026.",
+      "month:3:0:Q1:1":"1",
+      "month:3:0:Q1:2":"3",
+      "month:3:0:Q1:3":"1",
+      "op:3:0:Q1":"5",
+      "month:3:1:Q1:1":"4",
+      "month:3:1:Q1:2":"0",
+      "month:3:1:Q1:3":"2",
+      "op:3:1:Q1":"6",
+      "month:3:2:Q1:1":"3",
+      "month:3:2:Q1:2":"2",
+      "month:3:2:Q1:3":"1",
+      "op:3:2:Q1":"6",
+      "month:3:3:Q1:1":"0",
+      "month:3:3:Q1:2":"0",
+      "month:3:3:Q1:3":"0",
+      "op:3:3:Q1":"0",
+      "month:3:4:Q1:1":"2",
+      "month:3:4:Q1:2":"4",
+      "month:3:4:Q1:3":"1",
+      "op:3:4:Q1":"7",
+      "month:3:5:Q1:1":"0",
+      "month:3:5:Q1:2":"0",
+      "month:3:5:Q1:3":"0",
+      "op:3:5:Q1":"0",
+      "month:3:6:Q1:1":"0",
+      "month:3:6:Q1:2":"3",
+      "month:3:6:Q1:3":"0",
+      "op:3:6:Q1":"3",
+      "mainScore:3:Q1":"95",
+      "mainStatus:3:Q1":"ontime",
+      "rec:3:Q1:1":"يجب على الوحدة أن توسع نطاق أعمالها وأثرها.",
+      "rec:3:Q1:2":"يجب على الوحدة تكثيف إقامة البرامج التوعوية دورياً لكل كلية، واستهداف طلبة الكلية بشكل خاص.",
+      "rec:3:Q1:3":"يتم استدعاء الوحدة للتحقق من الأداء في الربع الأول؛ إذ يتضح أن هناك مشكلة داخلية في رفع التقرير، وتتولى إدارة العمادة تنسيق الموعد.",
+      "month:4:0:Q1:1":"4",
+      "month:4:0:Q1:2":"0",
+      "month:4:0:Q1:3":"0",
+      "op:4:0:Q1":"4",
+      "month:4:1:Q1:1":"2",
+      "month:4:1:Q1:2":"0",
+      "month:4:1:Q1:3":"0",
+      "op:4:1:Q1":"2",
+      "month:4:2:Q1:1":"8",
+      "month:4:2:Q1:2":"0",
+      "month:4:2:Q1:3":"0",
+      "op:4:2:Q1":"8",
+      "month:4:3:Q1:1":"78",
+      "month:4:3:Q1:2":"0",
+      "month:4:3:Q1:3":"0",
+      "op:4:3:Q1":"78",
+      "month:4:4:Q1:1":"86",
+      "month:4:4:Q1:2":"0",
+      "month:4:4:Q1:3":"0",
+      "op:4:4:Q1":"86",
+      "month:4:5:Q1:1":"0",
+      "month:4:5:Q1:2":"0",
+      "month:4:5:Q1:3":"0",
+      "op:4:5:Q1":"0",
+      "month:4:6:Q1:1":"99",
+      "month:4:6:Q1:2":"0",
+      "month:4:6:Q1:3":"0",
+      "op:4:6:Q1":"99",
+      "op:4:7:Q1":"حركية، بصرية، سمعية، تشوهات خلقية",
+      "mainScore:4:Q1":"65",
+      "mainStatus:4:Q1":"noexcuse",
+      "rec:4:Q1:1":"يتم عقد اجتماع لمراجعة الأداء، وتتولى إدارة العمادة تحديد الوقت والتنسيق مع الجهة.",
+      "month:5:0:Q1:1":"0",
+      "month:5:0:Q1:2":"0",
+      "month:5:0:Q1:3":"0",
+      "op:5:0:Q1":"0",
+      "month:5:1:Q1:1":"0",
+      "month:5:1:Q1:2":"0",
+      "month:5:1:Q1:3":"0",
+      "op:5:1:Q1":"0",
+      "month:5:2:Q1:1":"0",
+      "month:5:2:Q1:2":"0",
+      "month:5:2:Q1:3":"0",
+      "op:5:2:Q1":"0",
+      "month:5:3:Q1:1":"0",
+      "month:5:3:Q1:2":"0",
+      "month:5:3:Q1:3":"0",
+      "op:5:3:Q1":"0",
+      "month:5:4:Q1:1":"0",
+      "month:5:4:Q1:2":"0",
+      "month:5:4:Q1:3":"0",
+      "op:5:4:Q1":"0",
+      "month:5:5:Q1:1":"0",
+      "month:5:5:Q1:2":"0",
+      "month:5:5:Q1:3":"0",
+      "op:5:5:Q1":"0",
+      "month:5:6:Q1:1":"0",
+      "month:5:6:Q1:2":"0",
+      "month:5:6:Q1:3":"0",
+      "op:5:6:Q1":"0",
+      "month:5:7:Q1:1":"0",
+      "month:5:7:Q1:2":"0",
+      "month:5:7:Q1:3":"0",
+      "op:5:7:Q1":"0",
+      "mainScore:5:Q1":"0",
+      "mainStatus:5:Q1":"missing",
+      "rec:5:Q1:1":"يتم عقد اجتماع لمناقشة التعثر، وتتولى إدارة العمادة تحديد الوقت والتنسيق مع الجهة.",
+      "month:6:0:Q1:1":"145",
+      "month:6:0:Q1:2":"307",
+      "month:6:0:Q1:3":"57",
+      "op:6:0:Q1":"509",
+      "month:6:1:Q1:1":"43",
+      "month:6:1:Q1:2":"113",
+      "month:6:1:Q1:3":"48",
+      "op:6:1:Q1":"204",
+      "month:6:2:Q1:1":"16",
+      "month:6:2:Q1:2":"68",
+      "month:6:2:Q1:3":"21",
+      "op:6:2:Q1":"105",
+      "mainScore:6:Q1":"90",
+      "mainStatus:6:Q1":"excuse",
+      "rec:6:Q1:1":"يتم اعتماد السنة الميلادية في خطة الأنشطة الطلابية لتوافق قياس الأرباع السنوية والسنة المالية.",
+      "rec:6:Q1:2":"دراسة تقديم دعم للأندية الطلابية لدعم تحقيق الاستبقاء الطلابي.",
+      "rec:6:Q1:3":"إرسال خطاب إلى وكيل الجامعة لتوفير موظفة أمن خاصة بالأنشطة الطلابية ودعم الاستبقاء.",
+      "rec:6:Q1:4":"توعية موظفي وموظفات عمادة شؤون الطلاب بآليات ووسائل الحفاظ على أمان وسلامة الطالب والتعامل مع الأزمات أثناء التواجد في العمادة.",
+      "mainScore:7:Q1":"60",
+      "mainStatus:7:Q1":"noexcuse",
+      "rec:7:Q1:1":"تعديل نموذج المتابعة لموافقة الموسم الرياضي وتوسيع عمل الإدارة ليغطي السنة الميلادية.",
+      "rec:7:Q1:2":"تحسين خطة استهداف الموسم القادم.",
+      "rec:7:Q1:3":"توسيع نطاق الفئات المستهدفة للإدارة لتشمل أعضاء هيئة التدريس والموظفين والطلاب الناشطين.",
+      "mainScore:8:Q1":"0",
+      "mainStatus:8:Q1":"missing",
+      "mainScore:8:Q2":"100",
+      "mainStatus:8:Q2":"ontime",
+      "month:9:0:Q1:1":"0",
+      "month:9:0:Q1:2":"0",
+      "month:9:0:Q1:3":"0",
+      "op:9:0:Q1":"0",
+      "month:9:1:Q1:1":"0",
+      "month:9:1:Q1:2":"0",
+      "month:9:1:Q1:3":"0",
+      "op:9:1:Q1":"0",
+      "month:9:2:Q1:1":"0",
+      "month:9:2:Q1:2":"0",
+      "month:9:2:Q1:3":"0",
+      "op:9:2:Q1":"0",
+      "month:9:3:Q1:1":"0",
+      "month:9:3:Q1:2":"0",
+      "month:9:3:Q1:3":"0",
+      "op:9:3:Q1":"0",
+      "month:9:4:Q1:1":"0",
+      "month:9:4:Q1:2":"0",
+      "month:9:4:Q1:3":"0",
+      "op:9:4:Q1":"0",
+      "month:9:5:Q1:1":"0",
+      "month:9:5:Q1:2":"0",
+      "month:9:5:Q1:3":"0",
+      "op:9:5:Q1":"0",
+      "month:9:6:Q1:1":"0",
+      "month:9:6:Q1:2":"0",
+      "month:9:6:Q1:3":"0",
+      "op:9:6:Q1":"0",
+      "month:9:7:Q1:1":"0",
+      "month:9:7:Q1:2":"0",
+      "month:9:7:Q1:3":"0",
+      "op:9:7:Q1":"0",
+      "mainScore:9:Q1":"0",
+      "mainStatus:9:Q1":"missing",
+      "rec:9:Q1:1":"يتم عقد اجتماع لمناقشة التعثر، وتتولى إدارة العمادة تحديد الوقت والتنسيق مع الجهة.",
+      "month:10:0:Q1:1":"1",
+      "month:10:0:Q1:2":"1",
+      "month:10:0:Q1:3":"0",
+      "op:10:0:Q1":"2",
+      "month:10:1:Q1:1":"1",
+      "month:10:1:Q1:2":"1",
+      "month:10:1:Q1:3":"0",
+      "op:10:1:Q1":"2",
+      "month:10:2:Q1:1":"34",
+      "month:10:2:Q1:2":"20",
+      "month:10:2:Q1:3":"2",
+      "op:10:2:Q1":"56",
+      "month:10:3:Q1:1":"154",
+      "month:10:3:Q1:2":"185",
+      "month:10:3:Q1:3":"87",
+      "op:10:3:Q1":"426",
+      "op:10:4:Q1":"0",
+      "op:10:5:Q1":"0",
+      "month:10:6:Q1:1":"34",
+      "month:10:6:Q1:2":"17",
+      "month:10:6:Q1:3":"0",
+      "op:10:6:Q1":"51",
+      "month:10:7:Q1:1":"4716",
+      "month:10:7:Q1:2":"28226",
+      "month:10:7:Q1:3":"2588",
+      "op:10:7:Q1":"35530",
+      "month:10:8:Q1:1":"23484.13",
+      "month:10:8:Q1:2":"-13926.88",
+      "month:10:8:Q1:3":"10774.52",
+      "op:10:8:Q1":"20331.77",
+      "mainScore:10:Q1":"100",
+      "mainStatus:10:Q1":"ontime",
 
-    function getSavedKpiData(){
-      try{ return JSON.parse(localStorage.getItem(KPI_STORAGE_KEY) || "{}"); }
-      catch(e){ return {}; }
-    }
+      "month:10:0:Q2:1":"0",
+      "month:10:0:Q2:2":"0",
+      "month:10:0:Q2:3":"1",
+      "op:10:0:Q2":"1",
+      "month:10:1:Q2:1":"0",
+      "month:10:1:Q2:2":"0",
+      "month:10:1:Q2:3":"1",
+      "op:10:1:Q2":"1",
+      "month:10:2:Q2:1":"0",
+      "month:10:2:Q2:2":"0",
+      "month:10:2:Q2:3":"15",
+      "op:10:2:Q2":"15",
+      "month:10:3:Q2:1":"0",
+      "month:10:3:Q2:2":"0",
+      "month:10:3:Q2:3":"0",
+      "op:10:3:Q2":"0",
+      "op:10:4:Q2":"0",
+      "op:10:5:Q2":"0",
+      "mainScore:10:Q2":"100",
+      "mainStatus:10:Q2":"ontime",
+      "rec:10:Q1:1":"تقوم وحدة التطوير والجودة بالتواصل مع إدارة الصندوق الطلابي لمقارنة صافي ربح الربع الأول من عام 2026 بأرباح الربع الأول من عام 2025 ومقارنة النتائج.",
+      "rec:10:Q1:2":"على المركز رفع مبررات حول عدم وجود أي زيارة أو لقاء تعريفي في الربع الأول.",
+      "rec:10:Q1:3":"على المركز رفع مبررات حول عدم تحديث قاعدة البيانات في المركز.",
+      "rec:10:Q1:4":"تتم إضافة بيانات اختبارات الإكسل ضمن الإرشاد الرقمي للمركز في مؤشر مستقل.",
+      "month:11:0:Q1:1":"0",
+      "month:11:0:Q1:2":"0",
+      "month:11:0:Q1:3":"0",
+      "op:11:0:Q1":"0",
+      "month:11:1:Q1:1":"0",
+      "month:11:1:Q1:2":"0",
+      "month:11:1:Q1:3":"0",
+      "op:11:1:Q1":"0",
+      "month:11:2:Q1:1":"0",
+      "month:11:2:Q1:2":"0",
+      "month:11:2:Q1:3":"0",
+      "op:11:2:Q1":"0",
+      "month:11:3:Q1:1":"2125",
+      "month:11:3:Q1:2":"1539",
+      "month:11:3:Q1:3":"604",
+      "op:11:3:Q1":"4268",
+      "month:11:4:Q1:1":"0",
+      "month:11:4:Q1:2":"0",
+      "month:11:4:Q1:3":"0",
+      "op:11:4:Q1":"0",
+      "month:11:5:Q1:1":"0",
+      "month:11:5:Q1:2":"0",
+      "month:11:5:Q1:3":"0",
+      "op:11:5:Q1":"0",
+      "mainScore:11:Q1":"85",
+      "mainStatus:11:Q1":"excuse",
+      "rec:11:Q1:1":"يتم عقد اجتماع لمراجعة الأداء، وتتولى إدارة العمادة تحديد الوقت والتنسيق مع الجهة.",
+      "month:11:0:Q2:1":"0",
+      "month:11:0:Q2:2":"0",
+      "month:11:0:Q2:3":"0",
+      "op:11:0:Q2":"0",
+      "month:11:1:Q2:1":"0",
+      "month:11:1:Q2:2":"0",
+      "month:11:1:Q2:3":"0",
+      "op:11:1:Q2":"0",
+      "month:11:2:Q2:1":"0",
+      "month:11:2:Q2:2":"0",
+      "month:11:2:Q2:3":"0",
+      "op:11:2:Q2":"0",
+      "month:11:3:Q2:1":"5280",
+      "month:11:3:Q2:2":"2227",
+      "month:11:3:Q2:3":"4614",
+      "op:11:3:Q2":"12121",
+      "month:11:4:Q2:1":"0",
+      "month:11:4:Q2:2":"0",
+      "month:11:4:Q2:3":"0",
+      "op:11:4:Q2":"0",
+      "month:11:5:Q2:1":"0",
+      "month:11:5:Q2:2":"0",
+      "month:11:5:Q2:3":"0",
+      "op:11:5:Q2":"0",
+      "mainScore:11:Q2":"100",
+      "mainStatus:11:Q2":"ontime",
+      "mainScore:7:Q2":"100",
+      "mainStatus:7:Q2":"ontime",
+      "sportsSummary:7:Q2:طلاب:points":"17110",
+      "sportsSummary:7:Q2:طلاب:percent":"71.9",
+      "sportsSummary:7:Q2:طلاب:grade":"C",
+      "sportsSummary:7:Q2:طالبات:points":"16570",
+      "sportsSummary:7:Q2:طالبات:percent":"68.9",
+      "sportsSummary:7:Q2:طالبات:grade":"C",
+      "sports:7:Q2:طلاب:0:0":"0",
+      "sports:7:Q2:طلاب:0:1":"0",
+      "sports:7:Q2:طلاب:0:2":"0",
+      "sports:7:Q2:طلاب:0:3":"E",
+      "sports:7:Q2:طلاب:1:0":"0",
+      "sports:7:Q2:طلاب:1:1":"0",
+      "sports:7:Q2:طلاب:1:2":"0",
+      "sports:7:Q2:طلاب:1:3":"E",
+      "sports:7:Q2:طلاب:2:0":"0",
+      "sports:7:Q2:طلاب:2:1":"1000",
+      "sports:7:Q2:طلاب:2:2":"100",
+      "sports:7:Q2:طلاب:2:3":"A+",
+      "sports:7:Q2:طلاب:3:0":"0",
+      "sports:7:Q2:طلاب:3:1":"6460",
+      "sports:7:Q2:طلاب:3:2":"92",
+      "sports:7:Q2:طلاب:3:3":"A",
+      "sports:7:Q2:طلاب:4:0":"0",
+      "sports:7:Q2:طلاب:4:1":"2160",
+      "sports:7:Q2:طلاب:4:2":"80",
+      "sports:7:Q2:طلاب:4:3":"B",
+      "sports:7:Q2:طلاب:5:0":"0",
+      "sports:7:Q2:طلاب:5:1":"1750",
+      "sports:7:Q2:طلاب:5:2":"100",
+      "sports:7:Q2:طلاب:5:3":"A+",
+      "sports:7:Q2:طلاب:6:0":"0",
+      "sports:7:Q2:طلاب:6:1":"750",
+      "sports:7:Q2:طلاب:6:2":"100",
+      "sports:7:Q2:طلاب:6:3":"A+",
+      "sports:7:Q2:طلاب:7:0":"0",
+      "sports:7:Q2:طلاب:7:1":"800",
+      "sports:7:Q2:طلاب:7:2":"100",
+      "sports:7:Q2:طلاب:7:3":"A+",
+      "sports:7:Q2:طلاب:8:0":"0",
+      "sports:7:Q2:طلاب:8:1":"1000",
+      "sports:7:Q2:طلاب:8:2":"100",
+      "sports:7:Q2:طلاب:8:3":"A+",
+      "sports:7:Q2:طلاب:9:0":"0",
+      "sports:7:Q2:طلاب:9:1":"10000",
+      "sports:7:Q2:طلاب:9:2":"100",
+      "sports:7:Q2:طلاب:9:3":"A+",
+      "sports:7:Q2:طلاب:10:0":"0",
+      "sports:7:Q2:طلاب:10:1":"5000",
+      "sports:7:Q2:طلاب:10:2":"100",
+      "sports:7:Q2:طلاب:10:3":"A+",
+      "sports:7:Q2:طلاب:11:0":"0",
+      "sports:7:Q2:طلاب:11:1":"2200",
+      "sports:7:Q2:طلاب:11:2":"100",
+      "sports:7:Q2:طلاب:11:3":"A+",
+      "sports:7:Q2:طلاب:12:0":"0",
+      "sports:7:Q2:طلاب:12:1":"800",
+      "sports:7:Q2:طلاب:12:2":"100",
+      "sports:7:Q2:طلاب:12:3":"A+",
+      "sports:7:Q2:طلاب:13:0":"0",
+      "sports:7:Q2:طلاب:13:1":"500",
+      "sports:7:Q2:طلاب:13:2":"100",
+      "sports:7:Q2:طلاب:13:3":"A+",
+      "sports:7:Q2:طلاب:14:0":"0",
+      "sports:7:Q2:طلاب:14:1":"500",
+      "sports:7:Q2:طلاب:14:2":"100",
+      "sports:7:Q2:طلاب:14:3":"A+",
+      "sports:7:Q2:طلاب:15:0":"0",
+      "sports:7:Q2:طلاب:15:1":"500",
+      "sports:7:Q2:طلاب:15:2":"100",
+      "sports:7:Q2:طلاب:15:3":"A+",
+      "sports:7:Q2:طلاب:16:0":"0",
+      "sports:7:Q2:طلاب:16:1":"500",
+      "sports:7:Q2:طلاب:16:2":"100",
+      "sports:7:Q2:طلاب:16:3":"A+",
+      "sports:7:Q2:طلاب:17:0":"0",
+      "sports:7:Q2:طلاب:17:1":"650",
+      "sports:7:Q2:طلاب:17:2":"21",
+      "sports:7:Q2:طلاب:17:3":"E",
+      "sports:7:Q2:طلاب:18:0":"0",
+      "sports:7:Q2:طلاب:18:1":"0",
+      "sports:7:Q2:طلاب:18:2":"0",
+      "sports:7:Q2:طلاب:18:3":"E",
+      "sports:7:Q2:طلاب:19:0":"0",
+      "sports:7:Q2:طلاب:19:1":"650",
+      "sports:7:Q2:طلاب:19:2":"32",
+      "sports:7:Q2:طلاب:19:3":"D",
+      "sports:7:Q2:طالبات:0:0":"0",
+      "sports:7:Q2:طالبات:0:1":"0",
+      "sports:7:Q2:طالبات:0:2":"0",
+      "sports:7:Q2:طالبات:0:3":"E",
+      "sports:7:Q2:طالبات:1:0":"0",
+      "sports:7:Q2:طالبات:1:1":"0",
+      "sports:7:Q2:طالبات:1:2":"0",
+      "sports:7:Q2:طالبات:1:3":"E",
+      "sports:7:Q2:طالبات:2:0":"0",
+      "sports:7:Q2:طالبات:2:1":"1000",
+      "sports:7:Q2:طالبات:2:2":"100",
+      "sports:7:Q2:طالبات:2:3":"A+",
+      "sports:7:Q2:طالبات:3:0":"0",
+      "sports:7:Q2:طالبات:3:1":"5920",
+      "sports:7:Q2:طالبات:3:2":"84",
+      "sports:7:Q2:طالبات:3:3":"B",
+      "sports:7:Q2:طالبات:4:0":"0",
+      "sports:7:Q2:طالبات:4:1":"1620",
+      "sports:7:Q2:طالبات:4:2":"60",
+      "sports:7:Q2:طالبات:4:3":"D",
+      "sports:7:Q2:طالبات:5:0":"0",
+      "sports:7:Q2:طالبات:5:1":"1750",
+      "sports:7:Q2:طالبات:5:2":"100",
+      "sports:7:Q2:طالبات:5:3":"A+",
+      "sports:7:Q2:طالبات:6:0":"0",
+      "sports:7:Q2:طالبات:6:1":"750",
+      "sports:7:Q2:طالبات:6:2":"100",
+      "sports:7:Q2:طالبات:6:3":"A+",
+      "sports:7:Q2:طالبات:7:0":"0",
+      "sports:7:Q2:طالبات:7:1":"800",
+      "sports:7:Q2:طالبات:7:2":"100",
+      "sports:7:Q2:طالبات:7:3":"A+",
+      "sports:7:Q2:طالبات:8:0":"0",
+      "sports:7:Q2:طالبات:8:1":"1000",
+      "sports:7:Q2:طالبات:8:2":"100",
+      "sports:7:Q2:طالبات:8:3":"A+",
+      "sports:7:Q2:طالبات:9:0":"0",
+      "sports:7:Q2:طالبات:9:1":"10000",
+      "sports:7:Q2:طالبات:9:2":"100",
+      "sports:7:Q2:طالبات:9:3":"A+",
+      "sports:7:Q2:طالبات:10:0":"0",
+      "sports:7:Q2:طالبات:10:1":"5000",
+      "sports:7:Q2:طالبات:10:2":"100",
+      "sports:7:Q2:طالبات:10:3":"A+",
+      "sports:7:Q2:طالبات:11:0":"0",
+      "sports:7:Q2:طالبات:11:1":"2200",
+      "sports:7:Q2:طالبات:11:2":"100",
+      "sports:7:Q2:طالبات:11:3":"A+",
+      "sports:7:Q2:طالبات:12:0":"0",
+      "sports:7:Q2:طالبات:12:1":"800",
+      "sports:7:Q2:طالبات:12:2":"100",
+      "sports:7:Q2:طالبات:12:3":"A+",
+      "sports:7:Q2:طالبات:13:0":"0",
+      "sports:7:Q2:طالبات:13:1":"500",
+      "sports:7:Q2:طالبات:13:2":"100",
+      "sports:7:Q2:طالبات:13:3":"A+",
+      "sports:7:Q2:طالبات:14:0":"0",
+      "sports:7:Q2:طالبات:14:1":"500",
+      "sports:7:Q2:طالبات:14:2":"100",
+      "sports:7:Q2:طالبات:14:3":"A+",
+      "sports:7:Q2:طالبات:15:0":"0",
+      "sports:7:Q2:طالبات:15:1":"500",
+      "sports:7:Q2:طالبات:15:2":"100",
+      "sports:7:Q2:طالبات:15:3":"A+",
+      "sports:7:Q2:طالبات:16:0":"0",
+      "sports:7:Q2:طالبات:16:1":"500",
+      "sports:7:Q2:طالبات:16:2":"100",
+      "sports:7:Q2:طالبات:16:3":"A+",
+      "sports:7:Q2:طالبات:17:0":"0",
+      "sports:7:Q2:طالبات:17:1":"650",
+      "sports:7:Q2:طالبات:17:2":"18",
+      "sports:7:Q2:طالبات:17:3":"E",
+      "sports:7:Q2:طالبات:18:0":"0",
+      "sports:7:Q2:طالبات:18:1":"0",
+      "sports:7:Q2:طالبات:18:2":"0",
+      "sports:7:Q2:طالبات:18:3":"E",
+      "sports:7:Q2:طالبات:19:0":"0",
+      "sports:7:Q2:طالبات:19:1":"550",
+      "sports:7:Q2:طالبات:19:2":"27",
+      "sports:7:Q2:طالبات:19:3":"D",
+      "sportsSummary:7:Q1:طلاب:points":"10180",
+      "sportsSummary:7:Q1:طلاب:percent":"36.4",
+      "sportsSummary:7:Q1:طلاب:grade":"E",
+      "sports:7:Q1:طلاب:0:0":"10",
+      "sports:7:Q1:طلاب:0:1":"2010",
+      "sports:7:Q1:طلاب:0:2":"25.1",
+      "sports:7:Q1:طلاب:0:3":"E",
+      "sports:7:Q1:طلاب:1:0":"9",
+      "sports:7:Q1:طلاب:1:1":"1010",
+      "sports:7:Q1:طلاب:1:2":"14.4",
+      "sports:7:Q1:طلاب:1:3":"E",
+      "sports:7:Q1:طلاب:2:0":"1",
+      "sports:7:Q1:طلاب:2:1":"1000",
+      "sports:7:Q1:طلاب:2:2":"100",
+      "sports:7:Q1:طلاب:2:3":"A",
+      "sports:7:Q1:طلاب:3:0":"5",
+      "sports:7:Q1:طلاب:3:1":"1270",
+      "sports:7:Q1:طلاب:3:2":"18.1",
+      "sports:7:Q1:طلاب:3:3":"E",
+      "sports:7:Q1:طلاب:4:0":"0",
+      "sports:7:Q1:طلاب:4:1":"0",
+      "sports:7:Q1:طلاب:4:2":"0",
+      "sports:7:Q1:طلاب:4:3":"E",
+      "sports:7:Q1:طلاب:5:0":"3",
+      "sports:7:Q1:طلاب:5:1":"600",
+      "sports:7:Q1:طلاب:5:2":"6",
+      "sports:7:Q1:طلاب:5:3":"E",
+      "sports:7:Q1:طلاب:6:0":"1",
+      "sports:7:Q1:طلاب:6:1":"350",
+      "sports:7:Q1:طلاب:6:2":"35",
+      "sports:7:Q1:طلاب:6:3":"E",
+      "sports:7:Q1:طلاب:7:0":"1",
+      "sports:7:Q1:طلاب:7:1":"320",
+      "sports:7:Q1:طلاب:7:2":"16",
+      "sports:7:Q1:طلاب:7:3":"E",
+      "sports:7:Q1:طلاب:8:0":"0",
+      "sports:7:Q1:طلاب:8:1":"0",
+      "sports:7:Q1:طلاب:8:2":"0",
+      "sports:7:Q1:طلاب:8:3":"E",
+      "sports:7:Q1:طلاب:9:0":"44",
+      "sports:7:Q1:طلاب:9:1":"6350",
+      "sports:7:Q1:طلاب:9:2":"63.4",
+      "sports:7:Q1:طلاب:9:3":"C",
+      "sports:7:Q1:طلاب:10:0":"10",
+      "sports:7:Q1:طلاب:10:1":"1900",
+      "sports:7:Q1:طلاب:10:2":"38",
+      "sports:7:Q1:طلاب:10:3":"E",
+      "sports:7:Q1:طلاب:11:0":"11",
+      "sports:7:Q1:طلاب:11:1":"2200",
+      "sports:7:Q1:طلاب:11:2":"100",
+      "sports:7:Q1:طلاب:11:3":"A",
+      "sports:7:Q1:طلاب:12:0":"5",
+      "sports:7:Q1:طلاب:12:1":"800",
+      "sports:7:Q1:طلاب:12:2":"100",
+      "sports:7:Q1:طلاب:12:3":"A",
+      "sports:7:Q1:طلاب:13:0":"3",
+      "sports:7:Q1:طلاب:13:1":"450",
+      "sports:7:Q1:طلاب:13:2":"90",
+      "sports:7:Q1:طلاب:13:3":"A",
+      "sports:7:Q1:طلاب:14:0":"7",
+      "sports:7:Q1:طلاب:14:1":"500",
+      "sports:7:Q1:طلاب:14:2":"100",
+      "sports:7:Q1:طلاب:14:3":"A",
+      "sports:7:Q1:طلاب:15:0":"0",
+      "sports:7:Q1:طلاب:15:1":"0",
+      "sports:7:Q1:طلاب:15:2":"0",
+      "sports:7:Q1:طلاب:15:3":"E",
+      "sports:7:Q1:طلاب:16:0":"8",
+      "sports:7:Q1:طلاب:16:1":"500",
+      "sports:7:Q1:طلاب:16:2":"100",
+      "sports:7:Q1:طلاب:16:3":"A",
+      "sports:7:Q1:طلاب:17:0":"1",
+      "sports:7:Q1:طلاب:17:1":"550",
+      "sports:7:Q1:طلاب:17:2":"27.5",
+      "sports:7:Q1:طلاب:17:3":"E",
+      "sports:7:Q1:طلاب:18:0":"0",
+      "sports:7:Q1:طلاب:18:1":"0",
+      "sports:7:Q1:طلاب:18:2":"0",
+      "sports:7:Q1:طلاب:18:3":"E",
+      "sports:7:Q1:طلاب:19:0":"1",
+      "sports:7:Q1:طلاب:19:1":"550",
+      "sports:7:Q1:طلاب:19:2":"27.5",
+      "sports:7:Q1:طلاب:19:3":"E",
+      "sportsSummary:7:Q1:طالبات:points":"14435",
+      "sportsSummary:7:Q1:طالبات:percent":"51",
+      "sportsSummary:7:Q1:طالبات:grade":"D",
+      "sports:7:Q1:طالبات:0:0":"11",
+      "sports:7:Q1:طالبات:0:1":"3285",
+      "sports:7:Q1:طالبات:0:2":"41.1",
+      "sports:7:Q1:طالبات:0:3":"D",
+      "sports:7:Q1:طالبات:1:0":"10",
+      "sports:7:Q1:طالبات:1:1":"2285",
+      "sports:7:Q1:طالبات:1:2":"32.6",
+      "sports:7:Q1:طالبات:1:3":"E",
+      "sports:7:Q1:طالبات:2:0":"1",
+      "sports:7:Q1:طالبات:2:1":"1000",
+      "sports:7:Q1:طالبات:2:2":"100",
+      "sports:7:Q1:طالبات:2:3":"A",
+      "sports:7:Q1:طالبات:3:0":"6",
+      "sports:7:Q1:طالبات:3:1":"2100",
+      "sports:7:Q1:طالبات:3:2":"30",
+      "sports:7:Q1:طالبات:3:3":"E",
+      "sports:7:Q1:طالبات:4:0":"1",
+      "sports:7:Q1:طالبات:4:1":"450",
+      "sports:7:Q1:طالبات:4:2":"16.7",
+      "sports:7:Q1:طالبات:4:3":"E",
+      "sports:7:Q1:طالبات:5:0":"2",
+      "sports:7:Q1:طالبات:5:1":"600",
+      "sports:7:Q1:طالبات:5:2":"6",
+      "sports:7:Q1:طالبات:5:3":"E",
+      "sports:7:Q1:طالبات:6:0":"2",
+      "sports:7:Q1:طالبات:6:1":"550",
+      "sports:7:Q1:طالبات:6:2":"55",
+      "sports:7:Q1:طالبات:6:3":"C",
+      "sports:7:Q1:طالبات:7:0":"0",
+      "sports:7:Q1:طالبات:7:1":"0",
+      "sports:7:Q1:طالبات:7:2":"0",
+      "sports:7:Q1:طالبات:7:3":"E",
+      "sports:7:Q1:طالبات:8:0":"1",
+      "sports:7:Q1:طالبات:8:1":"500",
+      "sports:7:Q1:طالبات:8:2":"16.7",
+      "sports:7:Q1:طالبات:8:3":"E",
+      "sports:7:Q1:طالبات:9:0":"65",
+      "sports:7:Q1:طالبات:9:1":"8500",
+      "sports:7:Q1:طالبات:9:2":"85",
+      "sports:7:Q1:طالبات:9:3":"A",
+      "sports:7:Q1:طالبات:10:0":"20",
+      "sports:7:Q1:طالبات:10:1":"3550",
+      "sports:7:Q1:طالبات:10:2":"71",
+      "sports:7:Q1:طالبات:10:3":"B",
+      "sports:7:Q1:طالبات:11:0":"11",
+      "sports:7:Q1:طالبات:11:1":"2200",
+      "sports:7:Q1:طالبات:11:2":"100",
+      "sports:7:Q1:طالبات:11:3":"A",
+      "sports:7:Q1:طالبات:12:0":"5",
+      "sports:7:Q1:طالبات:12:1":"800",
+      "sports:7:Q1:طالبات:12:2":"100",
+      "sports:7:Q1:طالبات:12:3":"A",
+      "sports:7:Q1:طالبات:13:0":"3",
+      "sports:7:Q1:طالبات:13:1":"450",
+      "sports:7:Q1:طالبات:13:2":"90",
+      "sports:7:Q1:طالبات:13:3":"A",
+      "sports:7:Q1:طالبات:14:0":"7",
+      "sports:7:Q1:طالبات:14:1":"500",
+      "sports:7:Q1:طالبات:14:2":"100",
+      "sports:7:Q1:طالبات:14:3":"A",
+      "sports:7:Q1:طالبات:15:0":"11",
+      "sports:7:Q1:طالبات:15:1":"500",
+      "sports:7:Q1:طالبات:15:2":"100",
+      "sports:7:Q1:طالبات:15:3":"A",
+      "sports:7:Q1:طالبات:16:0":"8",
+      "sports:7:Q1:طالبات:16:1":"500",
+      "sports:7:Q1:طالبات:16:2":"100",
+      "sports:7:Q1:طالبات:16:3":"A",
+      "sports:7:Q1:طالبات:17:0":"1",
+      "sports:7:Q1:طالبات:17:1":"550",
+      "sports:7:Q1:طالبات:17:2":"18.3",
+      "sports:7:Q1:طالبات:17:3":"E",
+      "sports:7:Q1:طالبات:18:0":"0",
+      "sports:7:Q1:طالبات:18:1":"0",
+      "sports:7:Q1:طالبات:18:2":"0",
+      "sports:7:Q1:طالبات:18:3":"E",
+      "sports:7:Q1:طالبات:19:0":"1",
+      "sports:7:Q1:طالبات:19:1":"550",
+      "sports:7:Q1:طالبات:19:2":"27.5",
+      "sports:7:Q1:طالبات:19:3":"E"
+    };
+    function getSavedKpiData(){ return STATIC_KPI_DATA; }
     function setSavedKpiData(data){
-      localStorage.setItem(KPI_STORAGE_KEY, JSON.stringify(data || {}));
+      const snapshot = Object.assign({}, data || {});
+      Object.keys(STATIC_KPI_DATA).forEach(k => delete STATIC_KPI_DATA[k]);
+      Object.assign(STATIC_KPI_DATA, snapshot);
     }
-    function saveKpiValue(key, value){
-      if(!key) return;
-      const data = getSavedKpiData();
-      data[key] = value;
-      setSavedKpiData(data);
-    }
+    function saveKpiValue(key, value){ return; }
     function getSavedKpiValue(key){
-      const data = getSavedKpiData();
-      return Object.prototype.hasOwnProperty.call(data, key) ? data[key] : "";
+      return Object.prototype.hasOwnProperty.call(STATIC_KPI_DATA, key) ? STATIC_KPI_DATA[key] : "";
     }
     function opSaveKey(deptIndex, opIndex, quarter){ return `op:${deptIndex}:${opIndex}:${quarter}`; }
     function monthSaveKey(deptIndex, opIndex, quarter, monthNo){ return `month:${deptIndex}:${opIndex}:${quarter}:${monthNo}`; }
-    function recSaveKey(deptIndex, recNo){ return `rec:${deptIndex}:${recNo}`; }
-    function handleDepartmentRecommendationInput(deptIndex, recNo, value){
-      saveKpiValue(recSaveKey(deptIndex, recNo), value);
+    function recSaveKey(deptIndex, quarter, recNo){ return `rec:${deptIndex}:${quarter}:${recNo}`; }
+    function handleDepartmentRecommendationInput(deptIndex, quarter, recNo, value){
+      saveKpiValue(recSaveKey(deptIndex, quarter, recNo), value);
       renderInsights();
     }
 
@@ -4151,65 +5018,21 @@
       if(el) return String(el.value || "").trim();
       return String(getSavedKpiValue(key) || "").trim();
     }
-
-
-
-    function migrateDisabilityBeneficiariesSplit(){
-      const flag = "disability_beneficiaries_split_migrated_v2";
-      if(localStorage.getItem(flag) === "1") return;
-
-      try{
-        const deptIndex = (DEPARTMENT_TARGETS || []).findIndex(d => normalizeArabicText(d.name_ar).includes("ذوي الاعاقه"));
-        if(deptIndex < 0) return;
-
-        const data = getSavedKpiData();
-        ["Q1","Q2"].forEach(q => {
-          const oldTotal = data[opSaveKey(deptIndex, 3, q)];
-          const oldTime = data[opSaveKey(deptIndex, 4, q)];
-          const oldSatisfaction = data[opSaveKey(deptIndex, 5, q)];
-
-          // امسح المواقع القديمة أولاً حتى لا تختلط القيم بعد تحريك الصفوف
-          delete data[opSaveKey(deptIndex, 3, q)];
-          delete data[opSaveKey(deptIndex, 4, q)];
-          delete data[opSaveKey(deptIndex, 5, q)];
-
-          // لا نضع الإجمالي القديم في طلاب/طالبات، لأنها أصبحت حقول منفصلة وتحتاج إدخال جديد
-          // نحرك الصفوف التي بعدها لمواقعها الجديدة
-          if(oldTime !== undefined) data[opSaveKey(deptIndex, 5, q)] = oldTime;
-          if(oldSatisfaction !== undefined) data[opSaveKey(deptIndex, 6, q)] = oldSatisfaction;
-
-          [1,2,3].forEach(m => {
-            const oldTotalMonth = data[monthSaveKey(deptIndex, 3, q, m)];
-            const oldTimeMonth = data[monthSaveKey(deptIndex, 4, q, m)];
-            const oldSatisfactionMonth = data[monthSaveKey(deptIndex, 5, q, m)];
-
-            delete data[monthSaveKey(deptIndex, 3, q, m)];
-            delete data[monthSaveKey(deptIndex, 4, q, m)];
-            delete data[monthSaveKey(deptIndex, 5, q, m)];
-
-            if(oldTimeMonth !== undefined) data[monthSaveKey(deptIndex, 5, q, m)] = oldTimeMonth;
-            if(oldSatisfactionMonth !== undefined) data[monthSaveKey(deptIndex, 6, q, m)] = oldSatisfactionMonth;
-          });
-        });
-
-        setSavedKpiData(data);
-        localStorage.setItem(flag, "1");
-      }catch(e){
-        console.warn("Migration skipped:", e);
-      }
-    }
-
+    function migrateDisabilityBeneficiariesSplit(){ return; }
 
     function getOperationalValueType(name){
       const isPercent = /نسبة|رضا|التزام|إنجاز|انجاز|تغطية/.test(String(name || ""));
-      const isTextLike = /(تقييم|الأثر|قاعدة|اعتماد|إعداد|تحقيق|تنوع|سجل)/.test(String(name || ""));
+      const isTextLike = /(تقييم|الأثر|قاعدة|اعتماد|إعداد|تحقيق|تنوع|سجل|أنواع)/.test(String(name || ""));
       if(isPercent) return "percent";
       if(isTextLike) return "text";
       return "number";
     }
     function isQuarterWideOperational(name){
       const n = String(name || "");
-      return n.includes("الجولات الميدانية واللقاءات التعريفية") || n.includes("تحديث قاعدة البيانات");
+      return n.includes("الجولات الميدانية واللقاءات التعريفية")
+        || n.includes("تحديث قاعدة البيانات")
+        || n.includes("عدد طلبات الدعم الفني المرفوعة")
+        || n.includes("أنواع الإعاقات");
     }
     function aggregateMonthlyValues(values, type){
       const cleaned = values.map(v => String(v || "").trim()).filter(v => v !== "");
@@ -4458,9 +5281,8 @@
       });
       document.querySelectorAll(`[data-rec-input^="${deptIndex}_"]`).forEach(el => {
         const parts = String(el.dataset.recInput || "").split("_");
-        if(parts.length === 2){
-          const key = recSaveKey(parts[0], parts[1]);
-          const value = getSavedKpiValue(key);
+        if(parts.length === 3){
+          const value = getRecommendationValue(parts[0], parts[1], parts[2]);
           if(value !== "") el.value = value;
         }
       });
@@ -5223,6 +6045,10 @@
     function openDepartmentDetail(index){
       const d = DEPARTMENT_TARGETS[index];
       if(!d) return;
+      if(d.name_ar === "مركز محترف" && !sensitiveAccessUnlocked){
+        requestSensitiveAccess(() => openDepartmentDetail(index));
+        return;
+      }
       const detail = $("departmentDetail");
       const list = $("departmentsListView");
       const meta = getDeptStatusMeta(d);
@@ -5302,7 +6128,11 @@
       }).join("") : `<tr><td colspan="4" style="text-align:center;color:var(--muted);font-weight:900">لا توجد بيانات تفصيلية لهذا الربع حالياً.</td></tr>`;
 
       const isSportsDept = isSportsDepartmentName(d.name_ar);
+      const monthlyNote = d.name_ar === "إدارة التغذية والإعاشة"
+        ? `<div style="padding:12px 18px 8px;color:#d62828;font-size:14px;font-weight:950;text-align:right;background:var(--card)">ملاحظة: تم تعبئة بعض الشواهد خارج أوقات العمل.</div>`
+        : "";
       const genericMonthlyPanel = `<div class="detail-panel">
+        ${monthlyNote}
         <div class="detail-panel-head">
           <div>
             <h4>${d.icon || "🏢"} تفصيل شهري للأداء التشغيلي</h4>
@@ -5370,7 +6200,6 @@
       </div>
 
       <div class="data-entry-bottom">
-        <button class="dept-page-btn data-entry-toggle" type="button">🔒 إدخال البيانات</button>
       </div>
 
       <div class="main-homepage-panel">
@@ -5414,8 +6243,6 @@
           </tbody>
         </table>
       </div>
-
-      <div class="calc-hint"><b>طريقة العمل:</b> اضغط زر "إدخال البيانات" داخل صفحة الإدارة وافتحه بكلمة المرور، ثم عبئ بيانات الظهور في الصفحة الرئيسية بالأعلى، ويمكنك كذلك تعبئة التفصيل الشهري في الأسفل، وأي مؤشر تشغيلي مشابه للمستهدف الرسمي سيعبئه الداشبورد تلقائياً. المؤشرات التي لا يوجد لها ربط مباشر تبقى كـ "يدوي / إثبات".</div>
       <div class="hidden-operational-inputs" style="display:none" aria-hidden="true">
         <table>
           <tbody>${operationalRows}</tbody>
@@ -5445,12 +6272,28 @@
         <div class="dept-note-box"><b>المؤشرات اليدوية</b> بعض المستهدفات مثل السجلات أو الاعتمادات تحتاج إثبات أو إدخال يدوي لأنها لا تُحسب رقمياً.</div>
       </div>
 
-      <div class="recs-box">
-        <h5>توصيات اجتماع مراجعة الإدارة</h5>
-        <div class="recs-list">
-          <div class="rec-row"><span class="num">1</span><textarea class="rec-input" rows="2" ${dataEntryUnlocked ? "" : "disabled"} data-rec-input="${index}_1" oninput="handleDepartmentRecommendationInput(${index}, 1, this.value)" placeholder="اكتب التوصية الأولى هنا"></textarea></div>
-          <div class="rec-row"><span class="num">2</span><textarea class="rec-input" rows="2" ${dataEntryUnlocked ? "" : "disabled"} data-rec-input="${index}_2" oninput="handleDepartmentRecommendationInput(${index}, 2, this.value)" placeholder="اكتب التوصية الثانية هنا"></textarea></div>
-          <div class="rec-row"><span class="num">3</span><textarea class="rec-input" rows="2" ${dataEntryUnlocked ? "" : "disabled"} data-rec-input="${index}_3" oninput="handleDepartmentRecommendationInput(${index}, 3, this.value)" placeholder="اكتب التوصية الثالثة هنا"></textarea></div>
+      <div class="detail-quarter-box active" data-quarter="Q1">
+        <div class="recs-box">
+          <h5>توصيات اجتماع مراجعة الإدارة — الربع الأول</h5>
+          <p class="recs-quarter-note">هذه التوصيات مخصصة لنتائج وملاحظات الربع الأول فقط.</p>
+          <div class="recs-list">
+            <div class="rec-row"><span class="num">1</span><textarea class="rec-input" rows="2" ${dataEntryUnlocked ? "" : "disabled"} data-rec-input="${index}_Q1_1" oninput="handleDepartmentRecommendationInput(${index}, 'Q1', 1, this.value)" placeholder="لا توجد توصية أولى للربع الأول"></textarea></div>
+            <div class="rec-row"><span class="num">2</span><textarea class="rec-input" rows="2" ${dataEntryUnlocked ? "" : "disabled"} data-rec-input="${index}_Q1_2" oninput="handleDepartmentRecommendationInput(${index}, 'Q1', 2, this.value)" placeholder="لا توجد توصية ثانية للربع الأول"></textarea></div>
+            <div class="rec-row"><span class="num">3</span><textarea class="rec-input" rows="2" ${dataEntryUnlocked ? "" : "disabled"} data-rec-input="${index}_Q1_3" oninput="handleDepartmentRecommendationInput(${index}, 'Q1', 3, this.value)" placeholder="لا توجد توصية ثالثة للربع الأول"></textarea></div>
+            <div class="rec-row"><span class="num">4</span><textarea class="rec-input" rows="2" ${dataEntryUnlocked ? "" : "disabled"} data-rec-input="${index}_Q1_4" oninput="handleDepartmentRecommendationInput(${index}, 'Q1', 4, this.value)" placeholder="لا توجد توصية رابعة للربع الأول"></textarea></div>
+          </div>
+        </div>
+      </div>
+      <div class="detail-quarter-box" data-quarter="Q2">
+        <div class="recs-box">
+          <h5>توصيات اجتماع مراجعة الإدارة — الربع الثاني</h5>
+          <p class="recs-quarter-note">هذه التوصيات مخصصة لنتائج وملاحظات الربع الثاني فقط، وهي منفصلة عن توصيات الربع الأول.</p>
+          <div class="recs-list">
+            <div class="rec-row"><span class="num">1</span><textarea class="rec-input" rows="2" ${dataEntryUnlocked ? "" : "disabled"} data-rec-input="${index}_Q2_1" oninput="handleDepartmentRecommendationInput(${index}, 'Q2', 1, this.value)" placeholder="لا توجد توصية أولى للربع الثاني"></textarea></div>
+            <div class="rec-row"><span class="num">2</span><textarea class="rec-input" rows="2" ${dataEntryUnlocked ? "" : "disabled"} data-rec-input="${index}_Q2_2" oninput="handleDepartmentRecommendationInput(${index}, 'Q2', 2, this.value)" placeholder="لا توجد توصية ثانية للربع الثاني"></textarea></div>
+            <div class="rec-row"><span class="num">3</span><textarea class="rec-input" rows="2" ${dataEntryUnlocked ? "" : "disabled"} data-rec-input="${index}_Q2_3" oninput="handleDepartmentRecommendationInput(${index}, 'Q2', 3, this.value)" placeholder="لا توجد توصية ثالثة للربع الثاني"></textarea></div>
+            <div class="rec-row"><span class="num">4</span><textarea class="rec-input" rows="2" ${dataEntryUnlocked ? "" : "disabled"} data-rec-input="${index}_Q2_4" oninput="handleDepartmentRecommendationInput(${index}, 'Q2', 4, this.value)" placeholder="لا توجد توصية رابعة للربع الثاني"></textarea></div>
+          </div>
         </div>
       </div>`;
       detail.classList.add("open");
@@ -5483,25 +6326,36 @@
         : ["يناير","فبراير","مارس"];
       return `<option value="">اختر الشهر</option>` + months.map(m => `<option value="${m}" ${selected===m ? "selected" : ""}>${m}</option>`).join("");
     }
+    const STATIC_MUHTARAF_DATA = {
+      "Q1:0:month":"فبراير",
+      "Q1:0:program":"إدارة المشاريع CBP-PM",
+      "Q1:0:price":"2173",
+      "Q1:0:beneficiaries":"18",
+      "Q1:0:trainer":"5000",
+      "Q1:0:hall":"0",
+      "Q1:0:codes":"1032",
 
+      "Q1:1:month":"يناير",
+      "Q1:1:program":"القيادة الإدارية CBP-LS",
+      "Q1:1:price":"869",
+      "Q1:1:beneficiaries":"36",
+      "Q1:1:trainer":"6000",
+      "Q1:1:hall":"0",
+      "Q1:1:codes":"675",
+
+      "Q2:0:month":"يونيو",
+      "Q2:0:program":"النيبوش NEBOSH",
+      "Q2:0:price":"1739",
+      "Q2:0:beneficiaries":"15",
+      "Q2:0:trainer":"0",
+      "Q2:0:hall":"0",
+      "Q2:0:codes":"1200"
+    };
     function getSavedMuhtarafValue(deptIndex, rowIndex, field, quarter = currentQuarter || "Q1"){
-      const quarterKey = muhtarafRowKey(deptIndex, rowIndex, field, quarter);
-      const saved = localStorage.getItem(quarterKey);
-      if(saved !== null) return saved;
-
-      // ترحيل البيانات القديمة تلقائياً إلى الربع الأول حتى لا تضيع المدخلات السابقة.
-      if(quarter === "Q1"){
-        const legacy = localStorage.getItem(legacyMuhtarafRowKey(deptIndex, rowIndex, field));
-        if(legacy !== null){
-          localStorage.setItem(quarterKey, legacy);
-          return legacy;
-        }
-      }
-      return "";
+      return STATIC_MUHTARAF_DATA[`${quarter}:${rowIndex}:${field}`] ?? "";
     }
-
     function saveMuhtarafValue(deptIndex, rowIndex, field, value, quarter = currentQuarter || "Q1"){
-      localStorage.setItem(muhtarafRowKey(deptIndex, rowIndex, field, quarter), value ?? "");
+      return;
     }
 
     function numVal(v){
@@ -5770,6 +6624,7 @@
       renderQuarterPanel();
       if(!isQuarterFilled(currentQuarter)){ renderEmptyDashboard(); return; }
       renderSummary(); renderKpis(); renderScoreList(); drawCharts(); renderInsights();
+      updateSensitiveSections();
     }
 
     $("themeBtn").addEventListener("click", () => { theme = theme === "dark" ? "light" : "dark"; localStorage.setItem("quarters_dashboard_theme", theme); renderAll(); });
@@ -5780,7 +6635,7 @@
     if($("departmentsBtn")) $("departmentsBtn").addEventListener("click", openDepartmentsPage);
     document.addEventListener("click", (e) => {
       const btn = e.target.closest(".data-entry-toggle");
-      if(btn) toggleDataEntryMode();
+      if(btn) return;
     });
     if($("departmentsBackBtn")) $("departmentsBackBtn").addEventListener("click", closeDepartmentsPage);
     if($("departmentsCloseBtn")) $("departmentsCloseBtn").addEventListener("click", closeDepartmentsPage);
