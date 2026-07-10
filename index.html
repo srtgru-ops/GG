@@ -1,9 +1,10 @@
 <!DOCTYPE html>
+<!-- تحديث: نقل داشبورد الإدارة أسفل المستهدفات الرسمية وإضافة مقارنة الربع الأول والثاني -->
 <html lang="ar" dir="rtl" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>لوحة أداء عمادة شؤون الطلاب - الربع الأول 2026</title>
+  <title>لوحة أداء عمادة شؤون الطلاب - مقارنة الأرباع 2026</title>
   <style>
     :root{
       --green:#1D9E75;
@@ -249,6 +250,56 @@
     .donut-stat{background:var(--card-2);border:1px solid var(--border);border-radius:16px;padding:12px;text-align:center}
     .donut-stat b{display:block;font-size:24px;color:var(--text)}.donut-stat span{color:var(--muted);font-size:12px;font-weight:900}
     .donut-list{display:grid;gap:8px}.donut-list div{display:flex;justify-content:space-between;gap:12px;align-items:center;background:var(--card-2);border:1px solid var(--border);border-radius:14px;padding:9px 11px;font-size:12px;font-weight:900;color:var(--muted)}
+
+    .disability-metrics{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(95px,1fr));
+      gap:10px;
+      margin-bottom:12px;
+    }
+    .disability-metric{
+      background:var(--card-2);
+      border:1px solid var(--border);
+      border-radius:17px;
+      padding:13px 10px;
+      text-align:center;
+      min-height:86px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+    }
+    .disability-metric b{
+      display:block;
+      font-size:25px;
+      line-height:1;
+      color:var(--text);
+      font-weight:1000;
+      margin-bottom:8px;
+    }
+    .disability-metric span{
+      color:var(--muted);
+      font-size:12px;
+      font-weight:900;
+      line-height:1.45;
+    }
+    .radar-chart-box{min-height:370px}
+    .radar-reading-note{
+      margin-top:12px;
+      padding:10px 12px;
+      border-radius:14px;
+      background:var(--card-2);
+      border:1px solid var(--border);
+      color:var(--muted);
+      font-size:12px;
+      font-weight:850;
+      line-height:1.75;
+    }
+    .radar-reading-note b{color:var(--text);font-weight:1000}
+    .radar-scale-label{fill:var(--muted);font-size:10px;font-weight:850}
+    @media(max-width:760px){
+      .disability-metrics{grid-template-columns:1fr 1fr}
+      .disability-metric:last-child{grid-column:1 / -1}
+    }
 
     .table-wrap{overflow:auto;border:1px solid var(--border);border-radius:18px;background:var(--card)}
     table{width:100%;border-collapse:collapse;min-width:780px;font-size:13px}
@@ -1342,6 +1393,28 @@
     .dept-dashboard-top > .dept-section-title{
       margin-top:0;
     }
+    .quarter-comparison-card{
+      background:linear-gradient(135deg, var(--card), var(--card-2));
+      border-width:1px;
+    }
+    .quarter-score-compare{
+      margin-top:4px;
+    }
+    .quarter-compare-kpis{
+      margin-top:16px;
+    }
+    .quarter-target-compare{
+      margin-top:16px;
+      padding-top:14px;
+      border-top:1px solid var(--border);
+    }
+    .quarter-diff{
+      font-size:16px !important;
+      line-height:1.5;
+    }
+    .quarter-diff.good{color:#0d7c58 !important}
+    .quarter-diff.bad{color:#ba2f2f !important}
+    .quarter-diff.neutral{color:var(--muted) !important}
 
   
     .muhtaraf-panel{
@@ -1374,6 +1447,19 @@
       font-size:12px;
       font-weight:850;
       line-height:1.7;
+    }
+    .muhtaraf-quarter-chip{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:7px 12px;
+      border-radius:999px;
+      background:var(--green-soft);
+      color:var(--green-2);
+      border:1px solid rgba(29,158,117,.20);
+      font-size:12px;
+      font-weight:1000;
+      white-space:nowrap;
     }
     .muhtaraf-wrap{padding:14px 16px 18px}
     .muhtaraf-table{
@@ -1485,6 +1571,11 @@
       padding:10px 20px;
       min-width:118px;
     }
+    .hero-card{display:flex;flex-direction:column;justify-content:space-between;min-height:280px}
+    .hero-quarter-switch{display:flex;justify-content:flex-end;align-items:center;margin-top:22px;position:relative;z-index:2}
+    .hero-quarter-switch .quarter-tabs{display:flex;gap:10px;flex-wrap:wrap}
+    .hero-quarter-switch .quarter-btn{font-size:15px;padding:10px 20px;min-width:118px}
+    @media(max-width:760px){.hero-card{min-height:auto}.hero-quarter-switch{justify-content:flex-start}}
 
   
     .summary-panel{
@@ -1631,6 +1722,48 @@
       height:5px !important;
     }
 
+
+    /* مصفوفة تصنيف الأداء */
+    .matrix-reading-note{
+      margin-top:12px;
+      padding:12px 14px;
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:var(--card-2);
+      color:var(--muted);
+      font-size:12px;
+      font-weight:850;
+      line-height:1.8;
+    }
+    .matrix-reading-note b{color:var(--text)}
+    .matrix-quadrant-legend{
+      display:grid;
+      grid-template-columns:repeat(4,minmax(120px,1fr));
+      gap:8px;
+      margin-top:12px;
+    }
+    .matrix-legend-item{
+      display:flex;
+      align-items:center;
+      gap:7px;
+      border:1px solid var(--border);
+      border-radius:13px;
+      background:var(--card-2);
+      color:var(--text);
+      padding:9px 10px;
+      font-size:11px;
+      font-weight:900;
+    }
+    .matrix-legend-item i{
+      width:12px;
+      height:12px;
+      border-radius:4px;
+      flex:0 0 auto;
+    }
+    @media(max-width:760px){
+      .matrix-quadrant-legend{grid-template-columns:1fr 1fr}
+    }
+
   </style>
 </head>
 <body>
@@ -1656,17 +1789,18 @@
   <main class="container">
     <section class="hero">
       <div class="hero-card">
-        <div class="hero-eyebrow" data-t="eyebrow">لوحة متابعة تنفيذية</div>
-        <h2 class="hero-title" data-t="heroTitle">ملخص أداء وحدات عمادة شؤون الطلاب للربع الأول 2026</h2>
+        <div>
+          <div class="hero-eyebrow" data-t="eyebrow">لوحة متابعة تنفيذية</div>
+          <h2 class="hero-title" data-t="heroTitle">ملخص أداء وحدات عمادة شؤون الطلاب للربع الأول 2026</h2>
+        </div>
+        <div class="hero-quarter-switch" aria-label="اختيار الربع">
+          <div class="quarter-tabs" id="quarterTabs">
+            <button class="quarter-btn active" data-quarter="Q1" type="button">الربع الأول</button>
+            <button class="quarter-btn" data-quarter="Q2" type="button">الربع الثاني</button>
+          </div>
+        </div>
       </div>
       <div class="summary-panel panel" id="summaryPanel"></div>
-    </section>
-    
-    <section class="top-quarter-switch" aria-label="اختيار الربع">
-      <div class="quarter-tabs" id="quarterTabs">
-        <button class="quarter-btn active" data-quarter="Q1" type="button">الربع الأول</button>
-        <button class="quarter-btn" data-quarter="Q2" type="button">الربع الثاني</button>
-      </div>
     </section>
 
 <section class="kpi-grid" id="kpiGrid"></section>
@@ -1723,7 +1857,8 @@
       <article class="chart-card">
         <div class="card-head">
           <div>
-            <h3 class="card-title" data-t="sportsTitle">نقاط المؤشر الرياضي حسب الفئة</h3>
+            <h3 class="card-title" data-t="sportsTitle">نقاط المؤشر الرياضي حسب المسار</h3>
+            <p class="card-sub" data-t="sportsSub">تُسحب النقاط تلقائياً من جدول أداء النشاط الرياضي للربع المحدد.</p>
             <div class="tag-row">
               <span class="tag green" id="sportsMaleTag" data-t="maleSports">ذكور: 10,180 نقطة (درجة E)</span>
               <span class="tag purple" id="sportsFemaleTag" data-t="femaleSports">إناث: 14,435 نقطة (درجة D)</span>
@@ -1757,38 +1892,12 @@
       <article class="chart-card">
         <div class="card-head">
           <div>
-            <h3 class="card-title" data-t="radarTitle">درجات الجودة حسب القسم</h3>
-            <p class="card-sub" data-t="radarSub">مقارنة التعقيد والترابط والاستقرار والتوحيد.</p>
+            <h3 class="card-title" data-t="radarTitle">درجات الجودة التشغيلية حسب الإدارة</h3>
+            <p class="card-sub" data-t="radarSub">مقارنة وضوح الإجراءات والترابط والاستقرار والتوحيد — الدرجة من 100.</p>
           </div>
         </div>
-        <div class="chart-box" id="radarChart"></div>
+        <div class="chart-box radar-chart-box" id="radarChart"></div>
       </article>
-
-      <article class="chart-card full">
-        <div class="card-head">
-          <div>
-            <h3 class="card-title" data-t="nutritionTitle">نتائج تفتيش مواقع التغذية</h3>
-            <p class="card-sub" data-t="nutritionSub">جدول مبسط للمخالفات والتحذيرات حسب الموقع.</p>
-          </div>
-        </div>
-        <div class="table-wrap"><table id="nutritionTable"></table></div>
-      </article>
-
-      <article class="chart-card full">
-        <div class="card-head">
-          <div>
-            <h3 class="card-title" data-t="coverageTitle">تغطية قياس مؤشرات الأداء حسب القسم</h3>
-            <p class="card-sub" data-t="coverageSub">مقاس ومُبلَّغ / مستهدف غير مقاس / غير محدد.</p>
-          </div>
-        </div>
-        <div class="coverage" id="coverageBars"></div>
-        <div class="chart-legend">
-          <span class="legend-item"><i class="legend-dot" style="--dot:var(--green)"></i><span data-t="measured">مقاس ومُبلَّغ</span></span>
-          <span class="legend-item"><i class="legend-dot" style="--dot:var(--amber)"></i><span data-t="unmeasured">مستهدف غير مقاس</span></span>
-          <span class="legend-item"><i class="legend-dot" style="--dot:var(--gray)"></i><span data-t="undefinedTarget">غير محدد</span></span>
-        </div>
-      </article>
-
       <article class="chart-card">
         <div class="card-head"><div><h3 class="card-title" data-t="programTitle">أداء برامج المحترف: الربع الأول</h3></div></div>
         <div class="warning" data-t="programWarning">⚠️ انخفض LS-CBP بمقدار 35 نقطة عن العام الماضي.</div>
@@ -1799,7 +1908,7 @@
         <div class="card-head">
           <div>
             <h3 class="card-title" data-t="matrixTitle">مصفوفة تصنيف الأداء</h3>
-            <p class="card-sub" data-t="matrixSub">حجم الفقاعة يعبر عن درجة الأداء، بدون أسماء متداخلة داخل الرسم.</p>
+            <p class="card-sub" data-t="matrixSub">تصنيف الإدارات حسب درجة الأداء ومستوى الالتزام، وحجم الفقاعة يعكس عدد المستهدفات الرسمية.</p>
           </div>
         </div>
         <div class="chart-box compact" id="matrixChart"></div>
@@ -1881,14 +1990,12 @@
       scoreTitle:{ar:"مؤشر التزام الإدارات التشغيلية",en:"Operational Departments Compliance Index"}, scoreSub:{ar:"يعرض التزام كل إدارة تشغيليًا حسب البيانات المدخلة وحالة التسليم.",en:"Shows each department’s operational compliance based on entered data and submission status."},
       muhtarafTitle:{ar:"الإيرادات مقابل المصروفات – المحترف",en:"Muhtaraf Revenue vs. Expenditure"}, sarSub:{ar:"القيم بالريال السعودي",en:"Values in SAR"},
       activitiesTitle:{ar:"اتجاه الأنشطة الطلابية الشهري",en:"Student Activities Monthly Trend"}, activitiesSub:{ar:"مقارنة الطلاب والأنشطة وجلسات الاحتجاز.",en:"Students, activities, and retention sessions."},
-      sportsTitle:{ar:"نقاط المؤشر الرياضي حسب الفئة",en:"Sports Index Points by Category"}, maleSports:{ar:"ذكور: 10,180 نقطة (درجة E)",en:"Male: 10,180 pts (Grade E)"}, femaleSports:{ar:"إناث: 14,435 نقطة (درجة D)",en:"Female: 14,435 pts (Grade D)"},
+      sportsTitle:{ar:"نقاط المؤشر الرياضي حسب المسار",en:"Sports Index Points by Track"}, sportsSub:{ar:"تُسحب النقاط تلقائياً من جدول أداء النشاط الرياضي للربع المحدد.",en:"Points are pulled automatically from the sports activity table for the selected quarter."}, maleSports:{ar:"ذكور: 10,180 نقطة (درجة E)",en:"Male: 10,180 pts (Grade E)"}, femaleSports:{ar:"إناث: 14,435 نقطة (درجة D)",en:"Female: 14,435 pts (Grade D)"},
       sportsTrendTitle:{ar:"اتجاه الإنفاق الرياضي – 3 سنوات",en:"Sports Expenditure 3-Year Trend"}, sportsWarning:{ar:"⚠️ انخفاض الميزانية 63% منذ 2023 — قد يؤثر على فجوة الأداء.",en:"⚠️ 63% budget decline since 2023 — may affect the performance gap."},
-      disabilityTitle:{ar:"مستفيدو وحدة ذوي الإعاقة",en:"Disability Unit Beneficiaries"}, disabilitySub:{ar:"إجمالي المستفيدين: 164",en:"Total beneficiaries: 164"},
-      radarTitle:{ar:"درجات الجودة حسب القسم",en:"Quality Scores by Department"}, radarSub:{ar:"مقارنة التعقيد والترابط والاستقرار والتوحيد.",en:"Complexity, interdependency, stability, and standardization."},
-      nutritionTitle:{ar:"نتائج تفتيش مواقع التغذية",en:"Nutrition Inspection Results"}, nutritionSub:{ar:"جدول مبسط للمخالفات والتحذيرات حسب الموقع.",en:"A simplified table for violations and warnings by location."},
-      coverageTitle:{ar:"تغطية قياس مؤشرات الأداء حسب القسم",en:"KPI Measurement Coverage by Department"}, coverageSub:{ar:"مقاس ومُبلَّغ / مستهدف غير مقاس / غير محدد.",en:"Measured & reported / targeted but unmeasured / undefined."}, measured:{ar:"مقاس ومُبلَّغ",en:"Measured & Reported"}, unmeasured:{ar:"مستهدف غير مقاس",en:"Targeted but Unmeasured"}, undefinedTarget:{ar:"غير محدد",en:"No Target Defined"},
+      disabilityTitle:{ar:"مستفيدو وحدة ذوي الإعاقة",en:"Disability Unit Beneficiaries"}, disabilitySub:{ar:"تُسحب البيانات من وحدة ذوي الإعاقة",en:"Data is pulled from the Disability Unit"},
+      radarTitle:{ar:"درجات الجودة التشغيلية حسب الإدارة",en:"Operational Quality Scores by Department"}, radarSub:{ar:"مقارنة وضوح الإجراءات والترابط والاستقرار والتوحيد — الدرجة من 100.",en:"Process clarity, interdependency, stability, and standardization — scored out of 100."},
       programTitle:{ar:"أداء برامج المحترف: الربع الأول",en:"Muhtaraf Program Performance: Q1"}, programWarning:{ar:"⚠️ انخفض LS-CBP بمقدار 35 نقطة عن العام الماضي.",en:"⚠️ LS-CBP dropped by 35 points year-on-year."},
-      matrixTitle:{ar:"مصفوفة تصنيف الأداء",en:"Performance Classification Matrix"}, matrixSub:{ar:"حجم الفقاعة يعبر عن درجة الأداء، بدون أسماء متداخلة داخل الرسم.",en:"Bubble size represents score, with names moved to hover to avoid overlap."},
+      matrixTitle:{ar:"مصفوفة تصنيف الأداء",en:"Performance Classification Matrix"}, matrixSub:{ar:"تصنيف الإدارات حسب درجة الأداء ومستوى الالتزام، وحجم الفقاعة يعكس عدد المستهدفات الرسمية.",en:"Departments classified by performance score and commitment level; bubble size reflects official target count."},
       insightsTitle:{ar:"رؤى الأقسام والتوصيات",en:"Department Insights & Recommendations"}, clickHint:{ar:"اضغط على أي قسم لعرض التوصيات",en:"Click any department to show recommendations"},
       footer:{ar:"عمادة شؤون الطلاب — جامعة تبوك • الربع الأول 2026 • مراجعة الإدارة",en:"Deanship of Student Affairs — University of Tabuk • Q1 2026 • Management Review"}
     };
@@ -1898,17 +2005,17 @@
     };
 
     const DEPT_DATA = [
-      { name_ar:"النقل الطلابي", name_en:"Student Transport", score:120, status:"ontime" },
-      { name_ar:"المركز المهني", name_en:"Professional Center", score:100, status:"ontime" },
-      { name_ar:"سكن الطلاب", name_en:"Student Housing", score:100, status:"ontime" },
-      { name_ar:"وحدة الإرشاد", name_en:"Guidance Unit", score:95, status:"ontime" },
-      { name_ar:"التغذية والتموين", name_en:"Nutrition & Catering", score:90, status:"excuse" },
-      { name_ar:"الأنشطة الطلابية", name_en:"Student Activities", score:90, status:"excuse" },
-      { name_ar:"مكتب التوظيف", name_en:"Employment Office", score:85, status:"excuse" },
-      { name_ar:"الأنشطة الرياضية", name_en:"Sports Activities", score:60, status:"noexcuse" },
-      { name_ar:"وحدة ذوي الاحتياجات", name_en:"Disability Unit", score:65, status:"noexcuse" },
-      { name_ar:"منح الطلاب", name_en:"Student Grants", score:0, status:"missing" },
-      { name_ar:"العمل التطوعي", name_en:"Volunteer Work", score:0, status:"missing" }
+      { name_ar:"إدارة النقل الطلابي", name_en:"Student Transport", score:120, status:"ontime" },
+      { name_ar:"مركز محترف", name_en:"Professional Center", score:100, status:"ontime" },
+      { name_ar:"إدارة السكن الطلابي", name_en:"Student Housing", score:100, status:"ontime" },
+      { name_ar:"وحدة التوجيه وحقوق الطالب", name_en:"Guidance Unit", score:95, status:"ontime" },
+      { name_ar:"إدارة التغذية والإعاشة", name_en:"Nutrition & Catering", score:90, status:"excuse" },
+      { name_ar:"إدارة الأنشطة الطلابية", name_en:"Student Activities", score:90, status:"excuse" },
+      { name_ar:"مكتب التوظيف والإرشاد المهني", name_en:"Employment Office", score:85, status:"excuse" },
+      { name_ar:"إدارة النشاط الرياضي", name_en:"Sports Activities", score:60, status:"noexcuse" },
+      { name_ar:"وحدة ذوي الإعاقة", name_en:"Disability Unit", score:65, status:"noexcuse" },
+      { name_ar:"إدارة المنح الدراسية", name_en:"Student Grants", score:0, status:"missing" },
+      { name_ar:"إدارة العمل التطوعي", name_en:"Volunteer Work", score:0, status:"missing" }
     ];
 
     const DEPARTMENT_TARGETS = [
@@ -2214,7 +2321,7 @@
             ]
       },
       {
-            "name_ar": "إدارة الأنشطة الرياضية",
+            "name_ar": "إدارة النشاط الرياضي",
             "icon": "🏅",
             "source": "صفحة 9",
             "summary": "مستهدفات البرامج والمسابقات الرياضية، المشاركات، المرافق، الميزانية والمخاطر.",
@@ -2498,9 +2605,11 @@
     const OPERATIONAL_KPIS = {
       "إدارة النقل الطلابي": [
         "إجمالي عدد الرحلات الخارجية يومياً",
+        "نسبة الالتزام بالمواعيد",
         "عدد الرحلات المتأخرة",
         "عدد المخالفات المرصودة أو الحوادث المبلغ عنها",
         "عدد الشكاوى المقدمة من المستفيدين والمغلقة",
+        "رضا المستفيدين عن النقل",
         "نسبة تغطية الخدمات للطلب الفعلي"
       ],
       "إدارة السكن الطلابي": [
@@ -2604,18 +2713,16 @@
       { month:"Mar", month_ar:"مارس", students:57, activities:48, retention:21 }
     ];
     const SPORTS_DATA = [
-      { category:"Tournaments", category_ar:"البطولات", male:2400, female:3200 },
-      { category:"Internal", category_ar:"داخلية", male:1800, female:2400 },
-      { category:"Training", category_ar:"التدريب", male:2200, female:3100 },
-      { category:"Volunteering", category_ar:"التطوع", male:1580, female:2135 },
-      { category:"Awareness", category_ar:"التوعية", male:1200, female:1800 },
-      { category:"International", category_ar:"دولية", male:1000, female:1800 }
+      { category:"Championships", category_ar:"البطولات", male:2010, female:3285 },
+      { category:"Central Activities", category_ar:"الأنشطة المركزية", male:1270, female:2100 },
+      { category:"Internal Activities", category_ar:"الأنشطة الداخلية", male:6350, female:8500 },
+      { category:"International Participation", category_ar:"المشاركات الدولية", male:550, female:550 }
     ];
     const SPORTS_TREND = [
       { year:"2025", amount:965793 }, { year:"2024", amount:414572 }, { year:"2023", amount:357786 }
     ];
     const RADAR_DATA = [
-      { subject:"Complexity", subject_ar:"التعقيد", Transport:80, Housing:65, Nutrition:70, Sports:55, Activities:75 },
+      { subject:"Process Clarity", subject_ar:"وضوح الإجراءات", Transport:80, Housing:65, Nutrition:70, Sports:55, Activities:75 },
       { subject:"Interdependency", subject_ar:"الترابط", Transport:70, Housing:80, Nutrition:85, Sports:60, Activities:90 },
       { subject:"Stability", subject_ar:"الاستقرار", Transport:90, Housing:75, Nutrition:65, Sports:50, Activities:70 },
       { subject:"Standardization", subject_ar:"التوحيد", Transport:85, Housing:70, Nutrition:60, Sports:45, Activities:65 }
@@ -2626,28 +2733,6 @@
       { name:"Physical", name_ar:"حركية", value:52, color:COLORS.green },
       { name:"Congenital", name_ar:"خلقية", value:32, color:COLORS.amber }
     ];
-    const NUTRITION_DATA = [
-      { location:"Main Cafeteria (M)", location_ar:"المطعم الرئيسي - طلاب", rating:"Good", rating_ar:"جيد", violations:2, warnings:3, color:COLORS.green },
-      { location:"Main Cafeteria (F)", location_ar:"المطعم الرئيسي - طالبات", rating:"Excellent", rating_ar:"ممتاز", violations:0, warnings:1, color:COLORS.green },
-      { location:"Engineering Block", location_ar:"مبنى الهندسة", rating:"Good", rating_ar:"جيد", violations:3, warnings:4, color:COLORS.green },
-      { location:"Medicine Campus", location_ar:"كلية الطب", rating:"Good", rating_ar:"جيد", violations:1, warnings:2, color:COLORS.green },
-      { location:"Janar (M)", location_ar:"جلنار - طلاب", rating:"Very Poor", rating_ar:"ضعيف جداً", violations:9, warnings:7, color:COLORS.red },
-      { location:"Janar (F)", location_ar:"جلنار - طالبات", rating:"Poor", rating_ar:"ضعيف", violations:5, warnings:5, color:COLORS.amber },
-      { location:"Arts Block", location_ar:"مبنى الآداب", rating:"Good", rating_ar:"جيد", violations:2, warnings:3, color:COLORS.green },
-      { location:"Sciences Block", location_ar:"مبنى العلوم", rating:"Poor", rating_ar:"ضعيف", violations:4, warnings:4, color:COLORS.amber }
-    ];
-    const COVERAGE_DATA = [
-      { name:"Transport", name_ar:"النقل", measured:85, untargeted:10, undefined:5 },
-      { name:"Housing", name_ar:"السكن", measured:80, untargeted:15, undefined:5 },
-      { name:"Muhtaraf", name_ar:"المحترف", measured:90, untargeted:5, undefined:5 },
-      { name:"Nutrition", name_ar:"التغذية", measured:70, untargeted:20, undefined:10 },
-      { name:"Activities", name_ar:"الأنشطة", measured:75, untargeted:15, undefined:10 },
-      { name:"Employment", name_ar:"التوظيف", measured:65, untargeted:25, undefined:10 },
-      { name:"Sports", name_ar:"الرياضة", measured:55, untargeted:30, undefined:15 },
-      { name:"Disability", name_ar:"الإعاقة", measured:60, untargeted:25, undefined:15 },
-      { name:"Grants", name_ar:"المنح", measured:0, untargeted:50, undefined:50 },
-      { name:"Volunteer", name_ar:"التطوع", measured:0, untargeted:50, undefined:50 }
-    ];
     const BUBBLE_DATA = [
       { x:2, y:3, z:80, name:"Transport", name_ar:"النقل" }, { x:3, y:4, z:90, name:"Housing", name_ar:"السكن" },
       { x:4, y:5, z:70, name:"Nutrition", name_ar:"التغذية" }, { x:3, y:3, z:60, name:"Sports", name_ar:"الرياضة" },
@@ -2657,17 +2742,17 @@
       { x:2, y:3, z:88, name:"Muhtaraf", name_ar:"المحترف" }
     ];
     const INSIGHTS = [
-      { dept:"Student Transport", dept_ar:"النقل الطلابي", badge:"On Time", badge_ar:"في الوقت", status:"ontime", note:"Exceeds target — highest performer in Q1", note_ar:"تجاوز المستهدف — أعلى أداء في الربع الأول", recs:["Maintain GPS tracking schedule","Expand route coverage"], recs_ar:["الاستمرار في جدول تتبع الحافلات","توسيع تغطية المسارات"] },
-      { dept:"Professional Center", dept_ar:"المركز المهني", badge:"On Time", badge_ar:"في الوقت", status:"ontime", note:"February loss requires immediate review", note_ar:"خسارة فبراير تحتاج مراجعة مباشرة", recs:["Review LS-CBP demand drop","Increase marketing for low-enrollment programs"], recs_ar:["مراجعة انخفاض الطلب على LS-CBP","زيادة التسويق للبرامج منخفضة التسجيل"] },
-      { dept:"Student Housing", dept_ar:"سكن الطلاب", badge:"On Time", badge_ar:"في الوقت", status:"ontime", note:"Stable reporting performance", note_ar:"أداء رفع مستقر", recs:["Digitize maintenance logs","Survey satisfaction monthly"], recs_ar:["رقمنة سجل الصيانة","قياس رضا الطلاب شهرياً"] },
-      { dept:"Guidance Unit", dept_ar:"وحدة الإرشاد", badge:"On Time", badge_ar:"في الوقت", status:"ontime", note:"Strong compliance", note_ar:"امتثال مرتفع", recs:["Expand counseling capacity","Improve appointment system"], recs_ar:["زيادة الطاقة الاستيعابية للإرشاد","تحسين نظام المواعيد"] },
-      { dept:"Nutrition & Catering", dept_ar:"التغذية والتموين", badge:"Late w/ Excuse", badge_ar:"متأخر بعذر", status:"excuse", note:"Janar cafeteria needs urgent action", note_ar:"كافتيريا جلنار تحتاج إجراء عاجل", recs:["Weekly inspection plan","Close recurring violations"], recs_ar:["خطة تفتيش أسبوعية","إغلاق المخالفات المتكررة"] },
-      { dept:"Student Activities", dept_ar:"الأنشطة الطلابية", badge:"Late w/ Excuse", badge_ar:"متأخر بعذر", status:"excuse", note:"March participation drop requires root cause analysis", note_ar:"انخفاض مشاركة مارس يحتاج تحليل أسباب", recs:["Investigate participation drop","Prepare buffer activities"], recs_ar:["تحليل سبب انخفاض المشاركة","تجهيز أنشطة احتياطية"] },
-      { dept:"Employment Office", dept_ar:"مكتب التوظيف", badge:"Late w/ Excuse", badge_ar:"متأخر بعذر", status:"excuse", note:"Needs stronger employer partnerships", note_ar:"يحتاج تعزيز الشراكات الوظيفية", recs:["Add 5 employer partnerships","Automate graduate follow-up"], recs_ar:["إضافة 5 شراكات توظيف","أتمتة متابعة الخريجين"] },
-      { dept:"Sports Activities", dept_ar:"الأنشطة الرياضية", badge:"Late No Excuse", badge_ar:"متأخر بلا عذر", status:"noexcuse", note:"Budget decline may affect performance", note_ar:"انخفاض الميزانية قد يؤثر على الأداء", recs:["Explain expenditure decline","Review performance improvement plan"], recs_ar:["تفسير انخفاض الصرف","مراجعة خطة تحسين الأداء"] },
-      { dept:"Disability Unit", dept_ar:"وحدة ذوي الاحتياجات", badge:"Late No Excuse", badge_ar:"متأخر بلا عذر", status:"noexcuse", note:"Report overdue", note_ar:"التقرير متأخر", recs:["Submit Q1 report","Review support coverage"], recs_ar:["رفع تقرير الربع الأول","مراجعة تغطية الدعم"] },
-      { dept:"Student Grants", dept_ar:"منح الطلاب", badge:"Not Submitted", badge_ar:"لم يُرسَل", status:"missing", note:"Data governance risk", note_ar:"مخاطر حوكمة بيانات", recs:["Submit data within 5 days","Assign KPI officer"], recs_ar:["رفع البيانات خلال 5 أيام","تحديد مسؤول مؤشرات"] },
-      { dept:"Volunteer Work", dept_ar:"العمل التطوعي", badge:"Not Submitted", badge_ar:"لم يُرسَل", status:"missing", note:"No metrics available", note_ar:"لا توجد مؤشرات متاحة", recs:["Submit Q1 data","Establish baseline process"], recs_ar:["رفع بيانات الربع الأول","تأسيس آلية قياس أساسية"] }
+      { dept:"Student Transport", dept_ar:"إدارة النقل الطلابي", badge:"On Time", badge_ar:"في الوقت", status:"ontime", note:"Exceeds target — highest performer in Q1", note_ar:"تجاوز المستهدف — أعلى أداء في الربع الأول", recs:["Maintain GPS tracking schedule","Expand route coverage"], recs_ar:["الاستمرار في جدول تتبع الحافلات","توسيع تغطية المسارات"] },
+      { dept:"Professional Center", dept_ar:"مركز محترف", badge:"On Time", badge_ar:"في الوقت", status:"ontime", note:"February loss requires immediate review", note_ar:"خسارة فبراير تحتاج مراجعة مباشرة", recs:["Review LS-CBP demand drop","Increase marketing for low-enrollment programs"], recs_ar:["مراجعة انخفاض الطلب على LS-CBP","زيادة التسويق للبرامج منخفضة التسجيل"] },
+      { dept:"Student Housing", dept_ar:"إدارة السكن الطلابي", badge:"On Time", badge_ar:"في الوقت", status:"ontime", note:"Stable reporting performance", note_ar:"أداء رفع مستقر", recs:["Digitize maintenance logs","Survey satisfaction monthly"], recs_ar:["رقمنة سجل الصيانة","قياس رضا الطلاب شهرياً"] },
+      { dept:"Guidance Unit", dept_ar:"وحدة التوجيه وحقوق الطالب", badge:"On Time", badge_ar:"في الوقت", status:"ontime", note:"Strong compliance", note_ar:"امتثال مرتفع", recs:["Expand counseling capacity","Improve appointment system"], recs_ar:["زيادة الطاقة الاستيعابية للإرشاد","تحسين نظام المواعيد"] },
+      { dept:"Nutrition & Catering", dept_ar:"إدارة التغذية والإعاشة", badge:"Late w/ Excuse", badge_ar:"متأخر بعذر", status:"excuse", note:"Janar cafeteria needs urgent action", note_ar:"كافتيريا جلنار تحتاج إجراء عاجل", recs:["Weekly inspection plan","Close recurring violations"], recs_ar:["خطة تفتيش أسبوعية","إغلاق المخالفات المتكررة"] },
+      { dept:"Student Activities", dept_ar:"إدارة الأنشطة الطلابية", badge:"Late w/ Excuse", badge_ar:"متأخر بعذر", status:"excuse", note:"March participation drop requires root cause analysis", note_ar:"انخفاض مشاركة مارس يحتاج تحليل أسباب", recs:["Investigate participation drop","Prepare buffer activities"], recs_ar:["تحليل سبب انخفاض المشاركة","تجهيز أنشطة احتياطية"] },
+      { dept:"Employment Office", dept_ar:"مكتب التوظيف والإرشاد المهني", badge:"Late w/ Excuse", badge_ar:"متأخر بعذر", status:"excuse", note:"Needs stronger employer partnerships", note_ar:"يحتاج تعزيز الشراكات الوظيفية", recs:["Add 5 employer partnerships","Automate graduate follow-up"], recs_ar:["إضافة 5 شراكات توظيف","أتمتة متابعة الخريجين"] },
+      { dept:"Sports Activities", dept_ar:"إدارة النشاط الرياضي", badge:"Late No Excuse", badge_ar:"متأخر بلا عذر", status:"noexcuse", note:"Budget decline may affect performance", note_ar:"انخفاض الميزانية قد يؤثر على الأداء", recs:["Explain expenditure decline","Review performance improvement plan"], recs_ar:["تفسير انخفاض الصرف","مراجعة خطة تحسين الأداء"] },
+      { dept:"Disability Unit", dept_ar:"وحدة ذوي الإعاقة", badge:"Late No Excuse", badge_ar:"متأخر بلا عذر", status:"noexcuse", note:"Report overdue", note_ar:"التقرير متأخر", recs:["Submit Q1 report","Review support coverage"], recs_ar:["رفع تقرير الربع الأول","مراجعة تغطية الدعم"] },
+      { dept:"Student Grants", dept_ar:"إدارة المنح الدراسية", badge:"Not Submitted", badge_ar:"لم يُرسَل", status:"missing", note:"Data governance risk", note_ar:"مخاطر حوكمة بيانات", recs:["Submit data within 5 days","Assign KPI officer"], recs_ar:["رفع البيانات خلال 5 أيام","تحديد مسؤول مؤشرات"] },
+      { dept:"Volunteer Work", dept_ar:"إدارة العمل التطوعي", badge:"Not Submitted", badge_ar:"لم يُرسَل", status:"missing", note:"No metrics available", note_ar:"لا توجد مؤشرات متاحة", recs:["Submit Q1 data","Establish baseline process"], recs_ar:["رفع بيانات الربع الأول","تأسيس آلية قياس أساسية"] }
     ];
 
     function cloneData(data){ return JSON.parse(JSON.stringify(data)); }
@@ -2676,9 +2761,7 @@
       muhtaraf: cloneData(MUHTARAF_DATA),
       activities: cloneData(ACTIVITIES_DATA),
       sports: cloneData(SPORTS_DATA),
-      disability: cloneData(DISABILITY_DATA),
-      nutrition: cloneData(NUTRITION_DATA),
-      coverage: cloneData(COVERAGE_DATA)
+      disability: cloneData(DISABILITY_DATA)
     };
 
     /*
@@ -2694,11 +2777,9 @@
         muhtaraf: ORIGINAL_DATA.muhtaraf,
         activities: ORIGINAL_DATA.activities,
         sports: ORIGINAL_DATA.sports,
-        disability: ORIGINAL_DATA.disability,
-        nutrition: ORIGINAL_DATA.nutrition,
-        coverage: ORIGINAL_DATA.coverage
+        disability: ORIGINAL_DATA.disability
       },
-      Q2: { label_ar:"الربع الثاني", label_en:"Q2", hasData:false, depts:[], muhtaraf:[], activities:[], sports:[], disability:[], nutrition:[], coverage:[] }
+      Q2: { label_ar:"الربع الثاني", label_en:"Q2", hasData:false, depts:[], muhtaraf:[], activities:[], sports:[], disability:[] }
     };
 
     let currentQuarter = "Q1";
@@ -2715,13 +2796,29 @@
       replaceArray(ACTIVITIES_DATA, q.activities);
       replaceArray(SPORTS_DATA, q.sports);
       replaceArray(DISABILITY_DATA, q.disability);
-      replaceArray(NUTRITION_DATA, q.nutrition);
-      replaceArray(COVERAGE_DATA, q.coverage);
     }
     function quarterLabel(key = currentQuarter){
       const q = QUARTER_DATA[key] || QUARTER_DATA.Q1;
       return lang === "ar" ? q.label_ar : q.label_en;
     }
+    function getMuhtarafNetFromDepartment(quarter = "Q1"){
+      const deptIndex = DEPARTMENT_TARGETS.findIndex(d => normalizeArabicText(d.name_ar).includes("محترف"));
+      if(deptIndex < 0) return 0;
+
+      let hasEnteredData = false;
+      let totalNet = 0;
+      const fields = ["month","program","price","beneficiaries","trainer","hall","codes"];
+
+      for(let i = 0; i < 6; i++){
+        if(fields.some(field => String(getSavedMuhtarafValue(deptIndex, i, field, quarter) || "").trim() !== "")){
+          hasEnteredData = true;
+        }
+        totalNet += Number(calcMuhtarafRow(deptIndex, i, quarter).netProfit) || 0;
+      }
+
+      return hasEnteredData ? Math.round(totalNet * 100) / 100 : 0;
+    }
+
     function quarterStats(key){
       const q = QUARTER_DATA[key];
       if(!q || !isQuarterFilled(key)) return null;
@@ -2729,7 +2826,7 @@
       const avg = depts.length ? Math.round(depts.reduce((a,d)=>a+(Number(d.score)||0),0)/depts.length) : 0;
       const ontime = depts.filter(d=>d.status === "ontime").length;
       const risk = depts.filter(d=>d.status === "slight" || d.status === "excuse" || d.status === "noexcuse" || d.status === "missing").length;
-      const net = (q.muhtaraf || []).reduce((a,d)=>a+(Number(d.net)||0),0);
+      const net = getMuhtarafNetFromDepartment(key);
       const students = (q.activities || []).reduce((a,d)=>a+(Number(d.students)||0),0);
       return {avg, ontime, risk, net, students};
     }
@@ -2764,7 +2861,7 @@
             {label:{ar:"متوسط الامتثال",en:"Avg Compliance"}, value:stats.avg + "%", note:{ar:"للربع المحدد",en:"Selected quarter"}, color:COLORS.purple},
             {label:{ar:"في الوقت",en:"On Time"}, value:stats.ontime, note:{ar:"عدد الإدارات",en:"Departments"}, color:COLORS.green},
             {label:{ar:"عالية المخاطر",en:"High Risk"}, value:stats.risk, note:{ar:"متأخر بلا عذر أو لم يُرسل",en:"Late/no submission"}, color:COLORS.red},
-            {label:{ar:"صافي المحترف",en:"Muhtaraf Net"}, value:fmt(stats.net), note:{ar:"ريال سعودي",en:"SAR"}, color:stats.net >= 0 ? COLORS.green : COLORS.red}
+            {label:{ar:"صافي مركز محترف",en:"Muhtaraf Center Net"}, value:fmt(stats.net), note:{ar:"ريال سعودي",en:"SAR"}, color:stats.net >= 0 ? COLORS.green : COLORS.red}
           ].map(i => `<div class="quarter-mini-card" style="color:${i.color}"><span>${i.label[lang]}</span><b>${fmt(i.value)}</b><small>${i.note[lang]}</small></div>`).join("");
         }
       }
@@ -2796,8 +2893,7 @@
     }
     function renderEmptyDashboard(){
       const msg = `<div class="empty-state">${emptyText()}<br>${lang === "ar" ? "بعد تعبئة بيانات هذا الربع ستظهر جميع الرسوم والجداول هنا." : "After filling this quarter data, all charts and tables will appear here."}</div>`;
-      ["summaryPanel","kpiGrid","scoreList","muhtarafChart","activitiesChart","sportsChart","sportsTrendChart","disabilityChart","radarChart","coverageBars","programChart","matrixChart","insightsList"].forEach(id => { const el=$(id); if(el) el.innerHTML = msg; });
-      const table = $("nutritionTable"); if(table) table.innerHTML = `<tbody><tr><td>${emptyText()}</td></tr></tbody>`;
+      ["summaryPanel","kpiGrid","scoreList","muhtarafChart","activitiesChart","sportsChart","sportsTrendChart","disabilityChart","radarChart","programChart","matrixChart","insightsList"].forEach(id => { const el=$(id); if(el) el.innerHTML = msg; });
     }
     function switchQuarter(key){
       currentQuarter = key;
@@ -3063,42 +3159,367 @@
       renderLegend(box, series.map(s => ({name:s.name[lang], color:s.color})));
     }
 
+    function getDisabilityMainSnapshot(){
+      const deptIndex = (DEPARTMENT_TARGETS || []).findIndex(d => normalizeArabicText(d.name_ar).includes("ذوي الاعاقه"));
+      const quarter = currentQuarter || "Q1";
+      if(deptIndex < 0){
+        return {deptIndex:-1, quarter, male:null, female:null, satisfaction:null, total:0, hasBeneficiaries:false};
+      }
+
+      const maleRaw = findOperationalValue(deptIndex, quarter, ["المستفيدين من خدمات الوحدة ومراكز الوحدة - طلاب"]);
+      const femaleRaw = findOperationalValue(deptIndex, quarter, ["المستفيدين من خدمات الوحدة ومراكز الوحدة - طالبات"]);
+      const satisfactionRaw = findOperationalValue(deptIndex, quarter, ["نسبة رضا الطلبة من ذوي الإعاقة", "رضا الطلبة"]);
+
+      const male = parseDepartmentChartNumber(maleRaw);
+      const female = parseDepartmentChartNumber(femaleRaw);
+      const satisfaction = parseDepartmentChartNumber(satisfactionRaw);
+      const hasBeneficiaries = male !== null || female !== null;
+      const total = (male || 0) + (female || 0);
+
+      return {deptIndex, quarter, male, female, satisfaction, total, hasBeneficiaries};
+    }
+
     function renderDisability(){
-      $("disabilityChart").innerHTML = `<div class="donut-layout"><div class="donut"><div class="donut-center"><div><strong>${fmt(164)}</strong><span>${lang==="ar"?"مستفيد":"Beneficiaries"}</span></div></div></div><div><div class="donut-stats"><div class="donut-stat"><b>${fmt(78)}</b><span>${lang==="ar"?"ذكور":"Male"}</span></div><div class="donut-stat"><b>${fmt(86)}</b><span>${lang==="ar"?"إناث":"Female"}</span></div></div><div class="donut-list">${DISABILITY_DATA.map(d => `<div><span><i class="legend-dot" style="--dot:${d.color}"></i>${lang==="ar"?d.name_ar:d.name}</span><b>${fmt(d.value)}</b></div>`).join("")}</div></div></div>`;
+      const host = $("disabilityChart");
+      if(!host) return;
+
+      const data = getDisabilityMainSnapshot();
+      const male = data.male ?? 0;
+      const female = data.female ?? 0;
+      const total = data.total;
+      const malePct = total > 0 ? Math.max(0, Math.min(100, (male / total) * 100)) : 0;
+      const donutBackground = total > 0
+        ? `conic-gradient(${COLORS.blue} 0 ${malePct}%, ${COLORS.purple} ${malePct}% 100%)`
+        : `conic-gradient(var(--gray-soft) 0 100%)`;
+
+      const subtitle = document.querySelector('[data-t="disabilitySub"]');
+      if(subtitle){
+        subtitle.textContent = data.hasBeneficiaries
+          ? (lang === "ar" ? `إجمالي المستفيدين: ${fmt(total)} • ${quarterLabel(data.quarter)}` : `Total beneficiaries: ${fmt(total)} • ${quarterLabel(data.quarter)}`)
+          : (lang === "ar" ? `بانتظار إدخال بيانات وحدة ذوي الإعاقة • ${quarterLabel(data.quarter)}` : `Waiting for Disability Unit data • ${quarterLabel(data.quarter)}`);
+      }
+
+      const satisfactionText = data.satisfaction === null ? "—" : `${fmt(data.satisfaction)}%`;
+      const totalText = data.hasBeneficiaries ? fmt(total) : "—";
+      const maleText = data.male === null ? "—" : fmt(data.male);
+      const femaleText = data.female === null ? "—" : fmt(data.female);
+
+      host.innerHTML = `
+        <div class="donut-layout">
+          <div class="donut" style="background:${donutBackground}">
+            <div class="donut-center">
+              <div>
+                <strong>${totalText}</strong>
+                <span>${lang === "ar" ? "إجمالي المستفيدين" : "Total beneficiaries"}</span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="disability-metrics">
+              <div class="disability-metric">
+                <b>${maleText}</b>
+                <span>${lang === "ar" ? "عدد الذكور" : "Male beneficiaries"}</span>
+              </div>
+              <div class="disability-metric">
+                <b>${femaleText}</b>
+                <span>${lang === "ar" ? "عدد الإناث" : "Female beneficiaries"}</span>
+              </div>
+              <div class="disability-metric">
+                <b>${satisfactionText}</b>
+                <span>${lang === "ar" ? "نسبة الرضا" : "Satisfaction rate"}</span>
+              </div>
+            </div>
+          </div>
+        </div>`;
     }
 
     function radarChart(){
-      const {svg, w, box} = createSvg("radarChart", 320); const cx = w/2, cy = 150, r = Math.min(100, w/3.7);
+      const {svg, w, box} = createSvg("radarChart", 350);
+      svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
+
+      const cx = w / 2;
+      const cy = 157;
+      const r = Math.min(112, Math.max(82, w / 4.25));
+      const axisCount = RADAR_DATA.length;
+      const levels = [25, 50, 75, 100];
       const keys = [
-        {key:"Transport", name:{ar:"النقل",en:"Transport"}, color:COLORS.green}, {key:"Housing", name:{ar:"السكن",en:"Housing"}, color:COLORS.blue}, {key:"Nutrition", name:{ar:"التغذية",en:"Nutrition"}, color:COLORS.amber}, {key:"Sports", name:{ar:"الرياضة",en:"Sports"}, color:COLORS.red}, {key:"Activities", name:{ar:"الأنشطة",en:"Activities"}, color:COLORS.purple}
+        {key:"Transport", name:{ar:"النقل",en:"Transport"}, color:COLORS.green},
+        {key:"Housing", name:{ar:"السكن",en:"Housing"}, color:COLORS.blue},
+        {key:"Nutrition", name:{ar:"التغذية",en:"Nutrition"}, color:COLORS.amber},
+        {key:"Sports", name:{ar:"الرياضة",en:"Sports"}, color:COLORS.red},
+        {key:"Activities", name:{ar:"الأنشطة",en:"Activities"}, color:COLORS.purple}
       ];
-      for(let level=1; level<=4; level++){
-        const rr = r*level/4; const pts = RADAR_DATA.map((_,i)=>{const a=-Math.PI/2+i*Math.PI*2/RADAR_DATA.length; return [cx+rr*Math.cos(a), cy+rr*Math.sin(a)];});
-        svg.appendChild(svgEl("polygon", {points:pts.map(p=>p.join(",")).join(" "), fill:"none", stroke:"var(--grid)"}));
-      }
-      RADAR_DATA.forEach((d,i)=>{ const a=-Math.PI/2+i*Math.PI*2/RADAR_DATA.length; svg.appendChild(svgEl("line", {x1:cx,y1:cy,x2:cx+r*Math.cos(a),y2:cy+r*Math.sin(a),stroke:"var(--grid)"})); addWrappedText(svg, cx+(r+30)*Math.cos(a), cy+(r+25)*Math.sin(a)+4, nameOf(d,"subject"), 82, {maxLines:2, lineHeight:11}); });
-      keys.forEach(k => { const pts = RADAR_DATA.map((d,i)=>{ const val=d[k.key]/100, a=-Math.PI/2+i*Math.PI*2/RADAR_DATA.length; return [cx+r*val*Math.cos(a), cy+r*val*Math.sin(a)]; }); svg.appendChild(svgEl("polygon", {points:pts.map(p=>p.join(",")).join(" "), fill:k.color, "fill-opacity":".07", stroke:k.color, "stroke-width":"2"})); pts.forEach(p=>svg.appendChild(svgEl("circle", {cx:p[0],cy:p[1],r:3.2,fill:k.color}))); });
-      renderLegend(box, keys.map(k => ({name:k.name[lang], color:k.color})));
+
+      // شبكة القياس 25 / 50 / 75 / 100.
+      levels.forEach(level => {
+        const rr = r * level / 100;
+        const pts = RADAR_DATA.map((_, i) => {
+          const a = -Math.PI / 2 + i * Math.PI * 2 / axisCount;
+          return [cx + rr * Math.cos(a), cy + rr * Math.sin(a)];
+        });
+        svg.appendChild(svgEl("polygon", {
+          points:pts.map(p=>p.join(",")).join(" "),
+          fill:level === 100 ? "var(--card-2)" : "none",
+          "fill-opacity":level === 100 ? ".28" : "0",
+          stroke:"var(--grid)",
+          "stroke-width":level === 100 ? "1.4" : "1"
+        }));
+
+        const scale = svgEl("text", {
+          x:cx + 7,
+          y:cy - rr + 4,
+          class:"radar-scale-label",
+          "text-anchor":"start"
+        });
+        scale.textContent = level;
+        svg.appendChild(scale);
+      });
+
+      // المحاور وعناوينها.
+      RADAR_DATA.forEach((d, i) => {
+        const a = -Math.PI / 2 + i * Math.PI * 2 / axisCount;
+        const x2 = cx + r * Math.cos(a);
+        const y2 = cy + r * Math.sin(a);
+        svg.appendChild(svgEl("line", {
+          x1:cx, y1:cy, x2, y2,
+          stroke:"var(--grid)",
+          "stroke-width":"1.2"
+        }));
+
+        const labelRadius = r + (i === 0 || i === 2 ? 34 : 37);
+        const lx = cx + labelRadius * Math.cos(a);
+        const ly = cy + labelRadius * Math.sin(a) + (i === 0 ? -2 : i === 2 ? 9 : 4);
+        addWrappedText(svg, lx, ly, nameOf(d,"subject"), 112, {
+          maxLines:2,
+          lineHeight:12,
+          cls:"chart-label"
+        });
+      });
+
+      // بيانات الإدارات؛ كل لون يمثل إدارة واحدة.
+      keys.forEach(k => {
+        const pts = RADAR_DATA.map((d, i) => {
+          const value = Math.max(0, Math.min(100, Number(d[k.key]) || 0));
+          const a = -Math.PI / 2 + i * Math.PI * 2 / axisCount;
+          return {
+            x:cx + r * (value / 100) * Math.cos(a),
+            y:cy + r * (value / 100) * Math.sin(a),
+            value,
+            dimension:nameOf(d,"subject")
+          };
+        });
+
+        const polygon = svgEl("polygon", {
+          points:pts.map(p=>`${p.x},${p.y}`).join(" "),
+          fill:k.color,
+          "fill-opacity":".045",
+          stroke:k.color,
+          "stroke-width":"2.4",
+          "stroke-linejoin":"round"
+        });
+        svg.appendChild(polygon);
+        hover(polygon, () => {
+          const avg = Math.round(RADAR_DATA.reduce((sum,d)=>sum+(Number(d[k.key])||0),0)/RADAR_DATA.length);
+          return `<b>${k.name[lang]}</b><small>${lang === "ar" ? "متوسط الجودة" : "Average quality"}: ${avg}/100</small>`;
+        });
+
+        pts.forEach(p => {
+          const point = svgEl("circle", {
+            cx:p.x, cy:p.y, r:4,
+            fill:k.color,
+            stroke:"var(--card)",
+            "stroke-width":"1.6",
+            tabindex:"0"
+          });
+          svg.appendChild(point);
+          hover(point, () => `<b>${k.name[lang]}</b><small>${p.dimension}: ${p.value}/100</small>`);
+        });
+      });
+
+      const legendItems = keys.map(k => {
+        const avg = Math.round(RADAR_DATA.reduce((sum,d)=>sum+(Number(d[k.key])||0),0)/RADAR_DATA.length);
+        return {name:`${k.name[lang]} · ${avg}/100`, color:k.color};
+      });
+      renderLegend(box, legendItems);
+
+      const note = document.createElement("div");
+      note.className = "radar-reading-note";
+      note.innerHTML = lang === "ar"
+        ? `<b>طريقة القراءة:</b> كل لون يمثل إدارة، وكل محور يمثل معيار جودة من 100. كلما امتد الخط نحو الحافة كانت الدرجة أعلى، وكلما كان الشكل متوازنًا كانت جودة الإدارة أكثر استقرارًا عبر المعايير الأربعة.`
+        : `<b>How to read it:</b> Each color is a department and each axis is a quality criterion scored out of 100. Lines closer to the outer edge indicate stronger scores; a more balanced shape indicates consistent quality across all four criteria.`;
+      box.appendChild(note);
+    }
+
+    function matrixDepartmentTargetCount(deptName){
+      const n = normalizeArabicText(deptName);
+      const keywords = [
+        ["نقل","نقل"],["سكن","سكن"],["تغذيه","تغذيه"],["انشطه طلابيه","انشطه طلابيه"],
+        ["انشطه رياضيه","نشاط رياضي"],["ذوي","ذوي"],["منح","منح"],["تطوع","تطوع"],
+        ["توظيف","توظيف"],["ارشاد","توجيه"],["مركز مهني","محترف"]
+      ];
+      const pair = keywords.find(([a]) => n.includes(a));
+      if(!pair) return 1;
+      const target = (DEPARTMENT_TARGETS || []).find(d => normalizeArabicText(d.name_ar).includes(pair[1]));
+      return target && Array.isArray(target.indicators) ? target.indicators.length : 1;
+    }
+
+    function matrixCommitmentScore(status){
+      return ({ontime:95, slight:78, excuse:68, noexcuse:35, missing:10})[status] ?? 50;
+    }
+
+    function buildPerformanceMatrixData(){
+      return (DEPT_DATA || []).map(d => ({
+        name_ar:d.name_ar,
+        name:d.name_en,
+        x:Math.max(0,Math.min(100,Number(d.score)||0)),
+        y:matrixCommitmentScore(d.status),
+        targets:matrixDepartmentTargetCount(d.name_ar),
+        status:d.status
+      }));
     }
 
     function scatterChart(){
-      const h = 280; const {svg, w} = createSvg("matrixChart", h); const m = {top:22,right:22,bottom:48,left:48}; const pw=w-m.left-m.right, ph=h-m.top-m.bottom;
-      const xFor = x => m.left + x/6*pw; const yFor = y => m.top + ph - y/6*ph;
-      for(let i=0;i<=6;i++){ const x=xFor(i), y=yFor(i); svg.appendChild(svgEl("line", {x1:x,y1:m.top,x2:x,y2:m.top+ph,class:"gridline"})); svg.appendChild(svgEl("line", {x1:m.left,y1:y,x2:m.left+pw,y2:y,class:"gridline"})); const tx=svgEl("text", {x,y:h-27,class:"axis","text-anchor":"middle"}); tx.textContent=i; svg.appendChild(tx); const ty=svgEl("text", {x:m.left-9,y:y+4,class:"axis","text-anchor":"end"}); ty.textContent=i; svg.appendChild(ty); }
-      BUBBLE_DATA.forEach(d => { const c = svgEl("circle", {cx:xFor(d.x), cy:yFor(d.y), r:Math.max(7,d.z/7), fill:d.z>=80?COLORS.green:d.z>=50?COLORS.amber:COLORS.red, "fill-opacity":".76", stroke:"var(--card)", "stroke-width":"2"}); svg.appendChild(c); hover(c, () => `<b>${lang==="ar"?d.name_ar:d.name}</b><small>${lang==="ar"?"درجة الأداء":"Score"}: ${d.z}</small>`); });
-      const xt=svgEl("text", {x:m.left+pw/2,y:h-5,class:"axis-title","text-anchor":"middle"}); xt.textContent = lang==="ar"?"التعقيد ←":"Complexity →"; svg.appendChild(xt);
-      const yt=svgEl("text", {x:14,y:m.top+ph/2,class:"axis-title","text-anchor":"middle",transform:`rotate(-90 14 ${m.top+ph/2})`}); yt.textContent = lang==="ar"?"الترابط":"Interdependency"; svg.appendChild(yt);
+      const h = 330;
+      const {svg, w, box} = createSvg("matrixChart", h);
+      const m = {top:38,right:28,bottom:62,left:62};
+      const pw=w-m.left-m.right, ph=h-m.top-m.bottom;
+      const xFor = x => m.left + Math.max(0,Math.min(100,x))/100*pw;
+      const yFor = y => m.top + ph - Math.max(0,Math.min(100,y))/100*ph;
+      const xCut = 70, yCut = 70;
+
+      const quadrants = [
+        {x:m.left,y:m.top,w:xFor(xCut)-m.left,h:yFor(yCut)-m.top,fill:COLORS.blue,label:lang==="ar"?"ملتزم ويحتاج رفع الإنجاز":"Committed · Improve Results"},
+        {x:xFor(xCut),y:m.top,w:m.left+pw-xFor(xCut),h:yFor(yCut)-m.top,fill:COLORS.green,label:lang==="ar"?"أداء متميز":"High Performance"},
+        {x:m.left,y:yFor(yCut),w:xFor(xCut)-m.left,h:m.top+ph-yFor(yCut),fill:COLORS.red,label:lang==="ar"?"أولوية التحسين":"Improvement Priority"},
+        {x:xFor(xCut),y:yFor(yCut),w:m.left+pw-xFor(xCut),h:m.top+ph-yFor(yCut),fill:COLORS.amber,label:lang==="ar"?"إنجاز جيد ويحتاج التزام":"Good Results · Improve Commitment"}
+      ];
+      quadrants.forEach(q => {
+        svg.appendChild(svgEl("rect",{x:q.x,y:q.y,width:q.w,height:q.h,fill:q.fill,"fill-opacity":".075"}));
+        const t=svgEl("text",{x:q.x+q.w/2,y:q.y+18,class:"axis","text-anchor":"middle",fill:q.fill});
+        t.textContent=q.label; svg.appendChild(t);
+      });
+
+      [0,25,50,75,100].forEach(i=>{
+        const x=xFor(i), y=yFor(i);
+        svg.appendChild(svgEl("line", {x1:x,y1:m.top,x2:x,y2:m.top+ph,class:"gridline"}));
+        svg.appendChild(svgEl("line", {x1:m.left,y1:y,x2:m.left+pw,y2:y,class:"gridline"}));
+        const tx=svgEl("text", {x,y:h-35,class:"axis","text-anchor":"middle"}); tx.textContent=i; svg.appendChild(tx);
+        const ty=svgEl("text", {x:m.left-10,y:y+4,class:"axis","text-anchor":"end"}); ty.textContent=i; svg.appendChild(ty);
+      });
+      svg.appendChild(svgEl("line",{x1:xFor(xCut),y1:m.top,x2:xFor(xCut),y2:m.top+ph,stroke:"var(--muted)","stroke-dasharray":"5 5","stroke-opacity":".65"}));
+      svg.appendChild(svgEl("line",{x1:m.left,y1:yFor(yCut),x2:m.left+pw,y2:yFor(yCut),stroke:"var(--muted)","stroke-dasharray":"5 5","stroke-opacity":".65"}));
+
+      buildPerformanceMatrixData().forEach(d => {
+        const top = d.x >= xCut && d.y >= yCut;
+        const leftTop = d.x < xCut && d.y >= yCut;
+        const rightBottom = d.x >= xCut && d.y < yCut;
+        const color = top ? COLORS.green : leftTop ? COLORS.blue : rightBottom ? COLORS.amber : COLORS.red;
+        const radius = Math.max(8,Math.min(21,7+d.targets*1.15));
+        const c = svgEl("circle", {cx:xFor(d.x),cy:yFor(d.y),r:radius,fill:color,"fill-opacity":".82",stroke:"var(--card)","stroke-width":"2.5",tabindex:"0"});
+        svg.appendChild(c);
+        hover(c, () => `<b>${lang==="ar"?d.name_ar:d.name}</b><small>${lang==="ar"?"درجة الأداء":"Performance score"}: ${fmt(d.x)}/100</small><small>${lang==="ar"?"مستوى الالتزام":"Commitment level"}: ${fmt(d.y)}/100</small><small>${lang==="ar"?"المستهدفات الرسمية":"Official targets"}: ${d.targets}</small>`);
+      });
+
+      const xt=svgEl("text", {x:m.left+pw/2,y:h-8,class:"axis-title","text-anchor":"middle"});
+      xt.textContent = lang==="ar"?"درجة الأداء ←":"Performance score →"; svg.appendChild(xt);
+      const yt=svgEl("text", {x:18,y:m.top+ph/2,class:"axis-title","text-anchor":"middle",transform:`rotate(-90 18 ${m.top+ph/2})`});
+      yt.textContent = lang==="ar"?"مستوى الالتزام":"Commitment level"; svg.appendChild(yt);
+
+      const legend=document.createElement("div");
+      legend.className="matrix-quadrant-legend";
+      legend.innerHTML = lang==="ar"
+        ? `<div class="matrix-legend-item"><i style="background:${COLORS.green}"></i>أداء متميز</div><div class="matrix-legend-item"><i style="background:${COLORS.blue}"></i>ملتزم ويحتاج رفع الإنجاز</div><div class="matrix-legend-item"><i style="background:${COLORS.amber}"></i>إنجاز جيد ويحتاج التزام</div><div class="matrix-legend-item"><i style="background:${COLORS.red}"></i>أولوية التحسين</div>`
+        : `<div class="matrix-legend-item"><i style="background:${COLORS.green}"></i>High performance</div><div class="matrix-legend-item"><i style="background:${COLORS.blue}"></i>Committed, improve results</div><div class="matrix-legend-item"><i style="background:${COLORS.amber}"></i>Good results, improve commitment</div><div class="matrix-legend-item"><i style="background:${COLORS.red}"></i>Improvement priority</div>`;
+      box.appendChild(legend);
+
+      const note=document.createElement("div");
+      note.className="matrix-reading-note";
+      note.innerHTML = lang==="ar"
+        ? `<b>طريقة القراءة:</b> المحور الأفقي يعرض درجة الأداء، والمحور الرأسي يعرض مستوى الالتزام. موقع الفقاعة يحدد تصنيف الإدارة، بينما حجمها يعبّر عن عدد مستهدفاتها الرسمية. مرّر المؤشر على الفقاعة لعرض التفاصيل.`
+        : `<b>How to read:</b> The horizontal axis is performance score and the vertical axis is commitment. Position determines classification, while bubble size represents the number of official targets. Hover for details.`;
+      box.appendChild(note);
+    }
+    function findInsightForDepartmentName(deptName){
+      const n = normalizeArabicText(deptName);
+      return INSIGHTS.find(ins => {
+        const ar = normalizeArabicText(ins.dept_ar || "");
+        const en = normalizeArabicText(ins.dept || "");
+        return n.includes(ar) || ar.includes(n) || n.includes(en)
+          || (n.includes("محترف") && ar.includes("محترف"))
+          || (n.includes("توظيف") && ar.includes("توظيف"))
+          || (n.includes("ذوي الاعاقه") && ar.includes("ذوي"))
+          || (n.includes("تغذيه") && ar.includes("تغذيه"))
+          || (n.includes("سكن") && ar.includes("سكن"))
+          || (n.includes("نقل") && ar.includes("نقل"))
+          || (n.includes("نشاط الرياضي") && ar.includes("نشاط الرياضي"))
+          || (n.includes("انشطه الطلابيه") && ar.includes("انشطه الطلابيه"))
+          || (n.includes("منح") && ar.includes("منح"))
+          || (n.includes("تطوعي") && ar.includes("تطوعي"));
+      }) || null;
     }
 
-    function renderNutrition(){
-      const headers = lang==="ar" ? ["الموقع","التقييم","المخالفات","التحذيرات"] : ["Location","Rating","Violations","Warnings"];
-      $("nutritionTable").innerHTML = `<thead><tr>${headers.map(h=>`<th>${h}</th>`).join("")}</tr></thead><tbody>${NUTRITION_DATA.map(r=>`<tr><td>${lang==="ar"?r.location_ar:r.location}</td><td><span class="tag" style="background:${r.color}22;color:${r.color}">${lang==="ar"?r.rating_ar:r.rating}</span></td><td style="color:${r.violations>=7?COLORS.red:r.violations>=4?COLORS.amber:"var(--text)"};font-weight:950">${fmt(r.violations)}</td><td style="color:${r.warnings>=6?COLORS.red:"var(--text)"};font-weight:950">${fmt(r.warnings)}</td></tr>`).join("")}</tbody>`;
+    function getDepartmentEnteredRecommendations(deptIndex){
+      return [1,2,3]
+        .map(recNo => String(getSavedKpiValue(recSaveKey(deptIndex, recNo)) || "").trim())
+        .filter(Boolean);
     }
-    function renderCoverage(){
-      $("coverageBars").innerHTML = COVERAGE_DATA.map(d => `<div class="coverage-row"><div class="coverage-name">${lang==="ar"?d.name_ar:d.name}</div><div class="stack"><span style="width:${d.measured}%;background:${COLORS.green}"></span><span style="width:${d.untargeted}%;background:${COLORS.amber}"></span><span style="width:${d.undefined}%;background:${COLORS.gray}"></span></div><div class="coverage-pct">${fmt(d.measured)}%</div></div>`).join("");
+
+    function buildHomepageInsights(){
+      const rows = [];
+      const usedInsights = new Set();
+
+      (DEPARTMENT_TARGETS || []).forEach((dept, deptIndex) => {
+        const entered = getDepartmentEnteredRecommendations(deptIndex);
+        const base = findInsightForDepartmentName(dept.name_ar);
+        if(base) usedInsights.add(base);
+
+        // الإدارات الموجودة سابقاً تستمر بالظهور، وأي إدارة جديدة تظهر فور إدخال توصية لها.
+        if(!base && !entered.length) return;
+
+        const linked = getDeptScoreByName(dept.name_ar);
+        const status = linked?.status || base?.status || "missing";
+        const badgeAr = statusLabels[status]?.ar || base?.badge_ar || "غير محدد";
+        const badgeEn = statusLabels[status]?.en || base?.badge || "Not specified";
+        const recommendations = entered.length
+          ? entered
+          : (lang === "ar" ? (base?.recs_ar || []) : (base?.recs || []));
+
+        rows.push({
+          dept_ar: dept.name_ar,
+          dept: base?.dept || dept.name_ar,
+          badge_ar: badgeAr,
+          badge: badgeEn,
+          status,
+          note_ar: entered.length ? "توصيات مدخلة من صفحة الإدارة." : (base?.note_ar || "لم تُدخل توصيات لهذه الإدارة بعد."),
+          note: entered.length ? "Recommendations entered from the department page." : (base?.note || "No recommendations have been entered for this department yet."),
+          recommendations
+        });
+      });
+
+      // احتياطياً: الاحتفاظ بأي عنصر قديم غير مرتبط بصفحات الإدارات.
+      INSIGHTS.forEach(base => {
+        if(usedInsights.has(base)) return;
+        rows.push({
+          ...base,
+          recommendations: lang === "ar" ? (base.recs_ar || []) : (base.recs || [])
+        });
+      });
+      return rows;
     }
+
     function renderInsights(){
-      $("insightsList").innerHTML = INSIGHTS.map((ins,i)=>{ const c=statusColor(ins.status); const risk = ins.status === "noexcuse" || ins.status === "missing"; return `<div class="insight"><button class="insight-toggle" type="button" onclick="this.parentElement.classList.toggle('open')"><div class="insight-title"><span class="tag" style="background:${c}22;color:${c}">${lang==="ar"?ins.badge_ar:ins.badge}</span><strong>${lang==="ar"?ins.dept_ar:ins.dept}</strong>${risk?`<span class="tag red">⚠ ${lang==="ar"?"مخاطر":"Risk"}</span>`:""}</div><b>⌄</b></button><div class="insight-body"><b>${lang==="ar"?ins.note_ar:ins.note}</b><ul class="rec-list">${(lang==="ar"?ins.recs_ar:ins.recs).map((r,j)=>`<li><b>${j+1}.</b><span>${r}</span></li>`).join("")}</ul></div></div>`; }).join("");
+      const host = $("insightsList");
+      if(!host) return;
+      const rows = buildHomepageInsights();
+      host.innerHTML = rows.map(ins => {
+        const c = statusColor(ins.status);
+        const risk = ins.status === "noexcuse" || ins.status === "missing";
+        const recs = ins.recommendations || [];
+        const recHtml = recs.length
+          ? recs.map((r,j)=>`<li><b>${j+1}.</b><span>${r}</span></li>`).join("")
+          : `<li><span>${lang === "ar" ? "لم تُدخل توصيات بعد." : "No recommendations entered yet."}</span></li>`;
+        return `<div class="insight"><button class="insight-toggle" type="button" onclick="this.parentElement.classList.toggle('open')"><div class="insight-title"><span class="tag" style="background:${c}22;color:${c}">${lang==="ar"?ins.badge_ar:ins.badge}</span><strong>${lang==="ar"?ins.dept_ar:ins.dept}</strong>${risk?`<span class="tag red">⚠ ${lang==="ar"?"مخاطر":"Risk"}</span>`:""}</div><b>⌄</b></button><div class="insight-body"><b>${lang==="ar"?ins.note_ar:ins.note}</b><ul class="rec-list">${recHtml}</ul></div></div>`;
+      }).join("");
     }
 
 
@@ -3118,28 +3539,35 @@
       const quarter = currentQuarter || "Q1";
       if(deptIndex < 0) return SPORTS_DATA;
 
-      const categories = [
-        {category:'championships', category_ar:'البطولات', picks:[0]},
-        {category:'internal', category_ar:'داخلية', picks:[9]},
-        {category:'training', category_ar:'التدريب', picks:[5,13]},
-        {category:'volunteering', category_ar:'التطوع', picks:[15]},
-        {category:'awareness', category_ar:'التوعية', picks:[16]},
-        {category:'international', category_ar:'دولية', picks:[17]}
+      // المسارات الرئيسة في جدول النشاط الرياضي.
+      // نقرأ خانة "النقاط" للمسار الرئيس مباشرة، وإذا كانت فارغة نجمع المجالات التابعة له.
+      const tracks = [
+        {category:'championships', category_ar:'البطولات', topIndex:0, children:[1,2]},
+        {category:'centralActivities', category_ar:'الأنشطة المركزية', topIndex:3, children:[4,5,6,7,8]},
+        {category:'internalActivities', category_ar:'الأنشطة الداخلية', topIndex:9, children:[10,11,12,13,14,15,16]},
+        {category:'internationalParticipation', category_ar:'المشاركات الدولية', topIndex:17, children:[18,19]}
       ];
 
-      const genders = ['طلاب','طالبات'];
-      let hasAny=false;
-      const data = categories.map(cat => {
-        const values = {category:cat.category, category_ar:cat.category_ar, male:0, female:0};
-        genders.forEach(gender => {
-          const total = cat.picks.reduce((sum, idx) => sum + getSportsChartValue(deptIndex, quarter, gender, idx, 1), 0);
-          if(total) hasAny=true;
-          if(gender === 'طلاب') values.male = total;
-          else values.female = total;
-        });
-        return values;
-      });
-      return hasAny ? data : SPORTS_DATA;
+      function readPoints(gender, categoryIndex){
+        const raw = getSavedKpiValue(sportsInputKey(deptIndex, quarter, gender, categoryIndex, 1));
+        return parseDepartmentChartNumber(raw);
+      }
+
+      function trackPoints(gender, track){
+        const direct = readPoints(gender, track.topIndex);
+        if(direct !== null) return direct;
+        return track.children.reduce((sum, index) => {
+          const value = readPoints(gender, index);
+          return sum + (value === null ? 0 : value);
+        }, 0);
+      }
+
+      return tracks.map(track => ({
+        category:track.category,
+        category_ar:track.category_ar,
+        male:trackPoints('طلاب', track),
+        female:trackPoints('طالبات', track)
+      }));
     }
 
 
@@ -3229,7 +3657,7 @@
       const n = normalizeArabicText(name);
       const found = DEPT_DATA.find(d => n.includes(normalizeArabicText(d.name_ar)) || normalizeArabicText(d.name_ar).includes(n) || n.includes(normalizeArabicText(d.name_en)));
       if(found) return found;
-      if(n.includes("محترف")) return DEPT_DATA.find(d => d.name_ar.includes("المركز المهني")) || null;
+      if(n.includes("محترف")) return DEPT_DATA.find(d => d.name_ar.includes("محترف")) || null;
       if(n.includes("توظيف")) return DEPT_DATA.find(d => d.name_ar.includes("التوظيف")) || null;
       if(n.includes("ذوي الاعاقه")) return DEPT_DATA.find(d => d.name_ar.includes("ذوي")) || null;
       if(n.includes("تغذيه")) return DEPT_DATA.find(d => d.name_ar.includes("التغذية")) || null;
@@ -3282,7 +3710,7 @@
       "إدارة النقل الطلابي": [
         {official:"نسبة الالتزام بمواعيد الرحلات", type:"direct", op:"نسبة الالتزام بالمواعيد", source:"نسبة الالتزام بالمواعيد"},
         {official:"سجل عدد الأعطال أو التأخيرات", type:"direct", op:"عدد الرحلات المتأخرة", source:"عدد الرحلات المتأخرة"},
-        {official:"نسبة رضا المستفيدين عن خدمة النقل", type:"direct", op:"نسبة رضا المستفيدين عن خدمة النقل", source:"رضا المستفيدين عن النقل"},
+        {official:"نسبة رضا المستفيدين عن خدمة النقل", type:"direct", op:"رضا المستفيدين عن النقل", source:"رضا المستفيدين عن النقل", asPercent:true},
         {official:"سجل عدد المخالفات أو الحوادث", type:"direct", op:"عدد المخالفات المرصودة أو الحوادث المبلغ عنها", source:"المخالفات أو الحوادث"},
         {official:"نسبة تغطية الخدمة مقارنة بالطلب الفعلي", type:"direct", op:"نسبة تغطية الخدمات للطلب الفعلي", source:"تغطية الخدمات للطلب الفعلي"}
       ],
@@ -3294,24 +3722,17 @@
         {official:"سجل عدد المخالفات أو الحوادث السكنية", type:"direct", op:"سجل عدد المخالفات أو الحوادث", source:"سجل المخالفات أو الحوادث"}
       ],
       "إدارة التغذية والإعاشة": [
-        {official:"نسبة رضا المستفيدين عن الأسعار المقدمة", type:"direct", op:"نسبة رضا المستفيدين عن الأسعار المقدمة", source:"رضا المستفيدين عن الأسعار"},
-        {official:"نسبة رضا المستفيدين عن جودة الوجبات المقدمة", type:"direct", op:"نسبة رضا المستفيدين عن جودة الوجبات المقدمة", source:"رضا المستفيدين عن جودة الوجبات"},
-        {official:"عدد الملاحظات/الشكاوى التي تم إقفالها", type:"direct", op:"عدد الملاحظات/الشكاوى التي تم إقفالها", source:"الشكاوى والملاحظات المغلقة"},
-        {official:"عدد المخالفات المدونة والمُسجلة", type:"direct", op:"عدد المخالفات المدونة والمسجلة", source:"المخالفات المدونة والمسجلة"},
-        {official:"سجل عدد المخالفات أو الحوادث", type:"direct", op:"سجل عدد المخالفات أو الحوادث", source:"سجل المخالفات أو الحوادث"}
+        {official:"عدد المخالفات المدونة والمُسجلة", type:"direct", op:"عدد المخالفات", source:"عدد المخالفات"},
+        {official:"سجل عدد المخالفات أو الحوادث", type:"direct", op:"عدد المخالفات", source:"عدد المخالفات"}
       ],
       "وحدة التوجيه وحقوق الطالب": [
         {official:"عدد الحالات المستقبلة والمعالجة", type:"direct", op:"عدد الحالات المستقبلة والمعالجة خلال العام", source:"الحالات المستقبلة والمعالجة"},
         {official:"نسبة القضايا المغلقة", type:"direct", op:"نسبة القضايا المغلقة خلال العام الدراسي", source:"نسبة القضايا المغلقة"},
-        {official:"تقرير عدد الأنشطة المقامة", type:"direct", op:"عدد البرامج التوعوية المنفذة", source:"البرامج التوعوية المنفذة"},
         {official:"نسبة رضا المستفيدين عن آلية التعامل", type:"direct", op:"نسبة رضا المستفيدين عن آلية التعامل", source:"رضا المستفيدين عن آلية التعامل"}
       ],
       "إدارة الأنشطة الطلابية": [
         {official:"عدد الأنشطة المنفذة", type:"direct", op:"عدد الأنشطة الطلابية المقامة", source:"عدد الأنشطة الطلابية"},
-        {official:"نسبة مشاركة الطلبة مقارنة بعدد طلبة الجامعة", type:"direct", op:"نسبة مشاركة الطلبة مقارنة بعدد طلبة الجامعة", source:"نسبة المشاركة التشغيلية"},
-        {official:"تنوع الأنشطة", type:"direct", op:"تنوع الأنشطة", source:"تنوع الأنشطة"},
-        {official:"عدد ساعات استبقاء الطالب", type:"direct", op:"عدد ساعات استقبال الطالب في الجامعة من أجل النشاط الطلابي", source:"ساعات استقبال الطالب"},
-        {official:"عدد المبادرات ذات الشراكات المجتمعية", type:"direct", op:"عدد المبادرات ذات الشراكة المجتمعية", source:"مبادرات الشراكة المجتمعية"}
+        {official:"عدد ساعات استبقاء الطالب", type:"direct", op:"عدد ساعات استقبال الطالب في الجامعة من أجل النشاط الطلابي", source:"ساعات استقبال الطالب"}
       ],
       "مكتب التوظيف والإرشاد المهني": [
         {official:"عدد وسجل الشراكات", type:"direct", op:"عدد شراكات التوظيف الموقعة", source:"شراكات التوظيف"},
@@ -3320,37 +3741,34 @@
         {official:"عدد الطلبة الذين انتقلوا", type:"direct", op:"عدد العقود الموقعة مع الخريجين خلال البرنامج", source:"العقود الموقعة"}
       ],
       "وحدة ذوي الإعاقة": [
-        {official:"سجل عدد المستفيدين", type:"sum", ops:["عدد المستفيدين من خدمات الوحدة ومراكز الوحدة - طلاب","عدد المستفيدين من خدمات الوحدة ومراكز الوحدة - طالبات"], source:"إجمالي المستفيدين طلاب + طالبات"},
+        {official:"عدد المستفيدين من خدمات الوحدة ومراكز الوحدة", type:"sum", ops:["عدد المستفيدين من خدمات الوحدة ومراكز الوحدة - طلاب","عدد المستفيدين من خدمات الوحدة ومراكز الوحدة - طالبات"], source:"إجمالي المستفيدين طلاب + طالبات"},
         {official:"نسبة رضا الطلبة من ذوي الإعاقة", type:"direct", op:"نسبة رضا الطلبة من ذوي الإعاقة", source:"رضا الطلبة من ذوي الإعاقة"},
-        {official:"إعداد خطة أنشطة سنوية", type:"direct", op:"إعداد خطة أنشطة سنوية لطلبة ذوي الإعاقة", source:"إعداد خطة الأنشطة السنوية"},
-        {official:"نسبة تنفيذ الخطة السنوية", type:"direct", op:"نسبة تنفيذ الخطة السنوية لأنشطة ذوي الإعاقة", source:"تنفيذ الخطة السنوية"},
-        {official:"عدد البرامج التأهيلية", type:"direct", op:"عدد الأنشطة المنفذة", source:"الأنشطة المنفذة"},
-        {official:"زمن الاستجابة", type:"direct", op:"زمن الاستجابة لطلبات التيسير الأكاديمي والمالي", source:"زمن الاستجابة"}
+        {official:"عدد البرامج التأهيلية المنفذة", type:"direct", op:"عدد الأنشطة المنفذة", source:"الأنشطة المنفذة"},
+        {official:"زمن الاستجابة لطلبات التيسير الأكاديمي والمالي", type:"direct", op:"زمن الاستجابة لطلبات التيسير الأكاديمي والمالي", source:"زمن الاستجابة"}
       ],
       "إدارة العمل التطوعي": [
-        {official:"نسبة الالتزام بعدد ساعات سنوية 50 ألف ساعة", type:"direct", op:"نسبة الالتزام بعدد ساعات سنوية 50 ألف ساعة", source:"نسبة الالتزام بالساعات السنوية"},
-        {official:"عدد وسجل الفرص التطوعية", type:"direct", op:"عدد الفرص التطوعية", source:"الفرص التطوعية"},
-        {official:"نسبة الطلبة المشاركين في التطوع", type:"direct", op:"نسبة الطلبة المشاركين في التطوع من إجمالي طلاب الجامعة", source:"نسبة مشاركة الطلبة في التطوع"},
-        {official:"إنجاز ملف المسابقات", type:"direct", op:"نسبة إنجاز ملف المسابقات المستهدفة المشاركة فيها", source:"ملف المسابقات التطوعية"},
-        {official:"تحقيق جائزة", type:"direct", op:"تحقيق جائزة على الأقل سنوياً", source:"تحقيق جائزة سنوية"},
-        {official:"الأثر المجتمعي", type:"direct", op:"الأثر المجتمعي للمبادرات المنفذة", source:"الأثر المجتمعي"},
+        {official:"نسبة الالتزام بعدد ساعات سنوية 50 ألف ساعة", type:"ratioTarget", op:"عدد الساعات التطوعية", targetValue:50000, source:"عدد الساعات التطوعية ÷ 50,000", asPercent:true},
+        {official:"عدد وسجل الفرص التطوعية المعتمدة", type:"direct", op:"عدد الفرص التطوعية", source:"الفرص التطوعية"},
+        {official:"إنجاز ملف المسابقات التطوعية", type:"direct", op:"نسبة إنجاز ملف المسابقات المستهدفة المشاركة فيها", source:"ملف المسابقات التطوعية"},
+        {official:"الأثر المجتمعي للمبادرات", type:"direct", op:"الأثر المجتمعي للمبادرات المنفذة", source:"الأثر المجتمعي"},
         {official:"رضا المستفيدين والجهات", type:"direct", op:"نسبة رضا المتطوعين", source:"رضا المتطوعين"},
-        {official:"مأسسة العمل التطوعي", type:"direct", op:"نسبة إنجاز ملف مأسسة العمل التطوعي", source:"ملف مأسسة العمل التطوعي"}
+        {official:"إكمال ملف مأسسة العمل التطوعي", type:"direct", op:"نسبة إنجاز ملف مأسسة العمل التطوعي", source:"ملف مأسسة العمل التطوعي"}
       ],
       "إدارة المنح الدراسية": [
         {official:"قاعدة بيانات طلبة المنح الخارجية", type:"sum", ops:["عدد طلاب المنح الخارجية المقيدين والمنتظمين 2026","عدد طلاب المنح الداخلية المقيدين والمنتظمين 2026","عدد طالبات المنح الداخلية المقيدين والمنتظمين 2026"], source:"إجمالي طلبة المنح المقيدين"},
-        {official:"سجل الطلبات المعالجة", type:"direct", op:"سجل الطلبات المعالجة خلال العام الدراسي", source:"سجل الطلبات المعالجة"},
         {official:"نسبة رضا المستفيدين عن الإجراءات", type:"direct", op:"نسبة رضا الطلاب عن خدمات الوحدة", source:"رضا الطلاب عن خدمات الوحدة"},
-        {official:"تجديد الجوازات", type:"direct", op:"عدد طلبات تجديد الإقامة/الجواز المغلقة", source:"طلبات التجديد المغلقة"},
-        {official:"سجل التواصل مع الطلبة الجدد", type:"direct", op:"عدد الطلبة الجدد المتواصل معهم وترتيب عمليات الاستقبال وتهيئتهم نفسياً", source:"الطلبة الجدد والتواصل"}
+        {official:"نسبة الالتزام بتجديد الجوازات والهويات وكافة الأوراق الثبوتية", type:"direct", op:"عدد طلبات تجديد الإقامة/الجواز المغلقة", source:"طلبات التجديد المغلقة"},
+        {official:"سجل التواصل مع الطلبة الجدد وترتيب عمليات الاستقبال وتهيئتهم نفسياً", type:"direct", op:"عدد الطلبة الجدد المتواصل معهم وترتيب عمليات الاستقبال وتهيئتهم نفسياً", source:"الطلبة الجدد والتواصل"}
+      ],
+      "مركز محترف": [
+        {official:"عدد وسجل البرامج التدريبية والاحترافية والترويجية المنفذة", type:"direct", op:"عدد البرامج التدريبية المنفذة", source:"عدد البرامج التدريبية المنفذة"}
       ],
       "وحدة عشائر الجوالة": [
-        {official:"قاعدة بيانات", type:"direct", op:"قاعدة بيانات طلبة الجوالة", source:"قاعدة بيانات الجوالة"},
-        {official:"البرامج الكشفية", type:"direct", op:"عدد وسجل البرامج الكشفية المنفذة", source:"البرامج الكشفية"},
-        {official:"البرامج التطوعية", type:"direct", op:"عدد وسجل البرامج التطوعية المنفذة", source:"البرامج التطوعية"},
-        {official:"الساعات التطوع", type:"direct", op:"عدد ساعات التطوع المعتمدة لعشائر الجوالة", source:"ساعات التطوع"},
+        {official:"عدد وسجل البرامج الكشفية المنفذة", type:"direct", op:"عدد وسجل البرامج الكشفية المنفذة", source:"البرامج الكشفية"},
+        {official:"عدد وسجل البرامج التطوعية المنفذة", type:"direct", op:"عدد وسجل البرامج التطوعية المنفذة", source:"البرامج التطوعية"},
+        {official:"عدد ساعات التطوع المعتمدة لعشائر الجوالة", type:"direct", op:"عدد ساعات التطوع المعتمدة لعشائر الجوالة", source:"ساعات التطوع"},
         {official:"نسبة التزام أعضاء وحدة الجوالة", type:"direct", op:"نسبة التزام أعضاء وحدة الجوالة", source:"التزام أعضاء الجوالة"},
-        {official:"نسبة رضا الجهات المستفيدة", type:"direct", op:"نسبة رضا الجهات المستفيدة من المبادرات", source:"رضا الجهات المستفيدة"}
+        {official:"نسبة رضا الجهات المستفيدة من المبادرات", type:"direct", op:"نسبة رضا الجهات المستفيدة من المبادرات", source:"رضا الجهات المستفيدة"}
       ]
     };
     function getAutoRulesForDept(deptName){ return AUTO_TARGET_RULES[deptName] || []; }
@@ -3386,12 +3804,18 @@
         if(!rule) return {value:null, note:"غير مرتبط", source:"يدوي/إثبات", asPercent:false, missing:true};
         if(rule.type === "direct"){
           const value = readOpNumber(deptIndex, rule.op, quarter);
-          return {value, note:rule.source, source:rule.source, asPercent:String(rule.op || "").includes("نسبة"), missing:value === null};
+          return {value, note:rule.source, source:rule.source, asPercent:rule.asPercent === true || String(rule.op || "").includes("نسبة"), missing:value === null};
         }
         if(rule.type === "sum"){
           const vals = (rule.ops || []).map(op => readOpNumber(deptIndex, op, quarter));
           if(vals.some(v => v === null || typeof v !== "number")) return {value:null, note:rule.source, source:rule.source, asPercent:false, missing:true};
           return {value:vals.reduce((a,b)=>a+b,0), note:rule.source, source:rule.source, asPercent:false, missing:false};
+        }
+        if(rule.type === "ratioTarget"){
+          const actual = readOpNumber(deptIndex, rule.op, quarter);
+          const targetValue = Number(rule.targetValue);
+          if(typeof actual !== "number" || !Number.isFinite(targetValue) || targetValue <= 0) return {value:null, note:rule.source, source:rule.source, asPercent:true, missing:true};
+          return {value:(actual / targetValue) * 100, note:`${fmt(actual)} ÷ ${fmt(targetValue)}`, source:rule.source, asPercent:true, missing:false};
         }
         if(rule.type === "punctuality"){
           const total = readOpNumber(deptIndex, rule.total, quarter);
@@ -3455,7 +3879,7 @@
         n.includes(normalizeArabicText(d.name_ar)) ||
         normalizeArabicText(d.name_ar).includes(n) ||
         n.includes(normalizeArabicText(d.name_en || ""))
-      ) || (n.includes("محترف") ? (arr || []).find(d => normalizeArabicText(d.name_ar).includes("المركز المهني")) : null)
+      ) || (n.includes("محترف") ? (arr || []).find(d => normalizeArabicText(d.name_ar).includes("محترف")) : null)
         || (n.includes("توظيف") ? (arr || []).find(d => normalizeArabicText(d.name_ar).includes("التوظيف")) : null)
         || (n.includes("ذوي الاعاقه") ? (arr || []).find(d => normalizeArabicText(d.name_ar).includes("ذوي")) : null)
         || (n.includes("تغذيه") ? (arr || []).find(d => normalizeArabicText(d.name_ar).includes("التغذيه") || normalizeArabicText(d.name_ar).includes("التغذية")) : null)
@@ -3582,8 +4006,6 @@
         renderKpis();
         renderScoreList();
         drawCharts();
-        renderNutrition();
-        renderCoverage();
         renderInsights();
       }catch(e){
         console.warn("Dashboard refresh skipped:", e);
@@ -3625,8 +4047,6 @@
         renderKpis();
         renderScoreList();
         drawCharts();
-        renderNutrition();
-        renderCoverage();
         renderInsights();
         const detail = $("departmentDetail");
         const list = $("departmentsListView");
@@ -3717,6 +4137,10 @@
     function opSaveKey(deptIndex, opIndex, quarter){ return `op:${deptIndex}:${opIndex}:${quarter}`; }
     function monthSaveKey(deptIndex, opIndex, quarter, monthNo){ return `month:${deptIndex}:${opIndex}:${quarter}:${monthNo}`; }
     function recSaveKey(deptIndex, recNo){ return `rec:${deptIndex}:${recNo}`; }
+    function handleDepartmentRecommendationInput(deptIndex, recNo, value){
+      saveKpiValue(recSaveKey(deptIndex, recNo), value);
+      renderInsights();
+    }
 
 
     function mainScoreKey(deptIndex, quarter){ return `mainScore:${deptIndex}:${quarter}`; }
@@ -3900,12 +4324,12 @@
       let hasAny = false;
 
       for(let i=0; i<12; i++){
-        const selectedMonth = String(getSavedMuhtarafValue(deptIndex, i, "month") || "").trim();
-        const beneficiaries = numVal(getSavedMuhtarafValue(deptIndex, i, "beneficiaries"));
-        const price = numVal(getSavedMuhtarafValue(deptIndex, i, "price"));
-        const trainer = numVal(getSavedMuhtarafValue(deptIndex, i, "trainer"));
-        const hall = numVal(getSavedMuhtarafValue(deptIndex, i, "hall"));
-        const codeUnit = numVal(getSavedMuhtarafValue(deptIndex, i, "codes"));
+        const selectedMonth = String(getSavedMuhtarafValue(deptIndex, i, "month", currentQuarter) || "").trim();
+        const beneficiaries = numVal(getSavedMuhtarafValue(deptIndex, i, "beneficiaries", currentQuarter));
+        const price = numVal(getSavedMuhtarafValue(deptIndex, i, "price", currentQuarter));
+        const trainer = numVal(getSavedMuhtarafValue(deptIndex, i, "trainer", currentQuarter));
+        const hall = numVal(getSavedMuhtarafValue(deptIndex, i, "hall", currentQuarter));
+        const codeUnit = numVal(getSavedMuhtarafValue(deptIndex, i, "codes", currentQuarter));
 
         const revenue = price * beneficiaries;
         const codeTotal = codeUnit * beneficiaries;
@@ -3990,11 +4414,18 @@
     function switchDepartmentQuarter(quarter, btn){
       document.querySelectorAll(".dept-quarter-btn").forEach(b => b.classList.toggle("active", b === btn));
       document.querySelectorAll(".detail-quarter-box").forEach(box => box.classList.toggle("active", box.dataset.quarter === quarter));
-
       const host = document.getElementById("deptChartsHost");
       if(host && host.dataset.deptIndex !== undefined){
         const deptIndex = Number(host.dataset.deptIndex);
         updateDepartmentLiveStrip(deptIndex, quarter);
+
+        // في مركز محترف يتبدل جدول الربحية بالكامل حسب الربع، مع حفظ بيانات كل ربع بشكل مستقل.
+        const financePanel = document.getElementById("muhtarafFinancePanelHost");
+        const dept = DEPARTMENT_TARGETS[deptIndex];
+        if(financePanel && dept && String(dept.name_ar || "").includes("محترف")){
+          financePanel.outerHTML = buildMuhtarafFinancePanel(deptIndex, quarter);
+        }
+
         renderDepartmentCharts(deptIndex);
       }
     }
@@ -4208,6 +4639,27 @@
       return d ? getOperationalKpis(d.name_ar) : [];
     }
 
+    function readOperationalValueByIndex(deptIndex, opIndex, quarter){
+      const labels = getOperationalLabelList(deptIndex);
+      const label = labels[opIndex] || "";
+      const selector = `[data-op-input="${deptIndex}_${opIndex}_${quarter}"]`;
+      let raw = getInputValueFromDomOrStorage(selector, opSaveKey(deptIndex, opIndex, quarter));
+
+      if(String(raw || "").trim() === "" && !isQuarterWideOperational(label)){
+        const monthly = [1,2,3].map(monthNo => {
+          const el = document.querySelector(`[data-month-input="${deptIndex}_${opIndex}_${quarter}_${monthNo}"]`);
+          return el ? el.value : getSavedKpiValue(monthSaveKey(deptIndex, opIndex, quarter, monthNo));
+        });
+        raw = aggregateMonthlyValues(monthly, getOperationalValueType(label));
+      }
+
+      if(raw === null || raw === undefined || String(raw).trim() === "") return null;
+      const type = getOperationalValueType(label);
+      if(type === "text") return String(raw).trim();
+      const numeric = parseDepartmentChartNumber(raw);
+      return numeric === null ? String(raw).trim() : numeric;
+    }
+
     function getOperationalMap(deptIndex, quarter){
       const labels = getOperationalLabelList(deptIndex);
       const out = {};
@@ -4405,6 +4857,76 @@
       </div>`;
     }
 
+    function renderQuarterComparisonCard(deptIndex){
+      const q1 = getDepartmentQuarterResult(deptIndex, "Q1");
+      const q2 = getDepartmentQuarterResult(deptIndex, "Q2");
+      const s1 = getOfficialQuarterStats(deptIndex, "Q1");
+      const s2 = getOfficialQuarterStats(deptIndex, "Q2");
+
+      const score1 = q1.score === null ? null : Math.max(0, Math.min(100, Number(q1.score)));
+      const score2 = q2.score === null ? null : Math.max(0, Math.min(100, Number(q2.score)));
+      const scoreText1 = score1 === null ? "لا توجد بيانات" : fmt(score1) + "%";
+      const scoreText2 = score2 === null ? "لا توجد بيانات" : fmt(score2) + "%";
+
+      let diffText = "بانتظار اكتمال بيانات الربعين";
+      let diffClass = "";
+      if(score1 !== null && score2 !== null){
+        const diff = Math.round((score2 - score1) * 10) / 10;
+        diffText = `${diff > 0 ? "+" : ""}${fmt(diff)} نقطة`;
+        diffClass = diff > 0 ? "good" : (diff < 0 ? "bad" : "neutral");
+      }
+
+      const targetRow = (label, stats) => {
+        const total = stats.total || 1;
+        const greenW = (stats.green / total) * 100;
+        const amberW = (stats.amber / total) * 100;
+        const redW = (stats.red / total) * 100;
+        const grayW = Math.max(0, 100 - greenW - amberW - redW);
+        return `<div class="target-progress-row">
+          <div class="target-progress-head"><span>${label}</span><span>${fmt(stats.green)}/${fmt(stats.total)} محقق</span></div>
+          <div class="target-progress-stack">
+            <span class="green" style="width:${greenW}%"></span>
+            <span class="amber" style="width:${amberW}%"></span>
+            <span class="red" style="width:${redW}%"></span>
+            <span class="gray" style="width:${grayW}%"></span>
+          </div>
+        </div>`;
+      };
+
+      return `<div class="dept-dash-card full quarter-comparison-card">
+        <h5>🔄 مقارنة الربع الأول والثاني</h5>
+        <p>مقارنة مباشرة بين درجة الأداء وحالة تحقيق المستهدفات الرسمية في الربعين.</p>
+
+        <div class="compare-list quarter-score-compare">
+          <div class="compare-row">
+            <div class="head"><span>الربع الأول</span><span>${scoreText1}</span></div>
+            <div class="track"><div class="fill" style="width:${score1 === null ? 0 : score1}%;background:#1f9d73">${score1 === null ? "" : fmt(score1) + "%"}</div></div>
+          </div>
+          <div class="compare-row">
+            <div class="head"><span>الربع الثاني</span><span>${scoreText2}</span></div>
+            <div class="track"><div class="fill" style="width:${score2 === null ? 0 : score2}%;background:#3a7bd5">${score2 === null ? "" : fmt(score2) + "%"}</div></div>
+          </div>
+        </div>
+
+        <div class="mini-kpi-grid quarter-compare-kpis">
+          <div class="mini-kpi-box"><div class="k">الفرق من الربع الأول إلى الثاني</div><div class="v quarter-diff ${diffClass}">${diffText}</div></div>
+          <div class="mini-kpi-box"><div class="k">المستهدفات المحققة — الربع الأول</div><div class="v">${fmt(s1.green)}/${fmt(s1.total)}</div></div>
+          <div class="mini-kpi-box"><div class="k">المستهدفات المحققة — الربع الثاني</div><div class="v">${fmt(s2.green)}/${fmt(s2.total)}</div></div>
+        </div>
+
+        <div class="target-progress-wrap quarter-target-compare">
+          ${targetRow("الربع الأول", s1)}
+          ${targetRow("الربع الثاني", s2)}
+        </div>
+        <div class="target-legend">
+          <span><i style="background:#1f9d73"></i>محقق</span>
+          <span><i style="background:#f0b429"></i>قريب من المستهدف</span>
+          <span><i style="background:#e45858"></i>أقل من المستهدف</span>
+          <span><i style="background:#c9d2dd"></i>يدوي / بانتظار إدخال</span>
+        </div>
+      </div>`;
+    }
+
     function deptKey(name){
       return normalizeArabicText(name || "");
     }
@@ -4424,7 +4946,7 @@
           {label:"الطلاب", value:malePoints, color:"#159895"},
           {label:"الطالبات", value:femalePoints, color:"#7c3aed"}
         ]),
-        renderOfficialTargetsCard(deptIndex, quarter, True)
+        renderOfficialTargetsCard(deptIndex, quarter, true)
       ].join("");
     }
 
@@ -4441,7 +4963,7 @@
           {label:"الجولات الميدانية واللقاءات التعريفية", value:findOperationalValue(deptIndex, quarter, ["الجولات الميدانية"])},
           {label:"تحديث قاعدة البيانات", value:findOperationalValue(deptIndex, quarter, ["تحديث قاعدة البيانات"])}
         ], "#7c3aed"),
-        renderOfficialTargetsCard(deptIndex, quarter, True)
+        renderOfficialTargetsCard(deptIndex, quarter, true)
       ].join("");
     }
 
@@ -4460,7 +4982,7 @@
           {label:"العقود الموقعة", value:findOperationalValue(deptIndex, quarter, ["العقود الموقعة"])},
           {label:"شراكات التوظيف", value:findOperationalValue(deptIndex, quarter, ["شراكات التوظيف","شركات التوظيف"])}
         ], "#3a7bd5"),
-        renderOfficialTargetsCard(deptIndex, quarter, True)
+        renderOfficialTargetsCard(deptIndex, quarter, true)
       ].join("");
     }
 
@@ -4478,7 +5000,7 @@
           {label:"المخالفات أو الحوادث", value:findOperationalValue(deptIndex, quarter, ["المخالفات","الحوادث"]), color:"#e45858"},
           {label:"الشكاوى المغلقة", value:findOperationalValue(deptIndex, quarter, ["الشكاوى"]), color:"#1f9d73"}
         ], "#1f9d73"),
-        renderOfficialTargetsCard(deptIndex, quarter, True)
+        renderOfficialTargetsCard(deptIndex, quarter, true)
       ].join("");
     }
 
@@ -4496,7 +5018,7 @@
           {label:"طلاب المنح المسكنون", value:findOperationalValue(deptIndex, quarter, ["طلاب المنح المسكنين"]), color:"#3a7bd5"},
           {label:"البرامج الطلابية", value:findOperationalValue(deptIndex, quarter, ["البرامج الطلابية"]), color:"#1f9d73"}
         ], "#3a7bd5"),
-        renderOfficialTargetsCard(deptIndex, quarter, True)
+        renderOfficialTargetsCard(deptIndex, quarter, true)
       ].join("");
     }
 
@@ -4516,7 +5038,7 @@
           {label:"الإنذارات", value:findOperationalValue(deptIndex, quarter, ["الإنذارات"]), color:"#f59e0b"},
           {label:"الغرامات", value:findOperationalValue(deptIndex, quarter, ["الغرامات"]), color:"#7c3aed"}
         ], "#159895"),
-        renderOfficialTargetsCard(deptIndex, quarter, True)
+        renderOfficialTargetsCard(deptIndex, quarter, true)
       ].join("");
     }
 
@@ -4534,7 +5056,7 @@
           {label:"الشكاوى المرفوضة", value:findOperationalValue(deptIndex, quarter, ["الشكاوى","المرفوضة"])},
           {label:"الشكاوى المغلقة", value:findOperationalValue(deptIndex, quarter, ["الشكاوى","المغلقة"])}
         ]),
-        renderOfficialTargetsCard(deptIndex, quarter, True)
+        renderOfficialTargetsCard(deptIndex, quarter, true)
       ].join("");
     }
 
@@ -4552,7 +5074,7 @@
           {label:"الأنشطة المقامة", value:findOperationalValue(deptIndex, quarter, ["الأنشطة الطلابية المقامة"]), color:"#3a7bd5"},
           {label:"المبادرات المجتمعية", value:findOperationalValue(deptIndex, quarter, ["المبادرات","الشراكة المجتمعية"]), color:"#7c3aed"}
         ], "#1f9d73"),
-        renderOfficialTargetsCard(deptIndex, quarter, True)
+        renderOfficialTargetsCard(deptIndex, quarter, true)
       ].join("");
     }
 
@@ -4569,7 +5091,7 @@
           {label:"الأنشطة المنفذة", value:findOperationalValue(deptIndex, quarter, ["الأنشطة المنفذة"])},
           {label:"رضا الطلبة", value:findOperationalValue(deptIndex, quarter, ["رضا الطلبة"]), suffix:"%"}
         ]),
-        renderOfficialTargetsCard(deptIndex, quarter, True)
+        renderOfficialTargetsCard(deptIndex, quarter, true)
       ].join("");
     }
 
@@ -4588,7 +5110,7 @@
           {label:"إنجاز ملف مأسسة العمل التطوعي", value:findOperationalValue(deptIndex, quarter, ["مأسسة العمل التطوعي"]), color:"#7c3aed"},
           {label:"الأثر المجتمعي", value:findOperationalValue(deptIndex, quarter, ["الأثر المجتمعي"]), color:"#1f9d73"}
         ], "#1f9d73"),
-        renderOfficialTargetsCard(deptIndex, quarter, True)
+        renderOfficialTargetsCard(deptIndex, quarter, true)
       ].join("");
     }
 
@@ -4607,7 +5129,7 @@
           {label:"الطلبة الجدد المتواصل معهم", value:findOperationalValue(deptIndex, quarter, ["الطلبة الجدد المتواصل معهم"]), color:"#7c3aed"},
           {label:"رضا الطلاب", value:findOperationalValue(deptIndex, quarter, ["رضا الطلاب"]), color:"#f0b429"}
         ], "#3a7bd5"),
-        renderOfficialTargetsCard(deptIndex, quarter, True)
+        renderOfficialTargetsCard(deptIndex, quarter, true)
       ].join("");
     }
 
@@ -4624,7 +5146,7 @@
           {label:"التزام أعضاء الوحدة", value:findOperationalValue(deptIndex, quarter, ["ألتزام أعضاء","التزام أعضاء"]), suffix:"%", color:"#1f9d73"},
           {label:"رضا الجهات المستفيدة", value:findOperationalValue(deptIndex, quarter, ["رضا الجهات المستفيدة"]), suffix:"%", color:"#3a7bd5"}
         ]),
-        renderOfficialTargetsCard(deptIndex, quarter, True)
+        renderOfficialTargetsCard(deptIndex, quarter, true)
       ].join("");
     }
 
@@ -4637,7 +5159,7 @@
           label,
           value: findOperationalValue(deptIndex, quarter, [label])
         })), "#3a7bd5"),
-        renderOfficialTargetsCard(deptIndex, quarter, True)
+        renderOfficialTargetsCard(deptIndex, quarter, true)
       ].join("");
     }
 
@@ -4666,6 +5188,7 @@
       else if(key.includes("الجواله")) html = buildScoutsDashboard(deptIndex, quarter);
       else html = buildGenericDashboard(deptIndex, quarter);
 
+      html += renderQuarterComparisonCard(deptIndex);
       host.innerHTML = `<div class="dept-dash-grid">${html}</div>`;
     }
 
@@ -4684,6 +5207,14 @@
       if(host && host.dataset.deptIndex !== undefined){
         const deptIndex = Number(host.dataset.deptIndex);
         updateDepartmentLiveStrip(deptIndex, quarter);
+
+        // في مركز محترف يتبدل جدول الربحية بالكامل حسب الربع، مع حفظ بيانات كل ربع بشكل مستقل.
+        const financePanel = document.getElementById("muhtarafFinancePanelHost");
+        const dept = DEPARTMENT_TARGETS[deptIndex];
+        if(financePanel && dept && String(dept.name_ar || "").includes("محترف")){
+          financePanel.outerHTML = buildMuhtarafFinancePanel(deptIndex, quarter);
+        }
+
         renderDepartmentCharts(deptIndex);
       }
     }
@@ -4810,7 +5341,7 @@
       </div>`;
 
       const performanceDetailPanel = isSportsDept ? sportsActivityPanel : genericMonthlyPanel;
-      const muhtarafFinancePanel = d.name_ar === "مركز محترف" ? buildMuhtarafFinancePanel(index) : "";
+      const muhtarafFinancePanel = d.name_ar === "مركز محترف" ? buildMuhtarafFinancePanel(index, "Q1") : "";
 
       detail.innerHTML = `<div class="dept-detail-toolbar">
         <button class="dept-back-light" type="button" onclick="backToDepartmentsList()">← رجوع لقائمة الإدارات</button>
@@ -4838,10 +5369,6 @@
         <div class="dept-kpi"><b>${fmt(operational.length)}</b><span>مؤشرات تشغيلية</span></div>
       </div>
 
-      <div class="dept-dashboard-top">
-        <h4 class="dept-section-title">📊 داشبورد الإدارة <span class="small-note">رسوم ومؤشرات مبنية على بيانات هذه الإدارة والربع المحدد</span></h4>
-        <div id="deptChartsHost" data-dept-index="${index}"></div>
-      </div>
       <div class="data-entry-bottom">
         <button class="dept-page-btn data-entry-toggle" type="button">🔒 إدخال البيانات</button>
       </div>
@@ -4906,6 +5433,12 @@
           <tbody>${officialRows}</tbody>
         </table>
       </div>
+
+      <div class="dept-dashboard-top">
+        <h4 class="dept-section-title">📊 داشبورد الإدارة <span class="small-note">يقرأ نتائج المستهدفات الرسمية ويعرض أداء الربع المحدد، مع مقارنة مستقلة بين الربع الأول والثاني</span></h4>
+        <div id="deptChartsHost" data-dept-index="${index}"></div>
+      </div>
+
 <div class="dept-notes-grid">
         <div class="dept-note-box"><b>بدون تكرار</b> المؤشر التشغيلي يُدخل مرة واحدة، وأي مستهدف رسمي مرتبط به يتم احتسابه تلقائياً.</div>
         <div class="dept-note-box"><b>الربط التلقائي</b> مثال: الالتزام بالمواعيد = (إجمالي الرحلات - الرحلات المتأخرة) ÷ إجمالي الرحلات.</div>
@@ -4915,9 +5448,9 @@
       <div class="recs-box">
         <h5>توصيات اجتماع مراجعة الإدارة</h5>
         <div class="recs-list">
-          <div class="rec-row"><span class="num">1</span><textarea class="rec-input" rows="2" ${dataEntryUnlocked ? "" : "disabled"} data-rec-input="${index}_1" oninput="saveKpiValue(recSaveKey({index}, 1), this.value)" placeholder="اكتب التوصية الأولى هنا"></textarea></div>
-          <div class="rec-row"><span class="num">2</span><textarea class="rec-input" rows="2" ${dataEntryUnlocked ? "" : "disabled"} data-rec-input="${index}_2" oninput="saveKpiValue(recSaveKey({index}, 2), this.value)" placeholder="اكتب التوصية الثانية هنا"></textarea></div>
-          <div class="rec-row"><span class="num">3</span><textarea class="rec-input" rows="2" ${dataEntryUnlocked ? "" : "disabled"} data-rec-input="${index}_3" oninput="saveKpiValue(recSaveKey({index}, 3), this.value)" placeholder="اكتب التوصية الثالثة هنا"></textarea></div>
+          <div class="rec-row"><span class="num">1</span><textarea class="rec-input" rows="2" ${dataEntryUnlocked ? "" : "disabled"} data-rec-input="${index}_1" oninput="handleDepartmentRecommendationInput(${index}, 1, this.value)" placeholder="اكتب التوصية الأولى هنا"></textarea></div>
+          <div class="rec-row"><span class="num">2</span><textarea class="rec-input" rows="2" ${dataEntryUnlocked ? "" : "disabled"} data-rec-input="${index}_2" oninput="handleDepartmentRecommendationInput(${index}, 2, this.value)" placeholder="اكتب التوصية الثانية هنا"></textarea></div>
+          <div class="rec-row"><span class="num">3</span><textarea class="rec-input" rows="2" ${dataEntryUnlocked ? "" : "disabled"} data-rec-input="${index}_3" oninput="handleDepartmentRecommendationInput(${index}, 3, this.value)" placeholder="اكتب التوصية الثالثة هنا"></textarea></div>
         </div>
       </div>`;
       detail.classList.add("open");
@@ -4932,21 +5465,43 @@
 
 
 
-    function muhtarafRowKey(deptIndex, rowIndex, field){
+    function muhtarafRowKey(deptIndex, rowIndex, field, quarter = "Q1"){
+      return `muhtarafProgram:${deptIndex}:${quarter}:${rowIndex}:${field}`;
+    }
+
+    function legacyMuhtarafRowKey(deptIndex, rowIndex, field){
       return `muhtarafProgram:${deptIndex}:${rowIndex}:${field}`;
     }
 
-    function getMuhtarafMonthOptions(selected=""){
-      const months = ["يناير","فبراير","مارس","أبريل","مايو","يونيو","يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر"];
+    function muhtarafQuarterLabel(quarter = "Q1"){
+      return quarter === "Q2" ? "الربع الثاني" : "الربع الأول";
+    }
+
+    function getMuhtarafMonthOptions(selected="", quarter="Q1"){
+      const months = quarter === "Q2"
+        ? ["أبريل","مايو","يونيو"]
+        : ["يناير","فبراير","مارس"];
       return `<option value="">اختر الشهر</option>` + months.map(m => `<option value="${m}" ${selected===m ? "selected" : ""}>${m}</option>`).join("");
     }
 
-    function getSavedMuhtarafValue(deptIndex, rowIndex, field){
-      return localStorage.getItem(muhtarafRowKey(deptIndex, rowIndex, field)) || "";
+    function getSavedMuhtarafValue(deptIndex, rowIndex, field, quarter = currentQuarter || "Q1"){
+      const quarterKey = muhtarafRowKey(deptIndex, rowIndex, field, quarter);
+      const saved = localStorage.getItem(quarterKey);
+      if(saved !== null) return saved;
+
+      // ترحيل البيانات القديمة تلقائياً إلى الربع الأول حتى لا تضيع المدخلات السابقة.
+      if(quarter === "Q1"){
+        const legacy = localStorage.getItem(legacyMuhtarafRowKey(deptIndex, rowIndex, field));
+        if(legacy !== null){
+          localStorage.setItem(quarterKey, legacy);
+          return legacy;
+        }
+      }
+      return "";
     }
 
-    function saveMuhtarafValue(deptIndex, rowIndex, field, value){
-      localStorage.setItem(muhtarafRowKey(deptIndex, rowIndex, field), value ?? "");
+    function saveMuhtarafValue(deptIndex, rowIndex, field, value, quarter = currentQuarter || "Q1"){
+      localStorage.setItem(muhtarafRowKey(deptIndex, rowIndex, field, quarter), value ?? "");
     }
 
     function numVal(v){
@@ -4956,12 +5511,12 @@
       return Number.isFinite(n) ? n : 0;
     }
 
-    function calcMuhtarafRow(deptIndex, rowIndex){
-      const price = numVal(getSavedMuhtarafValue(deptIndex, rowIndex, "price"));
-      const beneficiaries = numVal(getSavedMuhtarafValue(deptIndex, rowIndex, "beneficiaries"));
-      const trainer = numVal(getSavedMuhtarafValue(deptIndex, rowIndex, "trainer"));
-      const hall = numVal(getSavedMuhtarafValue(deptIndex, rowIndex, "hall"));
-      const codeUnit = numVal(getSavedMuhtarafValue(deptIndex, rowIndex, "codes"));
+    function calcMuhtarafRow(deptIndex, rowIndex, quarter = currentQuarter || "Q1"){
+      const price = numVal(getSavedMuhtarafValue(deptIndex, rowIndex, "price", quarter));
+      const beneficiaries = numVal(getSavedMuhtarafValue(deptIndex, rowIndex, "beneficiaries", quarter));
+      const trainer = numVal(getSavedMuhtarafValue(deptIndex, rowIndex, "trainer", quarter));
+      const hall = numVal(getSavedMuhtarafValue(deptIndex, rowIndex, "hall", quarter));
+      const codeUnit = numVal(getSavedMuhtarafValue(deptIndex, rowIndex, "codes", quarter));
 
       const revenue = price * beneficiaries;
       const codeTotal = codeUnit * beneficiaries;
@@ -4977,66 +5532,70 @@
       if(el) el.textContent = value;
     }
 
-    function updateMuhtarafCalculatedRow(deptIndex, rowIndex){
-      const c = calcMuhtarafRow(deptIndex, rowIndex);
+    function updateMuhtarafCalculatedRow(deptIndex, rowIndex, quarter = currentQuarter || "Q1"){
+      const c = calcMuhtarafRow(deptIndex, rowIndex, quarter);
+      const idKey = `${deptIndex}_${quarter}_${rowIndex}`;
 
-      setCellText(`muhtarafRevenue_${deptIndex}_${rowIndex}`, fmt(c.revenue));
-      setCellText(`muhtarafCodeTotal_${deptIndex}_${rowIndex}`, fmt(c.codeTotal));
-      setCellText(`muhtarafTotalCosts_${deptIndex}_${rowIndex}`, fmt(c.totalCosts));
-      setCellText(`muhtarafNetProfit_${deptIndex}_${rowIndex}`, fmt(c.netProfit));
-      setCellText(`muhtarafMargin_${deptIndex}_${rowIndex}`, fmt(c.margin) + "%");
+      setCellText(`muhtarafRevenue_${idKey}`, fmt(c.revenue));
+      setCellText(`muhtarafCodeTotal_${idKey}`, fmt(c.codeTotal));
+      setCellText(`muhtarafTotalCosts_${idKey}`, fmt(c.totalCosts));
+      setCellText(`muhtarafNetProfit_${idKey}`, fmt(c.netProfit));
+      setCellText(`muhtarafMargin_${idKey}`, fmt(c.margin) + "%");
 
-      const netEl = document.getElementById(`muhtarafNetProfit_${deptIndex}_${rowIndex}`);
+      const netEl = document.getElementById(`muhtarafNetProfit_${idKey}`);
       if(netEl){
         netEl.classList.toggle("profit-good", c.netProfit >= 0);
         netEl.classList.toggle("profit-low", c.netProfit < 0);
       }
 
-      const marginEl = document.getElementById(`muhtarafMargin_${deptIndex}_${rowIndex}`);
+      const marginEl = document.getElementById(`muhtarafMargin_${idKey}`);
       if(marginEl){
         marginEl.classList.toggle("goal-good", c.margin >= 30);
         marginEl.classList.toggle("goal-low", c.margin < 30);
       }
     }
 
-    function buildMuhtarafFinancePanel(deptIndex){
+    function buildMuhtarafFinancePanel(deptIndex, quarter = "Q1"){
       const lockedAttr = dataEntryUnlocked ? "" : "disabled";
+      const quarterText = muhtarafQuarterLabel(quarter);
+      const quarterMonths = quarter === "Q2" ? "أبريل، مايو، يونيو" : "يناير، فبراير، مارس";
       const rows = Array.from({length:6}, (_,i) => {
         const rowNo = i + 1;
-        const month = getSavedMuhtarafValue(deptIndex, i, "month");
-        const program = getSavedMuhtarafValue(deptIndex, i, "program");
-        const price = getSavedMuhtarafValue(deptIndex, i, "price");
-        const beneficiaries = getSavedMuhtarafValue(deptIndex, i, "beneficiaries");
-        const trainer = getSavedMuhtarafValue(deptIndex, i, "trainer");
-        const hall = getSavedMuhtarafValue(deptIndex, i, "hall");
-        const codes = getSavedMuhtarafValue(deptIndex, i, "codes");
-        const c = calcMuhtarafRow(deptIndex, i);
+        const month = getSavedMuhtarafValue(deptIndex, i, "month", quarter);
+        const program = getSavedMuhtarafValue(deptIndex, i, "program", quarter);
+        const price = getSavedMuhtarafValue(deptIndex, i, "price", quarter);
+        const beneficiaries = getSavedMuhtarafValue(deptIndex, i, "beneficiaries", quarter);
+        const trainer = getSavedMuhtarafValue(deptIndex, i, "trainer", quarter);
+        const hall = getSavedMuhtarafValue(deptIndex, i, "hall", quarter);
+        const codes = getSavedMuhtarafValue(deptIndex, i, "codes", quarter);
+        const c = calcMuhtarafRow(deptIndex, i, quarter);
         const profitClass = c.netProfit >= 0 ? "profit-good" : "profit-low";
         const goalClass = c.margin >= 30 ? "goal-good" : "goal-low";
 
         return `<tr>
           <td>${fmt(rowNo)}</td>
-          <td><select ${lockedAttr} onchange="handleMuhtarafTableInput(${deptIndex}, ${i}, 'month', this.value)">${getMuhtarafMonthOptions(month)}</select></td>
-          <td><input type="text" ${lockedAttr} value="${program}" oninput="handleMuhtarafTableInput(${deptIndex}, ${i}, 'program', this.value)" placeholder="اسم الدورة / البرنامج"></td>
-          <td><input type="number" step="any" inputmode="decimal" ${lockedAttr} value="${price}" oninput="handleMuhtarafTableInput(${deptIndex}, ${i}, 'price', this.value)" placeholder="0"></td>
-          <td><input type="number" step="any" inputmode="decimal" ${lockedAttr} value="${beneficiaries}" oninput="handleMuhtarafTableInput(${deptIndex}, ${i}, 'beneficiaries', this.value)" placeholder="0"></td>
-          <td><div class="readonly-cell" id="muhtarafRevenue_${deptIndex}_${i}">${fmt(c.revenue)}</div></td>
-          <td><input type="number" step="any" inputmode="decimal" ${lockedAttr} value="${trainer}" oninput="handleMuhtarafTableInput(${deptIndex}, ${i}, 'trainer', this.value)" placeholder="0"></td>
-          <td><input type="number" step="any" inputmode="decimal" ${lockedAttr} value="${hall}" oninput="handleMuhtarafTableInput(${deptIndex}, ${i}, 'hall', this.value)" placeholder="0"></td>
-          <td><input type="number" step="any" inputmode="decimal" ${lockedAttr} value="${codes}" oninput="handleMuhtarafTableInput(${deptIndex}, ${i}, 'codes', this.value)" placeholder="تكلفة الكود للفرد"></td>
-          <td><div class="readonly-cell" id="muhtarafCodeTotal_${deptIndex}_${i}">${fmt(c.codeTotal)}</div></td>
-          <td><div class="readonly-cell" id="muhtarafTotalCosts_${deptIndex}_${i}">${fmt(c.totalCosts)}</div></td>
-          <td><div class="readonly-cell ${profitClass}" id="muhtarafNetProfit_${deptIndex}_${i}">${fmt(c.netProfit)}</div></td>
-          <td><div class="readonly-cell ${goalClass}" id="muhtarafMargin_${deptIndex}_${i}">${fmt(c.margin)}%</div></td>
+          <td><select ${lockedAttr} onchange="handleMuhtarafTableInput(${deptIndex}, ${i}, 'month', this.value, '${quarter}')">${getMuhtarafMonthOptions(month, quarter)}</select></td>
+          <td><input type="text" ${lockedAttr} value="${program}" oninput="handleMuhtarafTableInput(${deptIndex}, ${i}, 'program', this.value, '${quarter}')" placeholder="اسم الدورة / البرنامج"></td>
+          <td><input type="number" step="any" inputmode="decimal" ${lockedAttr} value="${price}" oninput="handleMuhtarafTableInput(${deptIndex}, ${i}, 'price', this.value, '${quarter}')" placeholder="0"></td>
+          <td><input type="number" step="any" inputmode="decimal" ${lockedAttr} value="${beneficiaries}" oninput="handleMuhtarafTableInput(${deptIndex}, ${i}, 'beneficiaries', this.value, '${quarter}')" placeholder="0"></td>
+          <td><div class="readonly-cell" id="muhtarafRevenue_${deptIndex}_${quarter}_${i}">${fmt(c.revenue)}</div></td>
+          <td><input type="number" step="any" inputmode="decimal" ${lockedAttr} value="${trainer}" oninput="handleMuhtarafTableInput(${deptIndex}, ${i}, 'trainer', this.value, '${quarter}')" placeholder="0"></td>
+          <td><input type="number" step="any" inputmode="decimal" ${lockedAttr} value="${hall}" oninput="handleMuhtarafTableInput(${deptIndex}, ${i}, 'hall', this.value, '${quarter}')" placeholder="0"></td>
+          <td><input type="number" step="any" inputmode="decimal" ${lockedAttr} value="${codes}" oninput="handleMuhtarafTableInput(${deptIndex}, ${i}, 'codes', this.value, '${quarter}')" placeholder="تكلفة الكود للفرد"></td>
+          <td><div class="readonly-cell" id="muhtarafCodeTotal_${deptIndex}_${quarter}_${i}">${fmt(c.codeTotal)}</div></td>
+          <td><div class="readonly-cell" id="muhtarafTotalCosts_${deptIndex}_${quarter}_${i}">${fmt(c.totalCosts)}</div></td>
+          <td><div class="readonly-cell ${profitClass}" id="muhtarafNetProfit_${deptIndex}_${quarter}_${i}">${fmt(c.netProfit)}</div></td>
+          <td><div class="readonly-cell ${goalClass}" id="muhtarafMargin_${deptIndex}_${quarter}_${i}">${fmt(c.margin)}%</div></td>
         </tr>`;
       }).join("");
 
       return `<div class="muhtaraf-panel" id="muhtarafFinancePanelHost">
         <div class="panel-title">
           <div>
-            <h4>💼 جدول ربحية برامج مركز محترف</h4>
-            <span>الإيرادات تُحسب تلقائياً = سعر البرنامج بعد خصم الضريبة × عدد المستفيدين. وإجمالي المصاريف يُحسب تلقائياً = رسوم المدرب + القاعة + (تكلفة كود الاختبار للفرد × عدد المستفيدين).</span>
+            <h4>💼 جدول ربحية برامج مركز محترف — ${quarterText}</h4>
+            <span>يعرض بيانات ${quarterText} فقط (${quarterMonths}). الإيرادات تُحسب تلقائياً = سعر البرنامج بعد خصم الضريبة × عدد المستفيدين، والمصاريف = رسوم المدرب + القاعة + أكواد الاختبارات.</span>
           </div>
+          <span class="muhtaraf-quarter-chip">${quarterText}</span>
         </div>
         <div class="muhtaraf-wrap">
           <div class="table-wrap">
@@ -5071,12 +5630,13 @@
       </div>`;
     }
 
-    function handleMuhtarafTableInput(deptIndex, rowIndex, field, value){
-      saveMuhtarafValue(deptIndex, rowIndex, field, value);
-      updateMuhtarafCalculatedRow(deptIndex, rowIndex);
+    function handleMuhtarafTableInput(deptIndex, rowIndex, field, value, quarter = "Q1"){
+      saveMuhtarafValue(deptIndex, rowIndex, field, value, quarter);
+      updateMuhtarafCalculatedRow(deptIndex, rowIndex, quarter);
 
-      const activeQuarter = document.querySelector(".detail-quarter-box.active")?.dataset?.quarter || "Q1";
-      updateDepartmentLiveStrip(deptIndex, activeQuarter);
+      // تحديث بطاقة صافي مركز محترف والرسم الرئيسي من بيانات صفحة الإدارة مباشرة.
+      refreshDashboardViewsForQuarter(quarter);
+      updateDepartmentLiveStrip(deptIndex, quarter);
       renderDepartmentCharts(deptIndex);
     }
 
@@ -5209,7 +5769,7 @@
       setLanguage();
       renderQuarterPanel();
       if(!isQuarterFilled(currentQuarter)){ renderEmptyDashboard(); return; }
-      renderSummary(); renderKpis(); renderScoreList(); drawCharts(); renderNutrition(); renderCoverage(); renderInsights();
+      renderSummary(); renderKpis(); renderScoreList(); drawCharts(); renderInsights();
     }
 
     $("themeBtn").addEventListener("click", () => { theme = theme === "dark" ? "light" : "dark"; localStorage.setItem("quarters_dashboard_theme", theme); renderAll(); });
